@@ -16,6 +16,9 @@
                     </http>
                 </endpoint>
             </call>
+            <log>
+                <property name="End Logger " value="Data recieve from backend api"/>
+            </log>
             <respond/>
         </inSequence>
         <outSequence/>
