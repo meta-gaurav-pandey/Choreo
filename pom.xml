@@ -58,6 +58,9 @@
     <profile>
       <id>Docker</id>
       <build />
+      <modules>
+        <module>ChoreoDockerConatiner</module>
+      </modules>
     </profile>
     <profile>
       <id>Kubernetes</id>
@@ -68,6 +71,9 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <build />
+      <modules>
+        <module>ChoreoDockerConatiner</module>
+      </modules>
     </profile>
   </profiles>
 </project>

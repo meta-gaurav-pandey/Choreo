@@ -16,8 +16,10 @@
                     </http>
                 </endpoint>
             </call>
+            <property name="Hospital" scope="default" type="STRING" value="Jagdish Hospital"/>
             <log>
                 <property name="End Logger " value="Data recieve from backend api"/>
+                <property expression="fn:concat('Invalid hospital - ', get-property('Hospital'))" name="Functioncheck"/>
             </log>
             <respond/>
         </inSequence>
