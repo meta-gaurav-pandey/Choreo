@@ -1,7 +1,8 @@
 ARG BASE_IMAGE
 
 FROM ${BASE_IMAGE}
-RUN groupadd -r wso2 &&  useradd -r -g wso2 -u 10001 wso2user
+RUN groupadd -r wso2 && \ useradd -r -g wso2 -u 10001 wso2user
+RUN chown -R wso2user:wso2 /${WSO2_SERVER_HOME}/wso2user
 WORKDIR    /${WSO2_SERVER_HOME}/wso2user
 USER wso2user
 COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbonapps/
