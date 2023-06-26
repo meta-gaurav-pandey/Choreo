@@ -7,11 +7,12 @@ USER root
 
 # Add non-root user
 ARG USER=wso2user
-ARG USER_ID=10001
+ARG USER_ID=10004
 ARG USER_GROUP=wso2group
-ARG USER_GROUP_ID=10001
+ARG USER_GROUP_ID=10004
 ARG USER_HOME=/home/${USER}
-RUN addgroup -S -g ${USER_GROUP_ID} ${USER_GROUP} \
+RUN \
+    addgroup -S -g ${USER_GROUP_ID} ${USER_GROUP} \
     && adduser -S -u ${USER_ID} -h ${USER_HOME} -G ${USER_GROUP} ${USER}
     
 RUN  chown -R wso2user:wso2group ${WSO2_SERVER_HOME}
@@ -25,6 +26,7 @@ COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbon
 COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
 COPY Resources/client-truststore.jks ${WSO2_SERVER_HOME}/repository/resources/security/client-truststore.jks
 # COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+
 
 
 
