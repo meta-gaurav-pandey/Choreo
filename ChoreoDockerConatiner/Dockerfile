@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}
 RUN groupadd -r wso2 && \ useradd -r -g wso2 -u wso2user 10001
 RUN chown -R wso2user:wso2 /${WSO2_SERVER_HOME}/wso2user
 WORKDIR    /${WSO2_SERVER_HOME}/wso2user
-USER wso2user
+USER wso2user 10001
 COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbonapps/
 
 COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
