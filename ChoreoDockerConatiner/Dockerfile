@@ -17,7 +17,7 @@ RUN \
     
 RUN  chown -R wso2user:wso2group ${WSO2_SERVER_HOME}
 
-USER wso2user    
+USER 10004    
 
 
 
@@ -26,6 +26,9 @@ COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbon
 COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
 COPY Resources/client-truststore.jks ${WSO2_SERVER_HOME}/repository/resources/security/client-truststore.jks
 # COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+
+
+
 
 
 
