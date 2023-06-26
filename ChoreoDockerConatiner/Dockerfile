@@ -3,28 +3,6 @@ ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
 
-COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbonapps/
-COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
-COPY Resources/client-truststore.jks ${WSO2_SERVER_HOME}/repository/resources/security/client-truststore.jks
-# COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 USER root
 
 # Add non-root user
@@ -33,17 +11,20 @@ ARG USER_ID=10001
 ARG USER_GROUP=wso2group
 ARG USER_GROUP_ID=10001
 ARG USER_HOME=/home/${USER}
-ARG MOTD='printf "\n\
- Welcome to WSO2 Docker Resources \n\
- --------------------------------- \n\
- This Docker container comprises of a WSO2 product, running with its latest GA release \n\
- which is under the Apache License, Version 2.0. \n\
- Read more about Apache License, Version 2.0 here @ http://www.apache.org/licenses/LICENSE-2.0.\n"'
-ENV ENV=${USER_HOME}"/.ashrc"
-RUN \
-    addgroup -S -g ${USER_GROUP_ID} ${USER_GROUP} \
-    && adduser -S -u ${USER_ID} -h ${USER_HOME} -G ${USER_GROUP} ${USER} \
-    && echo ${MOTD} > "${ENV}" 
+RUN addgroup -S -g ${USER_GROUP_ID} ${USER_GROUP} \
+    && adduser -S -u ${USER_ID} -h ${USER_HOME} -G ${USER_GROUP} ${USER}
+    
+RUN  chown -R wso2user:wso2group ${WSO2_SERVER_HOME}
+
+USER wso2user    
+
+
+
+
+COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbonapps/
+COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
+COPY Resources/client-truststore.jks ${WSO2_SERVER_HOME}/repository/resources/security/client-truststore.jks
+# COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
 
 
 
