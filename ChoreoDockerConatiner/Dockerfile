@@ -1,10 +1,16 @@
 ARG BASE_IMAGE
 
 FROM ${BASE_IMAGE}
+RUN groupadd -r wso2 && useradd -r -g wso2 wso2user
+WORKDIR    /${WSO2_SERVER_HOME}/wso2user
+USER wso2user
 COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbonapps/
+
 COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
 COPY Resources/client-truststore.jks ${WSO2_SERVER_HOME}/repository/resources/security/client-truststore.jks
 # COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+
+
 
 
 
