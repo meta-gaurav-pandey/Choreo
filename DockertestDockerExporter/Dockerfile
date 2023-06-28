@@ -4,6 +4,15 @@ FROM wso2/wso2mi:4.0.0
 
 
 USER root
+#COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+
+RUN apk update && apk upgrade
+RUN apk add --no-cache openssl
+#RUN --no-cache apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main io.netty/netty-handler:4.1.34.Final
+#RUN mvn dependency:get -Dartifact=com.google.guava:guava:32.0.0-jre -DrepoUrl=https://repo1.maven.org/maven2/
+#RUN mvn dependency:get -Dartifact=io.netty:netty-handler:4.1.93.Final -DrepoUrl=https://repo1.maven.org/maven2/
+
+
 
 # Add non-root user
 ARG USER=wso2user
@@ -19,10 +28,60 @@ RUN  chown -R wso2user:wso2group ${WSO2_SERVER_HOME}
 
 USER 10004    
 
+
+
 COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbonapps/
 COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
 COPY Resources/client-truststore.jks ${WSO2_SERVER_HOME}/repository/resources/security/client-truststore.jks
-# COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+#COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
