@@ -4,7 +4,18 @@ FROM wso2/wso2mi:4.0.0
 
 
 USER root
-#COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+
+
+RUN apk add --no-cache wget && \
+    mkdir -p /opt/maven && \
+    wget --no-verbose -O /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/3.9.3/binaries/apache-maven-3.9.3-bin.tar.gz && \
+    tar -xzf /tmp/apache-maven.tar.gz -C /opt/maven --strip-components=1 && \
+    rm -f /tmp/apache-maven.tar.gz && \
+    ln -s /opt/maven/bin/mvn /usr/bin/mvn
+
+COPY dependency.xml .
+RUN mvn -B -f dependency.xml dependency:resolve
 
 RUN apk update && apk upgrade
 RUN apk add --no-cache openssl
@@ -12,7 +23,7 @@ RUN apk add --no-cache openssl
 #RUN mvn dependency:get -Dartifact=com.google.guava:guava:32.0.0-jre -DrepoUrl=https://repo1.maven.org/maven2/
 #RUN mvn dependency:get -Dartifact=io.netty:netty-handler:4.1.93.Final -DrepoUrl=https://repo1.maven.org/maven2/
 
-
+#RUN mvn package
 
 # Add non-root user
 ARG USER=wso2user
@@ -20,9 +31,7 @@ ARG USER_ID=10004
 ARG USER_GROUP=wso2group
 ARG USER_GROUP_ID=10004
 ARG USER_HOME=/home/${USER}
-RUN \
-    addgroup -S -g ${USER_GROUP_ID} ${USER_GROUP} \
-    && adduser -S -u ${USER_ID} -h ${USER_HOME} -G ${USER_GROUP} ${USER}
+RUN addgroup -S -g ${USER_GROUP_ID} ${USER_GROUP} && adduser -S -u ${USER_ID} -h ${USER_HOME} -G ${USER_GROUP} ${USER}
     
 RUN  chown -R wso2user:wso2group ${WSO2_SERVER_HOME}
 
@@ -34,6 +43,19 @@ COPY CompositeApps/*.car ${WSO2_SERVER_HOME}/repository/deployment/server/carbon
 COPY Resources/wso2carbon.jks ${WSO2_SERVER_HOME}/repository/resources/security/wso2carbon.jks
 COPY Resources/client-truststore.jks ${WSO2_SERVER_HOME}/repository/resources/security/client-truststore.jks
 #COPY Libs/*.jar ${WSO2_SERVER_HOME}/lib/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

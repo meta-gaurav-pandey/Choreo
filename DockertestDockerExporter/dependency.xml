@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.example</groupId>
+    <artifactId>dependency-management</artifactId>
+    <version>1.0.0</version>
+    
+    <dependencyManagement>
+        <dependencies>
+            <!-- Define your managed dependencies here -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-handler</artifactId>
+                <version>4.1.93.Final</version>
+            </dependency>
+            <!-- Add more managed dependencies as needed -->
+        </dependencies>
+    </dependencyManagement>
+</project>
