@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SalesforceLeadSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log separator=",">
+        <property name="LeasSequence" value="SalesforceLeads Sequence Started"/>
+    </log>
+    <property name="sObjectType" scope="default" type="STRING" value="Lead"/>
+    <property expression="json-eval($.sobject.Id)" name="Id" scope="default" type="STRING"/>
+    <property name="messageType" scope="default" type="STRING" value="application/json"/>
+    <!--   <script language="js"><![CDATA[var Id = mc.getProperty('Id');
+          
+        var query = "SELECT Id, Company, Country,description FROM Lead WHERE Id ='"+Id+"'";
+        mc.setProperty('salesforceQuery2', query.toString());]]></script>
+    <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
+        <queryString>{fn:concat('select Id,Name,Company, Country,description from Lead where Id=',"'", $ctx:Id,"'" )}</queryString>
+    </salesforcerest.query> -->
+    <log level="full"/>
+</sequence>

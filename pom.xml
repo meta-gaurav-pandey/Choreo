@@ -9,6 +9,7 @@
   <name>wso2api</name>
   <description>wso2api</description>
   <modules>
+    <module>ConnectorExporter</module>
     <module>wso2apiConfigs</module>
     <module>wso2apiCompositeExporter</module>
   </modules>

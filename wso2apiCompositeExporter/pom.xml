@@ -14,17 +14,39 @@
   <name>wso2apiCompositeExporter</name>
   <description>wso2apiCompositeExporter</description>
   <properties>
+    <com.example.sequence_._SalesforceLeadSequence>capp/EnterpriseServiceBus</com.example.sequence_._SalesforceLeadSequence>
     <com.example.metadata_._MainApi_metadata>capp/EnterpriseServiceBus</com.example.metadata_._MainApi_metadata>
+    <com.example.lib_._salesforcerest-connector>capp/EnterpriseServiceBus</com.example.lib_._salesforcerest-connector>
+    <com.example.inbound-endpoint_._SalesforceLeadInbound>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._SalesforceLeadInbound>
     <com.example.metadata_._MainApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._MainApi_swagger>
     <com.example.api_._MainApi>capp/EnterpriseServiceBus</com.example.api_._MainApi>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
+    <com.example.local-entry_._SALESFORCEREST_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._SALESFORCEREST_CONNECTION_1>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>SalesforceLeadSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
     <dependency>
       <groupId>com.example.metadata</groupId>
       <artifactId>MainApi_metadata</artifactId>
       <version>1.0.0</version>
       <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.lib</groupId>
+      <artifactId>salesforcerest-connector</artifactId>
+      <version>1.1.3</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.inbound-endpoint</groupId>
+      <artifactId>SalesforceLeadInbound</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.metadata</groupId>
@@ -35,6 +57,12 @@
     <dependency>
       <groupId>com.example.api</groupId>
       <artifactId>MainApi</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.local-entry</groupId>
+      <artifactId>SALESFORCEREST_CONNECTION_1</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
