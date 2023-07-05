@@ -8,4 +8,13 @@
     <artifact name="MainApi_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
         <file>src/main/resources/metadata/MainApi_metadata.yaml</file>
     </artifact>
+    <artifact name="SalesforceLeadInbound" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/SalesforceLeadInbound.xml</file>
+    </artifact>
+    <artifact name="SalesforceLeadSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/SalesforceLeadSequence.xml</file>
+    </artifact>
+    <artifact name="SALESFORCEREST_CONNECTION_1" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/SALESFORCEREST_CONNECTION_1.xml</file>
+    </artifact>
 </artifacts>
