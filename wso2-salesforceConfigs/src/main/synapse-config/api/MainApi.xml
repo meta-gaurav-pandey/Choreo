@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/sales" name="MainApi" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log>
+                <property name="StartLog" value="Api started"/>
+            </log>
+            <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
+                <queryString>SELECT Id, Name,Country,Company, Phone FROM Lead</queryString>
+            </salesforcerest.query>
+            <property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <log>
+                <property name="EndLog" value="Api end log"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

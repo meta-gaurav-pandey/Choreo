@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="MainApi" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/MainApi.xml</file>
+    </artifact>
+    <artifact name="MainApi_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/MainApi_swagger.yaml</file>
+    </artifact>
+    <artifact name="MainApi_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/MainApi_metadata.yaml</file>
+    </artifact>
+    <artifact name="SALESFORCEREST_CONNECTION_1" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/SALESFORCEREST_CONNECTION_1.xml</file>
+    </artifact>
+</artifacts>
