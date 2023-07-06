@@ -3,7 +3,7 @@
     <resource methods="GET">
         <inSequence>
             <payloadFactory media-type="text">
-                <format>Hey i am in paylod</format>
+                <format>Hey i am in paylod for new testing</format>
                 <args/>
             </payloadFactory>
             <respond/>
