@@ -2,3 +2,6 @@
 **/*.war
 **/*.class
 **/*.ear
+
+
+Dockerfile
