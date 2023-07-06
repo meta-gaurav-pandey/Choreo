@@ -2,10 +2,16 @@
 <api context="/calling" name="MainApi" statistics="enable" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
     <resource methods="GET">
         <inSequence>
+            <log>
+                <property name="Starting Logger" value="Api Started"/>
+            </log>
             <payloadFactory media-type="text">
                 <format>Hey i am in paylod for new testing</format>
                 <args/>
             </payloadFactory>
+            <log>
+                <property name="End Log " value="Api End"/>
+            </log>
             <respond/>
         </inSequence>
         <outSequence/>
