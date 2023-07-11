@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inboundEndpoint class="org.wso2.carbon.inbound.salesforce.poll.SalesforceStreamData" name="SalesforceLeadInboundEndpoint" onError="SalesforceSequence" sequence="SalesforceSequence" suspend="false" xmlns="http://ws.apache.org/ns/synapse">
+    <parameters>
+        <parameter name="interval">1000</parameter>
+        <parameter name="class">org.wso2.carbon.inbound.salesforce.poll.SalesforceStreamData</parameter>
+        <parameter name="inbound.behavior">polling</parameter>
+        <parameter name="sequential">true</parameter>
+        <parameter name="coordination">true</parameter>
+        <parameter name="connection.salesforce.replay">true</parameter>
+        <parameter name="message.processor">SalesforceMessageProcessor</parameter>
+        <parameter name="connection.salesforce.EventIDStoredFilePath">Id.txt</parameter>
+        <parameter name="connection.salesforce.packageVersion">57.0</parameter>
+        <parameter name="connection.salesforce.salesforceObject">/topic/Leads</parameter>
+        <parameter name="connection.salesforce.loginEndpoint">https://login.salesforce.com</parameter>
+        <parameter name="connection.salesforce.userName">13gauravpandey@gmail.com</parameter>
+        <parameter name="connection.salesforce.password">Salesforce$123450ZdGkodB5QsYmb31DyuVoYV5B</parameter>
+        <parameter name="connection.salesforce.waitTime">5000</parameter>
+        <parameter name="connection.salesforce.connectionTimeout">20000</parameter>
+        <parameter name="connection.salesforce.soapApiVersion">22.0</parameter>
+    </parameters>
+</inboundEndpoint>

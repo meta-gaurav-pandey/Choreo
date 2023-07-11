@@ -11,4 +11,10 @@
     <artifact name="SALESFORCEREST_CONNECTION_1" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/local-entries/SALESFORCEREST_CONNECTION_1.xml</file>
     </artifact>
+    <artifact name="SalesforceLeadInboundEndpoint" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/SalesforceLeadInboundEndpoint.xml</file>
+    </artifact>
+    <artifact name="SalesforceSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/SalesforceSequence.xml</file>
+    </artifact>
 </artifacts>

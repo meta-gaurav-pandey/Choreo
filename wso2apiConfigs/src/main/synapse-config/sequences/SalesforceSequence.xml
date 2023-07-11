@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SalesforceSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log>
+        <property name="SalesforceSequence" value="Started"/>
+    </log>
+    <property expression="json-eval($.sobject.Id)" name="Id" scope="default" type="STRING"/>
+    <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
+        <queryString>{fn:concat('select Id,Name,Company, Country,description from Lead where Id=',"'", $ctx:Id,"'" )}</queryString>
+    </salesforcerest.query>
+    <property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <log level="full"/>
+</sequence>
