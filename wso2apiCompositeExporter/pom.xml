@@ -14,7 +14,6 @@
   <name>wso2apiCompositeExporter</name>
   <description>wso2apiCompositeExporter</description>
   <properties>
-    <com.example.metadata_._MainApi_metadata>capp/EnterpriseServiceBus</com.example.metadata_._MainApi_metadata>
     <com.example.lib_._salesforcerest-connector>capp/EnterpriseServiceBus</com.example.lib_._salesforcerest-connector>
     <com.example.metadata_._MainApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._MainApi_swagger>
     <com.example.api_._MainApi>capp/EnterpriseServiceBus</com.example.api_._MainApi>
@@ -22,12 +21,6 @@
     <com.example.local-entry_._SALESFORCEREST_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._SALESFORCEREST_CONNECTION_1>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>MainApi_metadata</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
-    </dependency>
     <dependency>
       <groupId>com.example.lib</groupId>
       <artifactId>salesforcerest-connector</artifactId>
