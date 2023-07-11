@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="SALESFORCEREST_CONNECTION_1" xmlns="http://ws.apache.org/ns/synapse">
+    <salesforcerest.init>
+        <hostName>https://login.salesforce.com</hostName>
+        <connectionType>init</connectionType>
+        <timeout>3000</timeout>
+        <password>Salesforce$123450ZdGkodB5QsYmb31DyuVoYV5B</password>
+        <apiVersion>v57.0</apiVersion>
+        <apiUrl>https://metacube147-dev-ed.my.salesforce.com</apiUrl>
+        <clientSecret>EF8DF51CDB688678C13B9641D5B180DDDC9F143F0434D077674D904EA9F26CBB</clientSecret>
+        <clientId>3MVG9wt4IL4O5wvKb19HaCNIcPCOlcyaJ3tufkxMFTnNHehYr4urKIG8XOjKeySfgdyKPIIO_waPnna3iqxlp</clientId>
+        <accessToken>00D5i000009NbeF!AQcAQJO3QQVNq7rWretDYdcE_CNzck6q7RSqGaxgE43USqldpO7MN3tx0uggTWbkcfgXAiHfeHuhqWb6iwDs1MYkjfcNnYYv</accessToken>
+        <name>SALESFORCEREST_CONNECTION_1</name>
+        <username>13gauravpandey@gmail.com</username>
+    </salesforcerest.init>
+</localEntry>
