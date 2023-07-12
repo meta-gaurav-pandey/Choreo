@@ -65,7 +65,7 @@
           <instructions>
             <Bundle-SymbolicName>JavaLibProject</Bundle-SymbolicName>
             <Bundle-Name>JavaLibProject</Bundle-Name>
-            <Export-Package>org.apache.synapse.salesforce.poll.class</Export-Package>
+            <Export-Package>Package>org.cometd.bayeux,org.cometd.bayeux.client,org.cometd.bayeux.server,org.cometd.client,org.cometd.client.ext,org.cometd.client.transport,org.cometd.common,org.eclipse.jetty.client,org.eclipse.jetty.client.api,org.eclipse.jetty.client.http,org.eclipse.jetty.client.util,org.eclipse.jetty.continuation,org.eclipse.jetty.http,org.eclipse.jetty.http.gzip,org.eclipse.jetty.http.pathmap,org.eclipse.jetty.http.ssl,org.eclipse.jetty.io,org.eclipse.jetty.io.bio,org.eclipse.jetty.io.nio,org.eclipse.jetty.io.ssl,org.eclipse.jetty.security,org.eclipse.jetty.security.authentication,org.eclipse.jetty.server,org.eclipse.jetty.server.bio,org.eclipse.jetty.server.handler,org.eclipse.jetty.server.handler.jmx,org.eclipse.jetty.server.jmx,org.eclipse.jetty.server.nio,org.eclipse.jetty.server.session,org.eclipse.jetty.server.session.jmx,org.eclipse.jetty.server.ssl,org.eclipse.jetty.util,org.eclipse.jetty.util.ajax,org.eclipse.jetty.util.annotation,org.eclipse.jetty.util.component,org.eclipse.jetty.util.log,org.eclipse.jetty.util.preventers,org.eclipse.jetty.util.resource,org.eclipse.jetty.util.security,org.eclipse.jetty.util.ssl,org.eclipse.jetty.util.statistic,org.eclipse.jetty.util.thread,org.wso2.carbon.inbound.salesforce.poll</Export-Package>
             <DynamicImport-Package>*</DynamicImport-Package>
           </instructions>
         </configuration>
