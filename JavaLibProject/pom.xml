@@ -56,7 +56,7 @@
   </pluginRepositories>
   <build>
     <plugins>
-      <plugin>
+     <!--  <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <version>2.3.4</version>
@@ -69,7 +69,7 @@
             <DynamicImport-Package>*</DynamicImport-Package>
           </instructions>
         </configuration>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-eclipse-plugin</artifactId>
         <version>2.9</version>
