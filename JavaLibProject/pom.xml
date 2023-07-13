@@ -68,7 +68,7 @@
             <Bundle-Name>JavaLibProject</Bundle-Name>
             <Export-Package>*</Export-Package>
             <DynamicImport-Package>*</DynamicImport-Package>
-             <Bundle-ClassPath>.,salesforce.jar</Bundle-ClassPath>
+       
           </instructions>
         </configuration>
       </plugin> 
