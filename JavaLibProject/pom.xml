@@ -56,6 +56,7 @@
   </pluginRepositories>
   <build>
     <plugins>
+    
        <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
@@ -67,6 +68,7 @@
             <Bundle-Name>JavaLibProject</Bundle-Name>
             <Export-Package>*</Export-Package>
             <DynamicImport-Package>*</DynamicImport-Package>
+             <Bundle-ClassPath>.,salesforce.jar</Bundle-ClassPath>
           </instructions>
         </configuration>
       </plugin> 
