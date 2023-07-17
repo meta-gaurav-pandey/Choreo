@@ -8,15 +8,14 @@
             <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
                 <queryString>SELECT Id, Name,Country,Company, Phone FROM Lead</queryString>
             </salesforcerest.query>
-            <log>
+            <log level="full">
                 <property name="EndLog" value="Api end log"/>
             </log>
-        </inSequence>
-        <outSequence>
             <property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
             <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
             <respond/>
-        </outSequence>
+        </inSequence>
+        <outSequence/>
         <faultSequence/>
     </resource>
 </api>
