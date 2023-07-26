@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ClassSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log>
+        <property name="StartLog" value="Starting class sequence"/>
+    </log>
+    <class name="com.example.JavaMediatorClass"/>
+    <log>
+        <property name="EndLog" value="Class Sequence end "/>
+    </log>
+</sequence>

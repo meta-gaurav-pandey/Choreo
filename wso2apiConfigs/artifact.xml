@@ -17,4 +17,7 @@
     <artifact name="SalesforceSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/SalesforceSequence.xml</file>
     </artifact>
+    <artifact name="ClassSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ClassSequence.xml</file>
+    </artifact>
 </artifacts>

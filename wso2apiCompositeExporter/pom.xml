@@ -14,7 +14,9 @@
   <name>wso2apiCompositeExporter</name>
   <description>wso2apiCompositeExporter</description>
   <properties>
+    <com.example_._JavaClassMediator>capp/EnterpriseServiceBus</com.example_._JavaClassMediator>
     <com.example.lib_._salesforcerest-connector>capp/EnterpriseServiceBus</com.example.lib_._salesforcerest-connector>
+    <com.example.sequence_._ClassSequence>capp/EnterpriseServiceBus</com.example.sequence_._ClassSequence>
     <com.example.metadata_._MainApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._MainApi_swagger>
     <com.example.api_._MainApi>capp/EnterpriseServiceBus</com.example.api_._MainApi>
     <com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>
@@ -24,10 +26,21 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>JavaClassMediator</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>com.example.lib</groupId>
       <artifactId>salesforcerest-connector</artifactId>
       <version>1.1.3</version>
       <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>ClassSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.metadata</groupId>

@@ -3,11 +3,19 @@
     <log>
         <property name="SalesforceSequence" value="Started"/>
     </log>
+    <property name="sObjectType" scope="default" type="STRING" value="Lead"/>
     <property expression="json-eval($.sobject.Id)" name="Id" scope="default" type="STRING"/>
     <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
         <queryString>{fn:concat('select Id,Name,Company, Country,description from Lead where Id=',"'", $ctx:Id,"'" )}</queryString>
     </salesforcerest.query>
     <property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
     <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
-    <log level="full"/>
+    <log level="full">
+        <property name="CallingClassSequence" value="After querying calling class sequence"/>
+    </log>
+    <sequence key="ClassSequence"/>
+    <log>
+        <property name="AfterClass" value="Class sequence end "/>
+        <property expression="json-eval($ctx:Array)" name="Array"/>
+    </log>
 </sequence>
