@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/jsonIntegration" name="JsonIntegration" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="ErrorSequence" methods="GET">
+        <inSequence>
+            <log>
+                <property name="Start Logger" value="File connector Main Logger Started"/>
+            </log>
+            <file.read configKey="FILE_CONNECTION_1">
+                <path>C:/FileConnectorDemo/input.json</path>
+                <readMode>Complete File</readMode>
+                <startLineNum>0</startLineNum>
+                <lineNum>0</lineNum>
+                <contentType>application/json</contentType>
+                <includeResultTo>Message Body</includeResultTo>
+                <enableStreaming>false</enableStreaming>
+                <enableLock>false</enableLock>
+            </file.read>
+            <log level="full"/>
+            <call>
+                <endpoint>
+                    <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=Organisation">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                </endpoint>
+            </call>
+            <log>
+                <property name="TTL Generatared Successfully?" value="True"/>
+            </log>
+            <call>
+                <endpoint>
+                    <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                </endpoint>
+            </call>
+            <log>
+                <property name="End Logger" value="Main Sequence ended"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

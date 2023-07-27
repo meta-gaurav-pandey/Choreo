@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/salesforce" name="SalesforceApi" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="ErrorSequence" methods="GET">
+        <inSequence>
+            <log>
+                <property name="MainLog1" value="MainSequnece Started"/>
+            </log>
+            <sequence key="SalesforceSequence"/>
+            <log>
+                <property name="MainLog 2" value="MainSequence End"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

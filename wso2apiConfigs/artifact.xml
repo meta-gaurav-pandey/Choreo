@@ -20,4 +20,55 @@
     <artifact name="ClassSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/ClassSequence.xml</file>
     </artifact>
+    <artifact name="ZoomInfoDataIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/ZoomInfoDataIntegration.xml</file>
+    </artifact>
+    <artifact name="ZoomInfoDataIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/ZoomInfoDataIntegration_swagger.yaml</file>
+    </artifact>
+    <artifact name="ZoomInfoDataIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/ZoomInfoDataIntegration_metadata.yaml</file>
+    </artifact>
+    <artifact name="LinkedinDataIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/LinkedinDataIntegration.xml</file>
+    </artifact>
+    <artifact name="LinkedinDataIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/LinkedinDataIntegration_swagger.yaml</file>
+    </artifact>
+    <artifact name="LinkedinDataIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/LinkedinDataIntegration_metadata.yaml</file>
+    </artifact>
+    <artifact name="XmlIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/XmlIntegration.xml</file>
+    </artifact>
+    <artifact name="XmlIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/XmlIntegration_swagger.yaml</file>
+    </artifact>
+    <artifact name="XmlIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/XmlIntegration_metadata.yaml</file>
+    </artifact>
+    <artifact name="JsonIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/JsonIntegration.xml</file>
+    </artifact>
+    <artifact name="JsonIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/JsonIntegration_swagger.yaml</file>
+    </artifact>
+    <artifact name="JsonIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/JsonIntegration_metadata.yaml</file>
+    </artifact>
+    <artifact name="SalesforceApi" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/SalesforceApi.xml</file>
+    </artifact>
+    <artifact name="SalesforceApi_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/SalesforceApi_swagger.yaml</file>
+    </artifact>
+    <artifact name="SalesforceApi_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/SalesforceApi_metadata.yaml</file>
+    </artifact>
+    <artifact name="ErrorSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ErrorSequence.xml</file>
+    </artifact>
+    <artifact name="FILE_CONNECTION_1" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/FILE_CONNECTION_1.xml</file>
+    </artifact>
 </artifacts>

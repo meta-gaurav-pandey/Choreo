@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="SalesforceSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence name="SalesforceSequence" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log>
         <property name="SalesforceSequence" value="Started"/>
     </log>
@@ -18,4 +18,57 @@
         <property name="AfterClass" value="Class sequence end "/>
         <property expression="json-eval($ctx:Array)" name="Array"/>
     </log>
+    <payloadFactory media-type="json">
+        <format>$1</format>
+        <args>
+            <arg evaluator="json" expression="$ctx:Array"/>
+        </args>
+    </payloadFactory>
+    <log>
+        <property expression="$body" name="log2"/>
+    </log>
+    <call>
+        <endpoint>
+            <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=OrganisationMapping">
+                <suspendOnFailure>
+                    <initialDuration>-1</initialDuration>
+                    <progressionFactor>-1</progressionFactor>
+                    <maximumDuration>0</maximumDuration>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                </markForSuspension>
+            </http>
+        </endpoint>
+    </call>
+    <log level="full"/>
+    <call>
+        <endpoint>
+            <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
+                <suspendOnFailure>
+                    <initialDuration>-1</initialDuration>
+                    <progressionFactor>-1</progressionFactor>
+                    <maximumDuration>0</maximumDuration>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                </markForSuspension>
+            </http>
+        </endpoint>
+    </call>
+    <!--    <send>
+                <endpoint>
+                    <http method="post" uri-template="http://localhost:7200/repositories/Graph_Java_Testing/rdf-graphs/service?graph=http://test.com/graphs/Zenia#person">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                   
+                </endpoint>
+            </send> -->
 </sequence>

@@ -32,8 +32,11 @@ public class JavaMediatorClass extends AbstractMediator {
         		 json=convert(payload);
       			context.setProperty("Array", json.toString()); 
         	 }
+        	 else {
+        		 throw new Exception("The typeObject is null");
+        	 }
         	 
-			 } catch (org.json.JSONException e) {
+			 } catch (Exception e) {
 				System.out.println("Error occure while converting into json object either records are empty or retrival failed");
 				
 			}

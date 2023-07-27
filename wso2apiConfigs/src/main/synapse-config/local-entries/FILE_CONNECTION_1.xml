@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="FILE_CONNECTION_1" xmlns="http://ws.apache.org/ns/synapse">
+    <file.init>
+        <name>FILE_CONNECTION_1</name>
+        <fileLockScheme>Local</fileLockScheme>
+        <connectionType>LOCAL</connectionType>
+    </file.init>
+</localEntry>
