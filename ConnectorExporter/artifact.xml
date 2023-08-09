@@ -8,4 +8,7 @@
     <artifact name="CSV-connector" groupId="com.example.lib" version="1.0.4" type="synapse/lib" serverRole="EnterpriseServiceBus">
         <file>CSV-connector-1.0.4.zip</file>
     </artifact>
+    <artifact name="msazurestorage-connector" groupId="com.example.lib" version="1.0.5" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>msazurestorage-connector-1.0.5.zip</file>
+    </artifact>
 </artifacts>
