@@ -14,6 +14,7 @@
   <name>wso2apiCompositeExporter</name>
   <description>wso2apiCompositeExporter</description>
   <properties>
+    <com.example.lib_._msazurestorage-connector>capp/EnterpriseServiceBus</com.example.lib_._msazurestorage-connector>
     <com.example.api_._SalesforceApi>capp/EnterpriseServiceBus</com.example.api_._SalesforceApi>
     <com.example.dataservice_._RDBMSdataService>capp/DataServicesServer</com.example.dataservice_._RDBMSdataService>
     <com.example.sequence_._DataBaseSchedulerSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSchedulerSequence>
@@ -50,6 +51,12 @@
     <com.example.metadata_._JsonIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._JsonIntegration_swagger>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.example.lib</groupId>
+      <artifactId>msazurestorage-connector</artifactId>
+      <version>1.0.5</version>
+      <type>zip</type>
+    </dependency>
     <dependency>
       <groupId>com.example.api</groupId>
       <artifactId>SalesforceApi</artifactId>
