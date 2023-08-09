@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/azure" name="AzureApi" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <msazurestorage.init>
+                <accountName>databricksaqi</accountName>
+                <accountKey>SboycvfUPW4wJaTDY8SnA6/ylwO1uptrBSystnsrdeiprCjPc7FoIVoVlawyk+0Mmte6S/gadI8M+ASta0ovYg==</accountKey>
+            </msazurestorage.init>
+            <msazurestorage.listBlobs>
+                <containerName>wso2container</containerName>
+            </msazurestorage.listBlobs>
+            <msazurestorage.downloadBlob>
+                <containerName>wso2container</containerName>
+                <fileName>LinkedInData.csv</fileName>
+            </msazurestorage.downloadBlob>
+            <file.checkExist configKey="FILE_CONNECTION_1">
+                <path>${WSO2_SERVER_HOME}/LinkedInData.csv</path>
+                <includeResultTo>Message Body</includeResultTo>
+            </file.checkExist>
+            <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
+            <switch source="get-property('response')">
+                <case regex="true">
+                    <log>
+                        <property name="FileExist" value="The desired file exist"/>
+                    </log>
+                    <file.read configKey="FILE_CONNECTION_1">
+                        <path>${WSO2_SERVER_HOME}/LinkedInData.csv</path>
+                        <readMode>Complete File</readMode>
+                        <startLineNum>0</startLineNum>
+                        <lineNum>0</lineNum>
+                        <contentType>text/plain</contentType>
+                        <includeResultTo>Message Body</includeResultTo>
+                        <enableStreaming>false</enableStreaming>
+                        <enableLock>false</enableLock>
+                    </file.read>
+                    <log>
+                        <property name="FileLog" value="FileReaded"/>
+                    </log>
+                    <CSV.csvToJson>
+                        <headerPresent>Present</headerPresent>
+                        <valueSeparator>,</valueSeparator>
+                        <skipHeader>true</skipHeader>
+                        <csvEmptyValues>Empty</csvEmptyValues>
+                    </CSV.csvToJson>
+                </case>
+                <default>
+                    <log level="full">
+                        <property name="log2" value="No file"/>
+                    </log>
+                </default>
+            </switch>
+            <log level="full"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

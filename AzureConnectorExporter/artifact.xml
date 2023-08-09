@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="msazurestorage-connector" groupId="com.example.lib" version="1.0.5" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>msazurestorage-connector-1.0.5.zip</file>
+    </artifact>
+    <artifact name="file-connector" groupId="com.example.lib" version="4.0.14" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>file-connector-4.0.14.zip</file>
+    </artifact>
+    <artifact name="CSV-connector" groupId="com.example.lib" version="1.0.4" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>CSV-connector-1.0.4.zip</file>
+    </artifact>
+</artifacts>
