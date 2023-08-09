@@ -29,6 +29,9 @@
                     </http>
                 </endpoint>
             </call>
+            <log>
+                <property name="TTL Conversion Status" value="True"/>
+            </log>
             <call>
                 <endpoint>
                     <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">

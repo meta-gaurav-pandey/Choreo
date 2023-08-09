@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="SalesforceSequence" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <log>
-        <property name="SalesforceSequence" value="Started"/>
+<sequence name="DataBaseSequence" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log separator=",">
+        <property name="StartingLog" value="Database sequence started "/>
     </log>
-    <property name="sObjectType" scope="default" type="STRING" value="Lead"/>
-    <property expression="json-eval($.sobject.Id)" name="Id" scope="default" type="STRING"/>
-    <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
-        <queryString>{fn:concat('select fields(All) from Lead where Id=',"'", $ctx:Id,"'",' limit 1' )}</queryString>
-    </salesforcerest.query>
-    <property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
-    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
-    <log level="full">
-        <property name="CallingClassSequence" value="After querying calling class sequence"/>
-    </log>
+    <property name="sObjectType" scope="default" type="STRING" value="DataEvent"/>
     <sequence key="ClassSequence"/>
-    <log>
-        <property name="AfterClass" value="Class sequence end "/>
-        <property expression="json-eval($ctx:Array)" name="Array"/>
-    </log>
     <payloadFactory media-type="json">
         <format>$1</format>
         <args>
             <arg evaluator="json" expression="$ctx:Array"/>
         </args>
     </payloadFactory>
-    <log>
-        <property expression="$body" name="log2"/>
+    <log separator=",">
+        <property expression="$body" name="Body"/>
+        <property expression="$ctx:Array" name="Array"/>
     </log>
     <call>
         <endpoint>
@@ -40,7 +28,6 @@
                 </markForSuspension>
             </http>
         </endpoint>
-        <source contentType="application/json" type="property">Array</source>
     </call>
     <log level="full"/>
     <call>
@@ -58,6 +45,6 @@
         </endpoint>
     </call>
     <log separator=",">
-        <property name="EndSequence" value="Salesforce Sequence end "/>
+        <property name="Ending Sequenec" value="Ending Of the database sequence "/>
     </log>
 </sequence>

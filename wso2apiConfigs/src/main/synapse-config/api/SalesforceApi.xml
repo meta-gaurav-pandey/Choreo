@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/salesforce" name="SalesforceApi" xmlns="http://ws.apache.org/ns/synapse">
-    <resource faultSequence="ErrorSequence" methods="GET">
+    <resource methods="GET">
         <inSequence>
             <log>
-                <property name="MainLog1" value="MainSequnece Started"/>
+                <property name="StartLog" value="Api started"/>
             </log>
-            <sequence key="SalesforceSequence"/>
-            <log>
-                <property name="MainLog 2" value="MainSequence End"/>
+            <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
+                <queryString>SELECT Id, Name,Country,Company, Phone FROM Lead</queryString>
+            </salesforcerest.query>
+            <log level="full">
+                <property name="EndLog" value="Api end log"/>
             </log>
+            <property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
             <respond/>
         </inSequence>
         <outSequence/>
+        <faultSequence/>
     </resource>
 </api>

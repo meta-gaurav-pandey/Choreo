@@ -6,8 +6,16 @@ info:
 servers:
 - url: http://localhost:8290/calling
 paths:
-  /:
+  /Salesforce/{source}:
     get:
+      parameters:
+      - name: source
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
         default:
           description: Default response

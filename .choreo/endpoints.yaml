@@ -21,6 +21,8 @@ endpoints:
   # The path should be relative to the docker context.
   schemaFilePath: wso2apiConfigs/src/main/resources/metadata/MainApi_swagger.yaml
 
+  
+
 - name: LinkedinDataIntegration
   # +required Numeric port value that gets exposed via this endpoint
   port: 8290

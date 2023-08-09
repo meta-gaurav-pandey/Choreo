@@ -1,0 +1,105 @@
+<data transports="http https" serviceGroup="" serviceNamespace="" name="RDBMSdataService">
+  <description />
+  <resource returnRequestStatus="true" method="GET" path="/Data">
+    <description />
+    <call-query href="TestQuery" />
+  </resource>
+  <config id="DatasourceConnection">
+    <property name="driverClassName">com.mysql.cj.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://meal-ticket.cqycsjh1wnuy.us-east-1.rds.amazonaws.com:3306/ZeniaGraph</property>
+    <property name="username">admin</property>
+    <property name="password">LpgKASCOqNsGpsFvY8Vh</property>
+  </config>
+  <operation name="GetAllData" returnRequestStatus="true">
+    <call-query href="TestQuery">
+      <with-param name="sourceName" query-param="sourceName" />
+    </call-query>
+  </operation>
+  <operation name="TriggerCall">
+    <call-query href="ScheduleQuery">
+      <with-param name="sourceName" query-param="sourceName" />
+      <with-param name="from" query-param="from" />
+      <with-param name="to" query-param="to" />
+    </call-query>
+  </operation>
+  <resource method="GET" path="/source">
+    <description />
+    <call-query href="ScheduleQuery" />
+  </resource>
+  <query id="TestQuery" useConfig="DatasourceConnection">
+    <sql>Select * from SourceData where source=:sourceName</sql>
+    <param type="IN" name="sourceName" optional="false" sqlType="STRING" paramType="SCALAR" />
+    <result outputType="json">{
+   "SourceData":{
+      "Data":[
+         {
+            "name":"$name",
+            "website":"$website",
+            "industry":"$industry",
+            "headquarters":"$headquarters",
+            "country":"$country",
+               "market_value":"$market_value",
+ "annual_growth":"$annual_growth",
+ "quarterly_growth":"$quarterly_growth", 
+"no_of_employees":"$no_of_employees",
+ "type":"$type",
+ "founded":"$founded",
+ "assets":"$assets",
+ "sales":"$sales",
+ "profit":"$profit",
+ "yearly_revenue_2022":"$yearly_revenue_2022", 
+"yearly_revenue_2021":"$yearly_revenue_2021", 
+"last_quarterly_revenue":"$last_quarterly_revenue",
+ "second_last_quarterly_revenue":"$second_last_quarterly_revenue", 
+"article":"$article",
+"SIC":"$SIC",
+"NAICS":"$NAICS",
+"company_size":"$company_size",
+"Specialties":"$Specialties",
+"source":"$source" 
+         }
+      ]
+   }
+}</result>
+  </query>
+  <query id="ScheduleQuery" useConfig="DatasourceConnection">
+    <sql><![CDATA[Select * from SourceData where source=:sourceName and UPDATED_AT>=:from and UPDATED_AT<:to
+    ]]></sql>
+    <param type="IN" name="sourceName" optional="false" sqlType="STRING" paramType="SCALAR" />
+    <param type="IN" name="from" optional="false" sqlType="STRING" paramType="SCALAR" />
+    <param type="IN" name="to" optional="false" sqlType="STRING" paramType="SCALAR" />
+    <result outputType="json">{
+   "SourceData":{
+      "Data":[
+         {
+            "name":"$name",
+            "website":"$website",
+            "industry":"$industry",
+            "headquarters":"$headquarters",
+            "country":"$country",
+               "market_value":"$market_value",
+ "annual_growth":"$annual_growth",
+ "quarterly_growth":"$quarterly_growth", 
+"no_of_employees":"$no_of_employees",
+ "type":"$type",
+ "founded":"$founded",
+ "assets":"$assets",
+ "sales":"$sales",
+ "profit":"$profit",
+ "yearly_revenue_2022":"$yearly_revenue_2022", 
+"yearly_revenue_2021":"$yearly_revenue_2021", 
+"last_quarterly_revenue":"$last_quarterly_revenue",
+ "second_last_quarterly_revenue":"$second_last_quarterly_revenue", 
+"article":"$article",
+"SIC":"$SIC",
+"NAICS":"$NAICS",
+"company_size":"$company_size",
+"Specialties":"$Specialties",
+"source":"$source"
+
+         }
+      ]
+   }
+}</result>
+  </query>
+</data>

@@ -9,8 +9,9 @@
   <name>wso2api</name>
   <description>wso2api</description>
   <modules>
-    <module>JavaClassMediator</module>
+    <module>RDBMSdataconfig</module>
     <module>ConnectorExporter</module>
+    <module>JavaClassMediator</module>
     <module>wso2apiConfigs</module>
     <module>wso2apiCompositeExporter</module>
   </modules>

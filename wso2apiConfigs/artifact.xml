@@ -71,4 +71,19 @@
     <artifact name="FILE_CONNECTION_1" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/local-entries/FILE_CONNECTION_1.xml</file>
     </artifact>
+    <artifact name="InsertionSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/InsertionSequence.xml</file>
+    </artifact>
+    <artifact name="DatabaseInboundEndpoint" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/DatabaseInboundEndpoint.xml</file>
+    </artifact>
+    <artifact name="DataBaseSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/DataBaseSequence.xml</file>
+    </artifact>
+    <artifact name="DataBaseScheduler" groupId="com.example.task" version="1.0.0" type="synapse/task" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/tasks/DataBaseScheduler.xml</file>
+    </artifact>
+    <artifact name="DataBaseSchedulerSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/DataBaseSchedulerSequence.xml</file>
+    </artifact>
 </artifacts>

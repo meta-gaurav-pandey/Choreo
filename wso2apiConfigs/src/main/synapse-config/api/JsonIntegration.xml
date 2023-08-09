@@ -11,14 +11,16 @@
                 <startLineNum>0</startLineNum>
                 <lineNum>0</lineNum>
                 <contentType>application/json</contentType>
-                <includeResultTo>Message Body</includeResultTo>
+                <includeResultTo>Message Property</includeResultTo>
+                <resultPropertyName>Array</resultPropertyName>
                 <enableStreaming>false</enableStreaming>
                 <enableLock>false</enableLock>
             </file.read>
             <log level="full"/>
+            <sequence key="InsertionSequence"/>
             <call>
                 <endpoint>
-                    <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=Organisation">
+                    <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
                         <suspendOnFailure>
                             <initialDuration>-1</initialDuration>
                             <progressionFactor>-1</progressionFactor>
@@ -31,11 +33,11 @@
                 </endpoint>
             </call>
             <log>
-                <property name="TTL Generatared Successfully?" value="True"/>
+                <property name="TTL Conversion Status" value="True"/>
             </log>
             <call>
                 <endpoint>
-                    <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
+                    <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
                         <suspendOnFailure>
                             <initialDuration>-1</initialDuration>
                             <progressionFactor>-1</progressionFactor>

@@ -15,6 +15,8 @@
   <description>wso2apiCompositeExporter</description>
   <properties>
     <com.example.api_._SalesforceApi>capp/EnterpriseServiceBus</com.example.api_._SalesforceApi>
+    <com.example.dataservice_._RDBMSdataService>capp/DataServicesServer</com.example.dataservice_._RDBMSdataService>
+    <com.example.sequence_._DataBaseSchedulerSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSchedulerSequence>
     <com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>
     <com.example.metadata_._LinkedinDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._LinkedinDataIntegration_swagger>
     <com.example.metadata_._SalesforceApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_swagger>
@@ -22,6 +24,7 @@
     <com.example.metadata_._LinkedinDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._LinkedinDataIntegration_metadata>
     <com.example.metadata_._XmlIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_swagger>
     <com.example.lib_._salesforcerest-connector>capp/EnterpriseServiceBus</com.example.lib_._salesforcerest-connector>
+    <com.example.inbound-endpoint_._DatabaseInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._DatabaseInboundEndpoint>
     <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
     <com.example.api_._LinkedinDataIntegration>capp/EnterpriseServiceBus</com.example.api_._LinkedinDataIntegration>
     <com.example.api_._JsonIntegration>capp/EnterpriseServiceBus</com.example.api_._JsonIntegration>
@@ -34,9 +37,12 @@
     <com.example.metadata_._JsonIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._JsonIntegration_metadata>
     <com.example.metadata_._XmlIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_metadata>
     <com.example.metadata_._ZoomInfoDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._ZoomInfoDataIntegration_metadata>
+    <com.example.sequence_._InsertionSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionSequence>
     <com.example.local-entry_._SALESFORCEREST_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._SALESFORCEREST_CONNECTION_1>
+    <com.example.task_._DataBaseScheduler>capp/EnterpriseServiceBus</com.example.task_._DataBaseScheduler>
     <com.example_._JavaClassMediator>capp/EnterpriseServiceBus</com.example_._JavaClassMediator>
     <com.example.lib_._file-connector>capp/EnterpriseServiceBus</com.example.lib_._file-connector>
+    <com.example.sequence_._DataBaseSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSequence>
     <com.example.api_._ZoomInfoDataIntegration>capp/EnterpriseServiceBus</com.example.api_._ZoomInfoDataIntegration>
     <com.example.sequence_._SalesforceSequence>capp/EnterpriseServiceBus</com.example.sequence_._SalesforceSequence>
     <com.example.api_._XmlIntegration>capp/EnterpriseServiceBus</com.example.api_._XmlIntegration>
@@ -47,6 +53,18 @@
     <dependency>
       <groupId>com.example.api</groupId>
       <artifactId>SalesforceApi</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.dataservice</groupId>
+      <artifactId>RDBMSdataService</artifactId>
+      <version>1.0.0</version>
+      <type>dbs</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>DataBaseSchedulerSequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -91,6 +109,12 @@
       <artifactId>salesforcerest-connector</artifactId>
       <version>1.1.3</version>
       <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.inbound-endpoint</groupId>
+      <artifactId>DatabaseInboundEndpoint</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.sequence</groupId>
@@ -165,8 +189,20 @@
       <type>yaml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>InsertionSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.local-entry</groupId>
       <artifactId>SALESFORCEREST_CONNECTION_1</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.task</groupId>
+      <artifactId>DataBaseScheduler</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -180,6 +216,12 @@
       <artifactId>file-connector</artifactId>
       <version>4.0.14</version>
       <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>DataBaseSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.api</groupId>
