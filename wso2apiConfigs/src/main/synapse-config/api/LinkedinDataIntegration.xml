@@ -14,7 +14,7 @@
                 <fileName>LinkedInData.csv</fileName>
             </msazurestorage.downloadBlob>
             <file.checkExist configKey="FILE_CONNECTION_1">
-                <path>${WSO2_SERVER_HOME}/LinkedInData.csv</path>
+                <path>/LinkedInData.csv</path>
                 <includeResultTo>Message Body</includeResultTo>
             </file.checkExist>
             <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
@@ -24,7 +24,7 @@
                         <property name="FileExist" value="The required file exist in source"/>
                     </log>
                     <file.read configKey="FILE_CONNECTION_1">
-                        <path>${WSO2_SERVER_HOME}/LinkedInData.csv</path>
+                        <path>/LinkedInData.csv</path>
                         <readMode>Complete File</readMode>
                         <startLineNum>0</startLineNum>
                         <lineNum>0</lineNum>
