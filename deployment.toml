@@ -1,0 +1,7 @@
+[[custom_message_builders]]
+content_type = "text/csv"
+class = "org.apache.axis2.format.PlainTextBuilder"
+
+[[custom_message_formatters]]
+content_type = "text/csv"
+class = "org.apache.axis2.format.PlainTextFormatter"
