@@ -5,56 +5,78 @@
             <log>
                 <property name="Start Logger" value="CSV Integration Main Sequence Started"/>
             </log>
-            <file.read configKey="FILE_CONNECTION_1">
-                <path>C:/FileConnectorDemo/zoom info_split.csv</path>
-                <readMode>Complete File</readMode>
-                <startLineNum>0</startLineNum>
-                <lineNum>0</lineNum>
-                <contentType>text/plain</contentType>
+            <msazurestorage.init>
+                <accountName>databricksaqi</accountName>
+                <accountKey>SboycvfUPW4wJaTDY8SnA6/ylwO1uptrBSystnsrdeiprCjPc7FoIVoVlawyk+0Mmte6S/gadI8M+ASta0ovYg==</accountKey>
+            </msazurestorage.init>
+            <msazurestorage.downloadBlob>
+                <containerName>wso2container</containerName>
+                <fileName>LinkedInData.csv</fileName>
+            </msazurestorage.downloadBlob>
+            <file.checkExist configKey="FILE_CONNECTION_1">
+                <path>/home/wso2carbon/wso2mi-4.1.0 /LinkedInData.csv</path>
                 <includeResultTo>Message Body</includeResultTo>
-                <enableStreaming>false</enableStreaming>
-                <enableLock>false</enableLock>
-            </file.read>
-            <log>
-                <property name="File Connector" value="Read the csv file and converting into json format"/>
-            </log>
-            <CSV.csvToJson>
-                <headerPresent>Present</headerPresent>
-                <valueSeparator>,</valueSeparator>
-                <skipHeader>true</skipHeader>
-                <csvEmptyValues>Empty</csvEmptyValues>
-            </CSV.csvToJson>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
-            <log>
-                <property name="TTL Conversion Status" value="True"/>
-            </log>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
+            </file.checkExist>
+            <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
+            <switch source="get-property('response')">
+                <case regex="true">
+                    <file.read configKey="FILE_CONNECTION_1">
+                        <path>/home/wso2carbon/wso2mi-4.1.0 /zoom info_split.csv</path>
+                        <readMode>Complete File</readMode>
+                        <startLineNum>0</startLineNum>
+                        <lineNum>0</lineNum>
+                        <contentType>text/plain</contentType>
+                        <includeResultTo>Message Body</includeResultTo>
+                        <enableStreaming>false</enableStreaming>
+                        <enableLock>false</enableLock>
+                    </file.read>
+                    <log>
+                        <property name="File Connector" value="Read the csv file and converting into json format"/>
+                    </log>
+                    <CSV.csvToJson>
+                        <headerPresent>Present</headerPresent>
+                        <valueSeparator>,</valueSeparator>
+                        <skipHeader>true</skipHeader>
+                        <csvEmptyValues>Empty</csvEmptyValues>
+                    </CSV.csvToJson>
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                    <log>
+                        <property name="TTL Conversion Status" value="True"/>
+                    </log>
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                </case>
+                <default>
+                    <log separator=",">
+                        <property name="Default log" value="No file exist"/>
+                    </log>
+                </default>
+            </switch>
             <log>
                 <property name="End Logger" value="CSV Integration Main Sequence Ended"/>
             </log>

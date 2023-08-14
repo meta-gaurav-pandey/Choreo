@@ -5,47 +5,69 @@
             <log>
                 <property name="Start Logger" value="XML Integration Started"/>
             </log>
-            <file.read configKey="FILE_CONNECTION_1">
-                <path>C:/FileConnectorDemo/input.xml</path>
-                <readMode>Complete File</readMode>
-                <startLineNum>0</startLineNum>
-                <lineNum>0</lineNum>
+            <msazurestorage.init>
+                <accountName>databricksaqi</accountName>
+                <accountKey>SboycvfUPW4wJaTDY8SnA6/ylwO1uptrBSystnsrdeiprCjPc7FoIVoVlawyk+0Mmte6S/gadI8M+ASta0ovYg==</accountKey>
+            </msazurestorage.init>
+            <msazurestorage.downloadBlob>
+                <containerName>wso2container</containerName>
+                <fileName>LinkedInData.csv</fileName>
+            </msazurestorage.downloadBlob>
+            <file.checkExist configKey="FILE_CONNECTION_1">
+                <path>/home/wso2carbon/wso2mi-4.1.0 /input.xml</path>
                 <includeResultTo>Message Body</includeResultTo>
-                <enableStreaming>false</enableStreaming>
-                <enableLock>false</enableLock>
-            </file.read>
-            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
-            <log>
-                <property name="TTL Conversion Status" value="True"/>
-            </log>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
+            </file.checkExist>
+            <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
+            <switch source="get-property('response')">
+                <case regex="true">
+                    <file.read configKey="FILE_CONNECTION_1">
+                        <path>/home/wso2carbon/wso2mi-4.1.0 /input.xml</path>
+                        <readMode>Complete File</readMode>
+                        <startLineNum>0</startLineNum>
+                        <lineNum>0</lineNum>
+                        <includeResultTo>Message Body</includeResultTo>
+                        <enableStreaming>false</enableStreaming>
+                        <enableLock>false</enableLock>
+                    </file.read>
+                    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                    <log>
+                        <property name="TTL Conversion Status" value="True"/>
+                    </log>
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                </case>
+                <default>
+                    <log>
+                        <property name="Default log" value="No file exist"/>
+                    </log>
+                </default>
+            </switch>
             <log>
                 <property name="End Logger" value="XML Integration is ended"/>
             </log>

@@ -14,7 +14,7 @@
                 <fileName>LinkedInData.csv</fileName>
             </msazurestorage.downloadBlob>
             <file.checkExist configKey="FILE_CONNECTION_1">
-                <path>/home/wso2carbon/wso2mi-4.1.0/LinkedInData.csv</path>
+                <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/LinkedInData.csv</path>
                 <includeResultTo>Message Body</includeResultTo>
             </file.checkExist>
             <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
@@ -22,9 +22,11 @@
                 <case regex="true">
                     <log>
                         <property name="FileExist" value="The required file exist in source"/>
+                        <property expression="$ctx:wso2carbon_home" name="Home2"/>
+                        <property expression="get-property('Home')" name="Home5"/>
                     </log>
                     <file.read configKey="FILE_CONNECTION_1">
-                        <path>/home/wso2carbon/wso2mi-4.1.0/LinkedInData.csv</path>
+                        <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/LinkedInData.csv</path>
                         <readMode>Complete File</readMode>
                         <startLineNum>0</startLineNum>
                         <lineNum>0</lineNum>
@@ -57,7 +59,7 @@
                             </http>
                         </endpoint>
                     </call>
-                    <log>
+                    <log level="full">
                         <property name="TTL Conversion Status" value="True"/>
                     </log>
                     <call>
