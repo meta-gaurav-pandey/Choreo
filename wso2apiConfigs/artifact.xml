@@ -86,4 +86,13 @@
     <artifact name="DataBaseSchedulerSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/DataBaseSchedulerSequence.xml</file>
     </artifact>
+    <artifact name="IngestionCsv" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/IngestionCsv.xml</file>
+    </artifact>
+    <artifact name="IngestionCsv_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/IngestionCsv_swagger.yaml</file>
+    </artifact>
+    <artifact name="IngestionCsv_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/IngestionCsv_metadata.yaml</file>
+    </artifact>
 </artifacts>

@@ -32,7 +32,6 @@
                         <enableLock>false</enableLock>
                     </file.read>
                     <log level="full"/>
-                    <sequence key="InsertionSequence"/>
                     <call>
                         <endpoint>
                             <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
