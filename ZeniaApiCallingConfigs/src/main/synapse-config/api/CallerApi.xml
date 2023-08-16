@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/callLinkedin" name="CallerApi" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="ErrorSequence" methods="GET" uri-template="/{CompanyName}">
+        <inSequence>
+            <log>
+                <property name="StartLog" value="Api Started"/>
+            </log>
+            <property name="Type" scope="default" type="STRING" value="linkedIn"/>
+            <property expression="get-property('uri.var.CompanyName')" name="CompanyName" scope="default" type="STRING"/>
+            <class name="com.example.ZeniaClass"/>
+            <log level="full"/>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('Records')"/>
+                </args>
+            </payloadFactory>
+            <log>
+                <property name="End Logger" value="Main Sequence ended"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

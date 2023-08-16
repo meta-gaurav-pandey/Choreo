@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/callDbpedia" name="CallDbpedia" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="ErrorSequence" methods="GET" uri-template="/{CompanyName}">
+        <inSequence>
+            <log/>
+            <property name="Type" scope="default" type="STRING" value="dbpedia"/>
+            <property expression="get-property('uri.var.CompanyName')" name="CompanyName" scope="default" type="STRING"/>
+            <class name="com.example.ZeniaClass"/>
+            <payloadFactory media-type="text">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('Result')"/>
+                </args>
+            </payloadFactory>
+            <log>
+                <property name="End Logger" value="Main Sequence ended"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

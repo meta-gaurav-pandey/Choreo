@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="CallerApi" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/CallerApi.xml</file>
+    </artifact>
+    <artifact name="CallerApi_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CallerApi_swagger.yaml</file>
+    </artifact>
+    <artifact name="CallerApi_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CallerApi_metadata.yaml</file>
+    </artifact>
+    <artifact name="ErrorSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ErrorSequence.xml</file>
+    </artifact>
+    <artifact name="CallDbpedia" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/CallDbpedia.xml</file>
+    </artifact>
+    <artifact name="CallDbpedia_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CallDbpedia_swagger.yaml</file>
+    </artifact>
+    <artifact name="CallDbpedia_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CallDbpedia_metadata.yaml</file>
+    </artifact>
+</artifacts>
