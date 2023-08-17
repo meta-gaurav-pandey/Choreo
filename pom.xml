@@ -10,7 +10,6 @@
   <description>ZeniaApiCalling</description>
   <modules>
     <module>JavaMediatorForZenia</module>
-    <module>ZeniaConnectorExporter</module>
     <module>ZeniaApiCallingConfigs</module>
     <module>ZeniaApiCallingCompositeExporter</module>
   </modules>
