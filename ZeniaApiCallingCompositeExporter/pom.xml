@@ -14,9 +14,7 @@
   <name>ZeniaApiCallingCompositeExporter</name>
   <description>ZeniaApiCallingCompositeExporter</description>
   <properties>
-    <com.example.metadata_._CallerApi_metadata>capp/EnterpriseServiceBus</com.example.metadata_._CallerApi_metadata>
     <com.example_._JavaMediatorForZenia>capp/EnterpriseServiceBus</com.example_._JavaMediatorForZenia>
-    <com.example.metadata_._CallDbpedia_metadata>capp/EnterpriseServiceBus</com.example.metadata_._CallDbpedia_metadata>
     <com.example.metadata_._CallDbpedia_swagger>capp/EnterpriseServiceBus</com.example.metadata_._CallDbpedia_swagger>
     <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
     <com.example.metadata_._CallerApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._CallerApi_swagger>
@@ -26,21 +24,9 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>CallerApi_metadata</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
-    </dependency>
-    <dependency>
       <groupId>com.example</groupId>
       <artifactId>JavaMediatorForZenia</artifactId>
       <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>CallDbpedia_metadata</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
     </dependency>
     <dependency>
       <groupId>com.example.metadata</groupId>

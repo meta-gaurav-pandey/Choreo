@@ -122,7 +122,7 @@ public class ZeniaClass extends AbstractMediator {
 	            	String result= printResult(sr.getModel(),rows_queryPopulationInFrance.getRowCount());   
 	                context.setProperty("Result", result.toString());
 	            }
-	        } catch (URISyntaxException | SparqlClientException e) {
+	        } catch (Exception e) {
 	            System.out.println(e);
 	            e.printStackTrace();
 	        }
