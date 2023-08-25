@@ -3,43 +3,91 @@
     <resource faultSequence="ErrorSequence" methods="POST">
         <inSequence>
             <log level="full"/>
-            <CSV.csvToJson>
-                <headerPresent>Present</headerPresent>
-                <valueSeparator>,</valueSeparator>
-                <skipHeader>true</skipHeader>
-                <csvEmptyValues>Empty</csvEmptyValues>
-            </CSV.csvToJson>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
-            <log level="full">
-                <property name="TTL Conversion Status" value="True"/>
-            </log>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
+            <property expression="$trp:Content-Type" name="content" scope="default" type="STRING"/>
+            <switch source="get-property('content')">
+                <case regex="text/csv">
+                    <CSV.csvToJson>
+                        <headerPresent>Present</headerPresent>
+                        <valueSeparator>,</valueSeparator>
+                        <skipHeader>true</skipHeader>
+                        <csvEmptyValues>Empty</csvEmptyValues>
+                    </CSV.csvToJson>
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                    <log level="full">
+                        <property name="TTL Conversion Status" value="True"/>
+                    </log>
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                </case>
+                <case regex="application/json">
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                    <log level="full">
+                        <property name="TTL Conversion Status" value="True"/>
+                    </log>
+                    <call>
+                        <endpoint>
+                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>-1</progressionFactor>
+                                    <maximumDuration>0</maximumDuration>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </http>
+                        </endpoint>
+                    </call>
+                </case>
+                <default>
+                    <log>
+                        <property name="default log" value="you have provided wrong media type either provide text/csv or application/json"/>
+                    </log>
+                    <payloadFactory media-type="text">
+                        <format>you have provided wrong media type either provide text/csv or application/json</format>
+                        <args/>
+                    </payloadFactory>
+                    <respond/>
+                </default>
+            </switch>
             <log>
                 <property name="End Log" value="IngestionCsv api completed"/>
             </log>
