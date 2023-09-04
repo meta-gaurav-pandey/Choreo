@@ -5,3 +5,8 @@ class = "org.apache.axis2.format.PlainTextBuilder"
 [[custom_message_formatters]]
 content_type = "text/csv"
 class = "org.apache.axis2.format.PlainTextFormatter"
+
+[transport.http]
+socket_timeout = 900000   # timeout in milliseconds
+disable_connection_keepalive = false
+connection_timeout = 900000 # in milliseconds

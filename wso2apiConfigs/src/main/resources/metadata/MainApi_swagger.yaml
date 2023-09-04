@@ -6,9 +6,16 @@ info:
 servers:
 - url: http://localhost:8290/calling
 paths:
-  /Salesforce/{source}:
+  /{table}/{source}:
     get:
       parameters:
+      - name: table
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: source
         in: path
         required: true

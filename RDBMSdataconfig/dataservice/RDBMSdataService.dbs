@@ -10,9 +10,14 @@
     <property name="username">admin</property>
     <property name="password">LpgKASCOqNsGpsFvY8Vh</property>
   </config>
-  <operation name="GetAllData" returnRequestStatus="true">
+  <resource method="GET" path="/source">
+    <description />
+    <call-query href="ScheduleQuery" />
+  </resource>
+  <operation name="GetAllData">
     <call-query href="TestQuery">
       <with-param name="sourceName" query-param="sourceName" />
+      <with-param name="TableName" query-param="TableName" />
     </call-query>
   </operation>
   <operation name="TriggerCall">
@@ -22,13 +27,10 @@
       <with-param name="to" query-param="to" />
     </call-query>
   </operation>
-  <resource method="GET" path="/source">
-    <description />
-    <call-query href="ScheduleQuery" />
-  </resource>
   <query id="TestQuery" useConfig="DatasourceConnection">
-    <sql>Select * from SourceData where source=:sourceName</sql>
+    <sql>Select * from TableName from source=:sourceName</sql>
     <param type="IN" name="sourceName" optional="false" sqlType="STRING" paramType="SCALAR" />
+    <param type="IN" name="TableName" optional="false" sqlType="STRING" paramType="SCALAR" />
     <result outputType="json">{
    "SourceData":{
       "Data":[
@@ -64,6 +66,7 @@
   </query>
   <query id="ScheduleQuery" useConfig="DatasourceConnection">
     <sql><![CDATA[Select * from SourceData where source=:sourceName and UPDATED_AT>=:from and UPDATED_AT<:to
+
     ]]></sql>
     <param type="IN" name="sourceName" optional="false" sqlType="STRING" paramType="SCALAR" />
     <param type="IN" name="from" optional="false" sqlType="STRING" paramType="SCALAR" />

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/calling" name="MainApi" statistics="enable" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
-    <resource methods="GET" uri-template="/Salesforce/{source}">
+    <resource methods="GET" uri-template="/{table}/{source}">
         <inSequence>
             <log>
                 <property name="StartLog" value="Api started"/>
             </log>
+            <property expression="get-property('uri.var.table')" name="table" scope="default" type="STRING"/>
             <property expression="get-property('uri.var.source')" name="source" scope="default" type="STRING"/>
             <dataServiceCall serviceName="RDBMSdataService">
                 <operations type="single">
