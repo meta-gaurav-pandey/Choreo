@@ -15,24 +15,41 @@
   <description>wso2apiCompositeExporter</description>
   <properties>
     <com.example.lib_._msazurestorage-connector>capp/EnterpriseServiceBus</com.example.lib_._msazurestorage-connector>
-    <com.example.api_._SalesforceApi>capp/EnterpriseServiceBus</com.example.api_._SalesforceApi>
-    <com.example.dataservice_._RDBMSdataService>capp/DataServicesServer</com.example.dataservice_._RDBMSdataService>
     <com.example.sequence_._DataBaseSchedulerSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSchedulerSequence>
-    <com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>
     <com.example.metadata_._LinkedinDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._LinkedinDataIntegration_swagger>
-    <com.example.metadata_._SalesforceApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_swagger>
-    <com.example.metadata_._ZoomInfoDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._ZoomInfoDataIntegration_swagger>
     <com.example.metadata_._LinkedinDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._LinkedinDataIntegration_metadata>
     <com.example.metadata_._XmlIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_swagger>
-    <com.example.lib_._salesforcerest-connector>capp/EnterpriseServiceBus</com.example.lib_._salesforcerest-connector>
-    <com.example.inbound-endpoint_._DatabaseInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._DatabaseInboundEndpoint>
     <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
-    <com.example.api_._LinkedinDataIntegration>capp/EnterpriseServiceBus</com.example.api_._LinkedinDataIntegration>
-    <com.example.metadata_._IngestionCsv_metadata>capp/EnterpriseServiceBus</com.example.metadata_._IngestionCsv_metadata>
+    <com.example.metadata_._TestAPI_swagger>capp/EnterpriseServiceBus</com.example.metadata_._TestAPI_swagger>
     <com.example.api_._JsonIntegration>capp/EnterpriseServiceBus</com.example.api_._JsonIntegration>
     <com.example.lib_._CSV-connector>capp/EnterpriseServiceBus</com.example.lib_._CSV-connector>
-    <com.example.metadata_._SalesforceApi_metadata>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_metadata>
     <com.example.local-entry_._FILE_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._FILE_CONNECTION_1>
+    <com.example.local-entry_._SALESFORCEREST_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._SALESFORCEREST_CONNECTION_1>
+    <com.example.task_._DataBaseScheduler>capp/EnterpriseServiceBus</com.example.task_._DataBaseScheduler>
+    <com.example_._JavaClassMediator>capp/EnterpriseServiceBus</com.example_._JavaClassMediator>
+    <com.example.lib_._file-connector>capp/EnterpriseServiceBus</com.example.lib_._file-connector>
+    <com.example.sequence_._DataBaseSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSequence>
+    <com.example.metadata_._DbpediaDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._DbpediaDataIntegration_metadata>
+    <com.example.sequence_._SalesforceSequence>capp/EnterpriseServiceBus</com.example.sequence_._SalesforceSequence>
+    <com.example.api_._XmlIntegration>capp/EnterpriseServiceBus</com.example.api_._XmlIntegration>
+    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
+    <com.example.api_._split>capp/EnterpriseServiceBus</com.example.api_._split>
+    <com.example.sequence_._DbpediaParent>capp/EnterpriseServiceBus</com.example.sequence_._DbpediaParent>
+    <com.example.api_._TestAPI>capp/EnterpriseServiceBus</com.example.api_._TestAPI>
+    <com.example.api_._SalesforceApi>capp/EnterpriseServiceBus</com.example.api_._SalesforceApi>
+    <com.example.dataservice_._RDBMSdataService>capp/DataServicesServer</com.example.dataservice_._RDBMSdataService>
+    <com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>
+    <com.example.metadata_._split_metadata>capp/EnterpriseServiceBus</com.example.metadata_._split_metadata>
+    <com.example.metadata_._SalesforceApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_swagger>
+    <com.example.metadata_._ZoomInfoDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._ZoomInfoDataIntegration_swagger>
+    <com.example.lib_._salesforcerest-connector>capp/EnterpriseServiceBus</com.example.lib_._salesforcerest-connector>
+    <com.example.inbound-endpoint_._DatabaseInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._DatabaseInboundEndpoint>
+    <com.example.metadata_._IngestionCsv_metadata>capp/EnterpriseServiceBus</com.example.metadata_._IngestionCsv_metadata>
+    <com.example.api_._LinkedinDataIntegration>capp/EnterpriseServiceBus</com.example.api_._LinkedinDataIntegration>
+    <com.example.metadata_._split_swagger>capp/EnterpriseServiceBus</com.example.metadata_._split_swagger>
+    <com.example.api_._DbpediaDataIntegration>capp/EnterpriseServiceBus</com.example.api_._DbpediaDataIntegration>
+    <com.example.metadata_._DbpediaDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._DbpediaDataIntegration_swagger>
+    <com.example.metadata_._SalesforceApi_metadata>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_metadata>
     <com.example.sequence_._ClassSequence>capp/EnterpriseServiceBus</com.example.sequence_._ClassSequence>
     <com.example.metadata_._MainApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._MainApi_swagger>
     <com.example.api_._MainApi>capp/EnterpriseServiceBus</com.example.api_._MainApi>
@@ -41,15 +58,9 @@
     <com.example.metadata_._XmlIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_metadata>
     <com.example.metadata_._ZoomInfoDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._ZoomInfoDataIntegration_metadata>
     <com.example.sequence_._InsertionSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionSequence>
-    <com.example.local-entry_._SALESFORCEREST_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._SALESFORCEREST_CONNECTION_1>
-    <com.example.task_._DataBaseScheduler>capp/EnterpriseServiceBus</com.example.task_._DataBaseScheduler>
-    <com.example_._JavaClassMediator>capp/EnterpriseServiceBus</com.example_._JavaClassMediator>
-    <com.example.lib_._file-connector>capp/EnterpriseServiceBus</com.example.lib_._file-connector>
-    <com.example.sequence_._DataBaseSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSequence>
+    <com.example.sequence_._ZoomInfoParent>capp/EnterpriseServiceBus</com.example.sequence_._ZoomInfoParent>
+    <com.example.metadata_._TestAPI_metadata>capp/EnterpriseServiceBus</com.example.metadata_._TestAPI_metadata>
     <com.example.api_._ZoomInfoDataIntegration>capp/EnterpriseServiceBus</com.example.api_._ZoomInfoDataIntegration>
-    <com.example.sequence_._SalesforceSequence>capp/EnterpriseServiceBus</com.example.sequence_._SalesforceSequence>
-    <com.example.api_._XmlIntegration>capp/EnterpriseServiceBus</com.example.api_._XmlIntegration>
-    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
     <com.example.api_._IngestionCsv>capp/EnterpriseServiceBus</com.example.api_._IngestionCsv>
     <com.example.metadata_._JsonIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._JsonIntegration_swagger>
   </properties>
@@ -87,6 +98,12 @@
     <dependency>
       <groupId>com.example.metadata</groupId>
       <artifactId>LinkedinDataIntegration_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>split_metadata</artifactId>
       <version>1.0.0</version>
       <type>yaml</type>
     </dependency>
@@ -145,8 +162,26 @@
       <type>yaml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>TestAPI_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.api</groupId>
       <artifactId>JsonIntegration</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>split_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.api</groupId>
+      <artifactId>DbpediaDataIntegration</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -155,6 +190,12 @@
       <artifactId>CSV-connector</artifactId>
       <version>1.0.4</version>
       <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>DbpediaDataIntegration_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
     </dependency>
     <dependency>
       <groupId>com.example.metadata</groupId>
@@ -223,6 +264,12 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>ZoomInfoParent</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.task</groupId>
       <artifactId>DataBaseScheduler</artifactId>
       <version>1.0.0</version>
@@ -244,6 +291,18 @@
       <artifactId>DataBaseSequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>TestAPI_metadata</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>DbpediaDataIntegration_metadata</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
     </dependency>
     <dependency>
       <groupId>com.example.api</groupId>
@@ -270,10 +329,28 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.api</groupId>
+      <artifactId>split</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>DbpediaParent</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.metadata</groupId>
       <artifactId>JsonIntegration_swagger</artifactId>
       <version>1.0.0</version>
       <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.api</groupId>
+      <artifactId>TestAPI</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
   </dependencies>
   <repositories>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="InsertionSequence" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence name="InsertionParentSequence" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log separator=",">
         <property name="StartingLog" value="InsertionSequence Started"/>
     </log>
     <payloadFactory media-type="json">
         <format>$1</format>
         <args>
-            <arg evaluator="json" expression="$ctx:Array1"/>
+            <arg evaluator="json" expression="$ctx:Array2"/>
         </args>
     </payloadFactory>
     <call>
@@ -24,7 +24,7 @@
         </endpoint>
     </call>
     <log>
-        <property name="InsertionSequence" value="ttl generation true"/>
+        <property name="Insertion parent sequence" value="ttl generation true"/>
     </log>
     <call>
         <endpoint>

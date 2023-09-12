@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/test" name="TestAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log level="custom">
+                <property name="Main Sequence" value="Started"/>
+            </log>
+            <file.read configKey="FILE_CONNECTION_1">
+                <path>C:/FileConnectorDemo/dbpedia-contacts-data.csv</path>
+                <readMode>Complete File</readMode>
+                <startLineNum>0</startLineNum>
+                <lineNum>0</lineNum>
+                <contentType>text/plain</contentType>
+                <includeResultTo>Message Body</includeResultTo>
+                <enableStreaming>false</enableStreaming>
+                <enableLock>false</enableLock>
+            </file.read>
+            <CSV.csvToJson>
+                <headerPresent>Present</headerPresent>
+                <valueSeparator>,</valueSeparator>
+                <skipHeader>true</skipHeader>
+                <csvEmptyValues>Empty</csvEmptyValues>
+            </CSV.csvToJson>
+            <property name="source" scope="default" type="STRING" value="Dbpedia-contact"/>
+            <class name="com.example.DBPediaMapper"/>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="json" expression="$ctx:Array"/>
+                </args>
+            </payloadFactory>
+            <log>
+                <property expression="$ctx:Array" name="log2"/>
+            </log>
+            <call>
+                <endpoint>
+                    <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=OrganisationMapping">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                </endpoint>
+            </call>
+            <call>
+                <endpoint>
+                    <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                </endpoint>
+            </call>
+            <log level="full"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

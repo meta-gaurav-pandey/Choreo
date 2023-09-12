@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<api context="/csvIntegration" name="ZoomInfoDataIntegration" statistics="enable" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
-    <resource faultSequence="ErrorSequence" methods="GET">
+<api context="/dbpedia" name="DbpediaDataIntegration" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
         <inSequence>
             <log>
                 <property name="Start Logger" value="CSV Integration Main Sequence Started"/>
@@ -11,17 +11,17 @@
             </msazurestorage.init>
             <msazurestorage.downloadBlob>
                 <containerName>wso2container</containerName>
-                <fileName>zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</fileName>
+                <fileName>depedia-source-data.csv</fileName>
             </msazurestorage.downloadBlob>
             <file.checkExist configKey="FILE_CONNECTION_1">
-                <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</path>
+                <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/depedia-source-data.csv</path>
                 <includeResultTo>Message Body</includeResultTo>
             </file.checkExist>
             <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
             <switch source="get-property('response')">
                 <case regex="true">
                     <file.read configKey="FILE_CONNECTION_1">
-                        <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</path>
+                        <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/depedia-source-data.csv</path>
                         <readMode>Complete File</readMode>
                         <startLineNum>0</startLineNum>
                         <lineNum>0</lineNum>
@@ -30,7 +30,7 @@
                         <enableStreaming>false</enableStreaming>
                         <enableLock>false</enableLock>
                     </file.read>
-                    <property name="source" scope="default" type="STRING" value="zoominfo"/>
+                    <property name="source" scope="default" type="STRING" value="dbpedia"/>
                     <log>
                         <property name="File Connector" value="Read the csv file and converting into json format"/>
                     </log>
@@ -40,7 +40,7 @@
                         <skipHeader>true</skipHeader>
                         <csvEmptyValues>Empty</csvEmptyValues>
                     </CSV.csvToJson>
-                    <class name="com.example.ZoomInfoClass"/>
+                    <class name="com.example.DBPediaMapper"/>
                     <payloadFactory media-type="json">
                         <format>$1</format>
                         <args>
@@ -78,7 +78,7 @@
                             </http>
                         </endpoint>
                     </call>
-                    <sequence key="ZoomInfoParent"/>
+                    <sequence key="DbpediaParent"/>
                 </case>
                 <default>
                     <log separator=",">
@@ -92,5 +92,6 @@
             <respond/>
         </inSequence>
         <outSequence/>
+        <faultSequence/>
     </resource>
 </api>
