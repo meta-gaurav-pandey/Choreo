@@ -107,7 +107,7 @@ import org.json.JSONObject;
 			JSONObject outputParentObject=new JSONObject();
 			JSONArray outputParentArray=new JSONArray();
 
-			outputParentObject.put("Comp_Name", validatekey("name",jsonObject));
+			outputParentObject.put("Comp_Name", validatekey("social_url",jsonObject));
 			outputParentObject.put("parentName", validatekey("parent_name",jsonObject));
 			outputParentObject.put("source","Linkedin-parent");
 			outputParentArray.put(outputParentObject);
