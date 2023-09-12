@@ -80,7 +80,7 @@
                             </http>
                         </endpoint>
                     </call>
-                    <log>
+                    <log level="full">
                         <property name="TTL Conversion Status" value="True"/>
                     </log>
                     <call>

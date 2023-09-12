@@ -192,12 +192,12 @@ import org.json.JSONObject;
 			outputJsonObject.put("parentName", validatekey("parent_name",jsonObject));
 			outputJsonObject.put("annual_revenue_growth", getPercentage(validatekey("current_year_revenue",jsonObject),validatekey("previous_year_revenue",jsonObject)));
 			outputJsonObject.put("source","yahoo");
-			outputJsonObject.put("symbol", validatekey("ticket_symbol",jsonObject));
+			outputJsonObject.put("symbol", validatekey("ticker_symbol",jsonObject));
 			outputJsonObject.put("longName", validatekey("name",jsonObject));
 
 			
 			outputJsonArray.put(outputJsonObject);
-				
+			System.out.println("Data:"+outputJsonArray.toString());
 
 			return outputJsonArray.toString();
 		}
@@ -217,6 +217,7 @@ import org.json.JSONObject;
 			String annualGrowth=getAnnualGrowthPercentage(validatekey("current_year_revenue",jsonObject),validatekey("previous_year_revenue",jsonObject));
 			outputObject.put("annual_revenue_growth",String.format("%.2f", (Double.parseDouble(annualGrowth)*100)).concat("%") );
 			outputObject.put("longName", validatekey("name",jsonObject));
+			if(!validatekey("employer",jsonObject).equals("")) {
 			JSONArray employerArray=jsonObject.getJSONArray("employer");
 			JSONArray outputEmployeeArray=new JSONArray();
 			for(int i=0;i<employerArray.length();i++) {
@@ -227,7 +228,7 @@ import org.json.JSONObject;
 			outputEmployeeArray.put(outputEmployeeObject);
 			}
 			outputObject.put("employer",outputEmployeeArray);
-
+			}
 			outputJsonArray.put(outputObject);
 			System.out.println("Contact Data:"+outputJsonArray.toString());
 
