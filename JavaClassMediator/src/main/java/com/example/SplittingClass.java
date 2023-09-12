@@ -205,22 +205,35 @@ import org.json.JSONObject;
 			JSONArray outputJsonArray=new JSONArray();
 			JSONObject outputObject=new JSONObject();
 			outputObject.put("source","yahoo-node");
-			outputObject.put("symbol", validatekey("ticket_symbol",jsonObject));
-			outputObject.put("gross_profit", getInMillions(validatekey("gross_profit",jsonObject)));	
-			outputObject.put("TotalAssets", getInMillions(validatekey("total_assets",jsonObject)));	
-			outputObject.put("current_year_revenue", getInMillions(validatekey("current_year_revenue",jsonObject)));		
-			outputObject.put("previous_year_revenue",  getInMillions(validatekey("previous_year_revenue",jsonObject)));	
-			outputObject.put("marketCap", getInMillions(validatekey("market_cap",jsonObject)));	
-			outputObject.put("last_quarterly_revenue", getInMillions(validatekey("last_quarterly_revenue",jsonObject)));		
-			outputObject.put("second_last_quarterly_revenue", getInMillions(validatekey("second_last_quarterly_revenue",jsonObject)));		
+			outputObject.put("symbol", validatekey("ticker_symbol",jsonObject));
+			outputObject.put("gross_profit", getInMillions(validatekey("gross_profit",jsonObject)));
+			outputObject.put("TotalAssets", getInMillions(validatekey("total_assets",jsonObject)));
+			outputObject.put("current_year_revenue", getInMillions(validatekey("current_year_revenue",jsonObject)));
+			outputObject.put("previous_year_revenue",  getInMillions(validatekey("previous_year_revenue",jsonObject)));
+			outputObject.put("marketCap", getInMillions(validatekey("market_cap",jsonObject)));
+			outputObject.put("last_quarterly_revenue", getInMillions(validatekey("last_quarterly_revenue",jsonObject)));
+			outputObject.put("second_last_quarterly_revenue", getInMillions(validatekey("second_last_quarterly_revenue",jsonObject)));
 			outputObject.put("quarterly_revenue_growth", String.format("%.2f", (Double.parseDouble(validatekey("quarterly_revenue_growth",jsonObject)))*100).concat("%"));
 			String annualGrowth=getAnnualGrowthPercentage(validatekey("current_year_revenue",jsonObject),validatekey("previous_year_revenue",jsonObject));
 			outputObject.put("annual_revenue_growth",String.format("%.2f", (Double.parseDouble(annualGrowth)*100)).concat("%") );
 			outputObject.put("longName", validatekey("name",jsonObject));
+			JSONArray employerArray=jsonObject.getJSONArray("employer");
+			JSONArray outputEmployeeArray=new JSONArray();
+			for(int i=0;i<employerArray.length();i++) {
+			JSONObject outputEmployeeObject=new JSONObject();
+			JSONObject employeeObject=employerArray.getJSONObject(i);
+			outputEmployeeObject.put("name",validatekey("full_name",employeeObject) );
+			outputEmployeeObject.put("title",validatekey("occupation",employeeObject) );
+			outputEmployeeArray.put(outputEmployeeObject);
+			}
+			outputObject.put("employer",outputEmployeeArray);
 
 			outputJsonArray.put(outputObject);
+			System.out.println("Contact Data:"+outputJsonArray.toString());
+
 			return outputJsonArray.toString();
-		}
+			}
+
 		
 		public String getInMillions(String inputValue) {
 			double d = Double.parseDouble(inputValue); 

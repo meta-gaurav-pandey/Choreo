@@ -61,14 +61,14 @@
                         <property expression="json-eval($ctx:Array1)" name="Array1"/>
                     </log>
                     <payloadFactory media-type="json">
-                        <format>"$1"</format>
+                        <format>$1</format>
                         <args>
                             <arg evaluator="json" expression="$ctx:Array1"/>
                         </args>
                     </payloadFactory>
                     <call>
                         <endpoint>
-                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
+                            <http method="post" statistics="enable" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
                                 <suspendOnFailure>
                                     <initialDuration>-1</initialDuration>
                                     <progressionFactor>-1</progressionFactor>
@@ -80,7 +80,7 @@
                             </http>
                         </endpoint>
                     </call>
-                    <log level="full">
+                    <log>
                         <property name="TTL Conversion Status" value="True"/>
                     </log>
                     <call>
