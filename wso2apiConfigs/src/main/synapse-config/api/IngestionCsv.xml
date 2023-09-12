@@ -57,17 +57,18 @@
                         <property name="log1" value="json api started"/>
                     </log>
                     <class name="com.example.SplittingClass"/>
-                    <log level="full"/>
-                    <sequence key="InsertionSequence"/>
-                    <!--           <payloadFactory media-type="json">
-                        <format>$1</format>
+                    <log>
+                        <property expression="json-eval($ctx:Array1)" name="Array1"/>
+                    </log>
+                    <payloadFactory media-type="json">
+                        <format>"$1"</format>
                         <args>
                             <arg evaluator="json" expression="$ctx:Array1"/>
                         </args>
                     </payloadFactory>
                     <call>
                         <endpoint>
-                            <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=OrganisationMapping">
+                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
                                 <suspendOnFailure>
                                     <initialDuration>-1</initialDuration>
                                     <progressionFactor>-1</progressionFactor>
@@ -84,7 +85,7 @@
                     </log>
                     <call>
                         <endpoint>
-                            <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
+                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
                                 <suspendOnFailure>
                                     <initialDuration>-1</initialDuration>
                                     <progressionFactor>-1</progressionFactor>
@@ -98,7 +99,7 @@
                     </call>
                     <log>
                         <property name="MediatorLog" value="First split json inserted"/>
-                    </log> 
+                    </log>
                     <payloadFactory media-type="json">
                         <format>$1</format>
                         <args>
@@ -107,7 +108,7 @@
                     </payloadFactory>
                     <call>
                         <endpoint>
-                            <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=OrganisationMapping">
+                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
                                 <suspendOnFailure>
                                     <initialDuration>-1</initialDuration>
                                     <progressionFactor>-1</progressionFactor>
@@ -124,7 +125,7 @@
                     </log>
                     <call>
                         <endpoint>
-                            <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
+                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
                                 <suspendOnFailure>
                                     <initialDuration>-1</initialDuration>
                                     <progressionFactor>-1</progressionFactor>
@@ -135,8 +136,7 @@
                                 </markForSuspension>
                             </http>
                         </endpoint>
-                    </call>-->
-                    <sequence key="InsertionParentSequence"/>
+                    </call>
                 </case>
                 <default/>
             </switch>

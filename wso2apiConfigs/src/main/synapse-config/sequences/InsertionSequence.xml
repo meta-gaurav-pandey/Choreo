@@ -9,9 +9,12 @@
             <arg evaluator="json" expression="$ctx:Array1"/>
         </args>
     </payloadFactory>
+    <log>
+        <property name="mediator" value="payload completd"/>
+    </log>
     <call>
         <endpoint>
-            <http method="post" statistics="enable" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
+            <http method="post" statistics="enable" trace="enable" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
                 <suspendOnFailure>
                     <initialDuration>-1</initialDuration>
                     <progressionFactor>-1</progressionFactor>

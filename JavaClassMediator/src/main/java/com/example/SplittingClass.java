@@ -106,8 +106,9 @@ import org.json.JSONObject;
 		public String getLinkedinParentMapping(JSONObject jsonObject) {
 			JSONObject outputParentObject=new JSONObject();
 			JSONArray outputParentArray=new JSONArray();
+			String source[]=validatekey("social_url",jsonObject).split("https://www.linkedin.com/company/");
 
-			outputParentObject.put("Comp_Name", validatekey("social_url",jsonObject));
+			outputParentObject.put("Comp_Name", source[1]);
 			outputParentObject.put("parentName", validatekey("parent_name",jsonObject));
 			outputParentObject.put("source","Linkedin-parent");
 			outputParentArray.put(outputParentObject);
@@ -148,7 +149,7 @@ import org.json.JSONObject;
 			headquarterArray.put(headquarterObject);
 			outputObject.put("headquarters",headquarterArray);
 			outputJsonArray.put(outputObject);
-			System.out.println(outputJsonArray.toString());
+			System.out.println("source " +outputJsonArray.toString());
 			return outputJsonArray.toString();
 	}
 		
@@ -169,7 +170,7 @@ import org.json.JSONObject;
 			contactObject.put("Occupation", occupationArray);
 			outputJsonArray.put(contactObject);
 		}
-			System.out.println(outputJsonArray.toString());
+			System.out.println("parent " + outputJsonArray.toString());
 			return outputJsonArray.toString();
 		}	
 		public String getYahooWithoutNodeJson(JSONObject jsonObject) {
