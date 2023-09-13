@@ -217,7 +217,8 @@ import org.json.JSONObject;
 			String annualGrowth=getAnnualGrowthPercentage(validatekey("current_year_revenue",jsonObject),validatekey("previous_year_revenue",jsonObject));
 			outputObject.put("annual_revenue_growth",String.format("%.2f", (Double.parseDouble(annualGrowth)*100)).concat("%") );
 			outputObject.put("longName", validatekey("name",jsonObject));
-			if(!validatekey("employer",jsonObject).equals("")) {
+			//if(!validatekey("employer",jsonObject).equals("")) {
+			if(jsonObject.has("employer") && jsonObject.getJSONArray("employer").length()>0) {
 			JSONArray employerArray=jsonObject.getJSONArray("employer");
 			JSONArray outputEmployeeArray=new JSONArray();
 			for(int i=0;i<employerArray.length();i++) {
@@ -239,8 +240,8 @@ import org.json.JSONObject;
 		public String getInMillions(String inputValue) {
 			double d = Double.parseDouble(inputValue); 
 			d=(d/1000000);
-			System.out.println(String.format("%.0f",d).concat(" M"));
-			return String.format("%.2f",d).concat(" M");
+			System.out.println(String.format("%.0f",d).concat("M"));
+			return String.format("%.2f",d).concat("M");
 
 		}
 		public String getPercentage(String firstValue, String secondValue) {
