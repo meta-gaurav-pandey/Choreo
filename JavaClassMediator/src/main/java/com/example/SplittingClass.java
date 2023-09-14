@@ -47,6 +47,15 @@ import org.json.JSONObject;
 						flag=true;
 						break;
 					}
+				else if(jsonObject.get("source").equals("others")) {
+					outputArray=getOthersJson(jsonObject);
+					JSONArray Array2=new JSONArray();
+					context.setProperty("Array1", outputArray);
+					context.setProperty("Array2", Array2);
+						System.out.println("in others source");
+						flag=true;
+						break;
+					}
 				
 				
 			}
@@ -235,7 +244,29 @@ import org.json.JSONObject;
 
 			return outputJsonArray.toString();
 			}
+		public String getOthersJson(JSONObject jsonObject) {
+			JSONArray outputJsonArray=new JSONArray();	
+			JSONObject outputJsonObject=new JSONObject();	
+			outputJsonObject.put("name", validatekey("name",jsonObject));
+			outputJsonObject.put("description", validatekey("description",jsonObject));
+			outputJsonObject.put("SIC", validatekey("SIC",jsonObject));
+			outputJsonObject.put("NAICS", validatekey("NAICS",jsonObject));
+			outputJsonObject.put("headquarters", validatekey("headquarters",jsonObject));
+			outputJsonObject.put("operating_years", validatekey("operating_years",jsonObject));
+			outputJsonObject.put("no_of_employees", validatekey("no_of_employees",jsonObject));
+			outputJsonObject.put("revenue_dollar", validatekey("revenue_dollar",jsonObject));
+			outputJsonObject.put("annual_growth", validatekey("annual_growth",jsonObject));
+			outputJsonObject.put("quarterly_growth", validatekey("quarterly_growth",jsonObject));
+			outputJsonObject.put("parent_name", validatekey("parent_name",jsonObject));
+			if(jsonObject.has("custom_properties") && jsonObject.getJSONArray("custom_properties").length()>0) {
+				outputJsonObject.put("custom_properties", jsonObject.getJSONArray("custom_properties"));
+			}
 
+			outputJsonObject.put("source", "others");
+			outputJsonArray.put(outputJsonObject);
+			System.out.println("Others Data:"+ outputJsonArray.toString());
+			return outputJsonArray.toString();
+		}
 		
 		public String getInMillions(String inputValue) {
 			double d = Double.parseDouble(inputValue); 

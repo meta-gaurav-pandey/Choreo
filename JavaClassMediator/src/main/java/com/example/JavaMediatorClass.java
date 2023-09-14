@@ -1,5 +1,8 @@
 package com.example;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.mediators.AbstractMediator;
 import org.json.JSONArray;
@@ -24,7 +27,10 @@ public class JavaMediatorClass extends AbstractMediator {
 			} else if (ObjectType.equals("Lead")) {
 				System.out.println("Lead" + payload);
 				json = convertLead(payload);
-				context.setProperty("Array", json.toString());
+				context.setProperty("Array1", json.toString());
+				System.out.println(json.toString());
+				
+				
 			} else if (ObjectType.equals("AccountScheduler")) {
 				System.out.println("Scheduler" + payload);
 				json = convertSchedule(payload);
@@ -93,52 +99,83 @@ public class JavaMediatorClass extends AbstractMediator {
 			records = new JSONArray();
 			records.put(jsonObj.getJSONObject("soapenv:Body").getJSONObject("jsonObject").getJSONObject("records"));
 
-			// System.out.println("Hey" + records);
+		//	 System.out.println("Hey" + records);
 			JSONArray result = new JSONArray();
+	//		String[] standardFields={"zeniadev__SICCode__c","zeniadev__Quarterly_Growth__c","zeniadev__Operating_Years__c","Description","zeniadev__No_Of_Employees__c","zeniadev__Annual_Growth__c","Status","Industry","zeniadev__Headquarters__c","zeniadev__Niacs_Code__c","Company","Name"};
 			for (int i = 0; i < records.length(); i++) {
-
+				JSONArray employeeArray=new JSONArray();
 				JSONObject record = records.getJSONObject(i);
+				//JSONArray custompropertiesArray=new JSONArray();
 				JSONObject obj = new JSONObject();
-				obj.put("name", record.get("Company"));
-				obj.put("description", record.get("Description"));
+				obj.put("Name", checkKeySales("Name",record));
+				obj.put("Description", checkKeySales("Description",record));
 				obj.put("source", "salesforce");
-				obj.put("isDeleted", record.get("IsDeleted"));
+				obj.put("zeniadev__SICCode__c",checkKeySales("zeniadev__SICCode__c",record));
 
-				obj.put("masterRecordId", record.get("MasterRecordId"));
-				obj.put("lastName", record.get("LastName"));
-				obj.put("firstName", record.get("FirstName"));
-				obj.put("title", record.get("Title"));
+				obj.put("zeniadev__Quarterly_Growth__c", checkKeySales("zeniadev__Quarterly_Growth__c",record));
+				obj.put("zeniadev__Operating_Years__c",checkKeySales("zeniadev__Operating_Years__c",record) );
+				obj.put("zeniadev__No_Of_Employees__c",checkKeySales("zeniadev__No_Of_Employees__c",record));
+				obj.put("zeniadev__Annual_Growth__c",checkKeySales("zeniadev__Annual_Growth__c",record) );
 				// obj.put("company", record.get("Company"));
-				obj.put("street", record.get("Street"));
-				obj.put("city", record.get("City"));
-				obj.put("state", record.get("State"));
-				obj.put("postalCode", record.get("PostalCode"));
-				obj.put("country", record.get("Country"));
-				obj.put("latitude", record.get("Latitude"));
-				obj.put("longitude", record.get("Longitude"));
-				obj.put("geocodeAccuracy", record.get("GeocodeAccuracy"));
-				obj.put("phone", record.get("Phone"));
-				obj.put("mobilePhone", record.get("MobilePhone"));
-				obj.put("fax", record.get("Fax"));
-				obj.put("email", record.get("Email"));
-				obj.put("website", record.get("Website"));
-				obj.put("status", record.get("Status"));
-				obj.put("industry", record.get("Industry"));
-				obj.put("rating", record.get("Rating"));
-				obj.put("annualRevenue", record.get("AnnualRevenue"));
-				obj.put("no_of_employees", record.get("NumberOfEmployees"));
-				obj.put("SIC", record.get("SICCode__c"));
-				obj.put("type", record.get("Company_type__c"));
-				obj.put("annual_growth", record.get("Annual_Growth__c"));
-				obj.put("NAICS", record.get("NAICS__c"));
-				obj.put("second_last_quarterly_revenue", record.get("second_last_quarterly_revenue__c"));
-				obj.put("last_quarterly_revenue", record.get("SICCode__c"));
-				obj.put("last_quarterly_revenue", record.get("last_quarterly_revenue__c"));
-				obj.put("yearly_revenue_2021", record.get("yearly_revenue_2021__c"));
-				obj.put("yearly_revenue_2022", record.get("yearly_revenue_2022__c"));
-				obj.put("Categories", record.get("Categories__c"));
-				obj.put("Specialties", record.get("Specialties__c"));
-				obj.put("headquarters", record.get("headquarters__c"));
+				obj.put("Status",checkKeySales("Status",record));
+				obj.put("Industry",checkKeySales("Industry",record) );
+				obj.put("zeniadev__Headquarters__c",checkKeySales("zeniadev__Headquarters__c",record) );
+				obj.put("zeniadev__Niacs_Code__c",checkKeySales("zeniadev__Niacs_Code__c",record) );
+				obj.put("Company",checkKeySales("Company",record));
+//				obj.put("latitude", record.get("Latitude"));
+//				obj.put("longitude", record.get("Longitude"));
+//				obj.put("geocodeAccuracy", record.get("GeocodeAccuracy"));
+//				obj.put("phone", record.get("Phone"));
+//				obj.put("mobilePhone", record.get("MobilePhone"));
+//				obj.put("fax", record.get("Fax"));
+//				obj.put("email", record.get("Email"));
+//				obj.put("website", record.get("Website"));
+//				obj.put("status", record.get("Status"));
+//				obj.put("industry", record.get("Industry"));
+//				obj.put("rating", record.get("Rating"));
+//				obj.put("annualRevenue", record.get("AnnualRevenue"));
+//				obj.put("no_of_employees", record.get("NumberOfEmployees"));
+//				obj.put("SIC", record.get("SICCode__c"));
+//				obj.put("type", record.get("Company_type__c"));
+//				obj.put("annual_growth", record.get("Annual_Growth__c"));
+//				obj.put("NAICS", record.get("NAICS__c"));
+//				obj.put("second_last_quarterly_revenue", record.get("second_last_quarterly_revenue__c"));
+//				obj.put("last_quarterly_revenue", record.get("SICCode__c"));
+//				obj.put("last_quarterly_revenue", record.get("last_quarterly_revenue__c"));
+//				obj.put("yearly_revenue_2021", record.get("yearly_revenue_2021__c"));
+//				obj.put("yearly_revenue_2022", record.get("yearly_revenue_2022__c"));
+//				obj.put("Categories", record.get("Categories__c"));
+//				obj.put("Specialties", record.get("Specialties__c"));
+//				obj.put("headquarters", record.get("headquarters__c"));
+				Iterator<String> keys=record.keys();
+				while(keys.hasNext()) {
+					String key=(String)keys.next();
+					if(key.contains("zeniadev__Contacts__r")) {
+						
+						if(!(record.get(key)==null) || !record.get(key).equals("")) {
+							int size=(int) record.getJSONObject(key).get("totalSize");
+							JSONArray emp=new JSONArray();
+							if(size==1) {
+								emp.put(record.getJSONObject(key).getJSONObject("records"));
+							}
+							else {
+								emp=new JSONArray(record.getJSONObject(key).getJSONObject("records"));
+							}
+						
+							for(int r=0;r< emp.length();r++) {
+								JSONObject empRecord=emp.getJSONObject(r);
+								JSONObject empObject=new JSONObject();
+								empObject.put("zeniadev__Designation__c", checkKeySales("zeniadev__Designation__c",empRecord));
+								empObject.put("Name", checkKeySales("Name",empRecord));
+								empObject.put("zeniadev__Lead__c", checkKeySales("zeniadev__Lead__c",empRecord));
+								employeeArray.put(empObject);
+							}
+						obj.put("employer", employeeArray);
+						
+					//	employeeArray.put(employerObject);
+						}
+						}
+					}
 				result.put(obj);
 
 			}
@@ -149,6 +186,20 @@ public class JavaMediatorClass extends AbstractMediator {
 		}
 
 	}
+	public static JSONObject getJSONObject(String key,String value) {
+		JSONObject jsonObject=new JSONObject();
+		jsonObject.put("name",key);
+		jsonObject.put("value",value);
+		return jsonObject;
+	}
+	public static String checkKeySales(String key,JSONObject jsonObject) {
+		if(jsonObject.has(key)) {
+			return (String) jsonObject.get(key).toString();
+		}
+		else
+		return "";
+	}
+	
 
 	public static JSONArray convertSchedule(String xml) throws org.json.JSONException {
 

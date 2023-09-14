@@ -4,13 +4,13 @@
         <hostName>https://login.salesforce.com</hostName>
         <connectionType>init</connectionType>
         <timeout>3000</timeout>
-        <password>Salesforce@12345cnc0aOkCCBVEgrdcXErMPVWTQ</password>
+        <password>Quid@123rHFeThoYrzp181aNibelZuGZq</password>
         <apiVersion>v57.0</apiVersion>
-        <apiUrl>https://metacube147-dev-ed.my.salesforce.com</apiUrl>
-        <clientSecret>EF8DF51CDB688678C13B9641D5B180DDDC9F143F0434D077674D904EA9F26CBB</clientSecret>
-        <clientId>3MVG9wt4IL4O5wvKb19HaCNIcPCOlcyaJ3tufkxMFTnNHehYr4urKIG8XOjKeySfgdyKPIIO_waPnna3iqxlp</clientId>
-        <accessToken>00D5i000009NbeF!AQcAQPyuzEUHOkl4Tc6jIWhX2ke71AJyAYUjRZ9mQ_cFIeNSmXtwyiV3MF3_t.ejPIepPgRVFOafAVQxcOxX9HxK4g825gpo</accessToken>
+        <apiUrl>https://metacubesoftware-1f-dev-ed.develop.my.salesforce.com</apiUrl>
+        <clientSecret>62E5CEF92945778999B0BAC007A489110A7DEDC93A793E9B90FF1A9F3D8B4F66</clientSecret>
+        <clientId>3MVG9wt4IL4O5wvLA9GK2AK2BfNDe68gUQEF50ZTyjKzTLFphdf.OhTfZlZ2rfAS4HmdxWrN3QHSouSTAOSxC</clientId>
+        <accessToken>00D5i00000DWMXN!AQUAQOzQo5VI0.M15yRSEKBAeb44XR2pW1.eSvT3.5chC6aahCCX3Oh3R.AtMd_.j9DXKXqBRUeAVdO9NG3nWnUfaBuxmS9_</accessToken>
         <name>SALESFORCEREST_CONNECTION_1</name>
-        <username>13gauravpandey@gmail.com</username>
+        <username>abdul.wahab@zeniagraph.com</username>
     </salesforcerest.init>
 </localEntry>

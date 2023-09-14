@@ -6,7 +6,7 @@
     <property name="sObjectType" scope="default" type="STRING" value="Lead"/>
     <property expression="json-eval($.sobject.Id)" name="Id" scope="default" type="STRING"/>
     <salesforcerest.query configKey="SALESFORCEREST_CONNECTION_1">
-        <queryString>{fn:concat('select fields(All) from Lead where Id=',"'", $ctx:Id,"'",' limit 1' )}</queryString>
+        <queryString>{fn:concat('select fields(All) ,(select id,name,zeniadev__Designation__c,zeniadev__Lead__c from zeniadev__Contacts__r) from Lead where Id=',"'", $ctx:Id,"'",' limit 1' )}</queryString>
     </salesforcerest.query>
     <property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
     <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
@@ -21,12 +21,9 @@
     <payloadFactory media-type="json">
         <format>$1</format>
         <args>
-            <arg evaluator="json" expression="$ctx:Array"/>
+            <arg evaluator="json" expression="$ctx:Array1"/>
         </args>
     </payloadFactory>
-    <log>
-        <property expression="$body" name="log2"/>
-    </log>
     <call>
         <endpoint>
             <http method="post" statistics="enable" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
@@ -40,7 +37,6 @@
                 </markForSuspension>
             </http>
         </endpoint>
-        <source contentType="application/json" type="property">Array</source>
     </call>
     <log level="full"/>
     <call>
