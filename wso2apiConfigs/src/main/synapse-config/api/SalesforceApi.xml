@@ -11,14 +11,14 @@
                 <fileName>salesforce-25-companies-data-csv.csv</fileName>
             </msazurestorage.downloadBlob>
             <file.checkExist configKey="FILE_CONNECTION_1">
-                <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/salesforce-25-companies-data-csv.csv</path>
+                <path> /home/wso2carbon/wso2mi-4.1.0/salesforce-25-companies-data-csv.csv</path>
                 <includeResultTo>Message Body</includeResultTo>
             </file.checkExist>
             <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
             <switch source="get-property('response')">
                 <case regex="true">
                     <file.read configKey="FILE_CONNECTION_1">
-                        <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/salesforce-25-companies-data-csv.csv</path>
+                        <path> /home/wso2carbon/wso2mi-4.1.0/salesforce-25-companies-data-csv.csv</path>
                         <readMode>Complete File</readMode>
                         <startLineNum>0</startLineNum>
                         <lineNum>0</lineNum>
@@ -46,7 +46,7 @@
                     </payloadFactory>
                     <call>
                         <endpoint>
-                            <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=OrganisationMapping">
+                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
                                 <suspendOnFailure>
                                     <initialDuration>-1</initialDuration>
                                     <progressionFactor>-1</progressionFactor>
@@ -63,7 +63,7 @@
                     </log>
                     <call>
                         <endpoint>
-                            <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
+                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
                                 <suspendOnFailure>
                                     <initialDuration>-1</initialDuration>
                                     <progressionFactor>-1</progressionFactor>

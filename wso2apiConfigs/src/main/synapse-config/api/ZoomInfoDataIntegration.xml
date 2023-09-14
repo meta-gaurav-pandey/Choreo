@@ -14,14 +14,14 @@
                 <fileName>zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</fileName>
             </msazurestorage.downloadBlob>
             <file.checkExist configKey="FILE_CONNECTION_1">
-                <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</path>
+                <path> /home/wso2carbon/wso2mi-4.1.0/zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</path>
                 <includeResultTo>Message Body</includeResultTo>
             </file.checkExist>
             <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
             <switch source="get-property('response')">
                 <case regex="true">
                     <file.read configKey="FILE_CONNECTION_1">
-                        <path>C:/Users/Gaurav/Documents/WSO2/IntegrationStudio/runtime/microesb/zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</path>
+                        <path> /home/wso2carbon/wso2mi-4.1.0/zenia-graph-zoominfo-company-enrichment-(1)-csv.csv</path>
                         <readMode>Complete File</readMode>
                         <startLineNum>0</startLineNum>
                         <lineNum>0</lineNum>

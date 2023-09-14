@@ -3,6 +3,8 @@ package com.example;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.mediators.AbstractMediator;
 import org.json.JSONArray;
@@ -105,7 +107,7 @@ public class JavaMediatorClass extends AbstractMediator {
 			for (int i = 0; i < records.length(); i++) {
 				JSONArray employeeArray=new JSONArray();
 				JSONObject record = records.getJSONObject(i);
-				//JSONArray custompropertiesArray=new JSONArray();
+			
 				JSONObject obj = new JSONObject();
 				obj.put("Name", checkKeySales("Name",record));
 				obj.put("Description", checkKeySales("Description",record));
@@ -116,7 +118,7 @@ public class JavaMediatorClass extends AbstractMediator {
 				obj.put("zeniadev__Operating_Years__c",checkKeySales("zeniadev__Operating_Years__c",record) );
 				obj.put("zeniadev__No_Of_Employees__c",checkKeySales("zeniadev__No_Of_Employees__c",record));
 				obj.put("zeniadev__Annual_Growth__c",checkKeySales("zeniadev__Annual_Growth__c",record) );
-				// obj.put("company", record.get("Company"));
+	
 				obj.put("Status",checkKeySales("Status",record));
 				obj.put("Industry",checkKeySales("Industry",record) );
 				obj.put("zeniadev__Headquarters__c",checkKeySales("zeniadev__Headquarters__c",record) );
@@ -151,17 +153,20 @@ public class JavaMediatorClass extends AbstractMediator {
 				while(keys.hasNext()) {
 					String key=(String)keys.next();
 					if(key.contains("zeniadev__Contacts__r")) {
-						
+					
 						if(!(record.get(key)==null) || !record.get(key).equals("")) {
-							int size=(int) record.getJSONObject(key).get("totalSize");
+							System.out.println("condition");
+							int size= record.getJSONObject(key).getInt("totalSize");
+						
 							JSONArray emp=new JSONArray();
 							if(size==1) {
 								emp.put(record.getJSONObject(key).getJSONObject("records"));
 							}
 							else {
-								emp=new JSONArray(record.getJSONObject(key).getJSONObject("records"));
+								
+								emp=record.getJSONObject(key).getJSONArray("records");
 							}
-						
+						System.out.println(emp.toString());
 							for(int r=0;r< emp.length();r++) {
 								JSONObject empRecord=emp.getJSONObject(r);
 								JSONObject empObject=new JSONObject();
@@ -170,7 +175,7 @@ public class JavaMediatorClass extends AbstractMediator {
 								empObject.put("zeniadev__Lead__c", checkKeySales("zeniadev__Lead__c",empRecord));
 								employeeArray.put(empObject);
 							}
-						obj.put("employer", employeeArray);
+						obj.put("Contact", employeeArray);
 						
 					//	employeeArray.put(employerObject);
 						}
@@ -184,6 +189,8 @@ public class JavaMediatorClass extends AbstractMediator {
 			JSONArray result = new JSONArray();
 			return result;
 		}
+
+
 
 	}
 	public static JSONObject getJSONObject(String key,String value) {

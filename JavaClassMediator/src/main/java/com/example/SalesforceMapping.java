@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -17,6 +18,7 @@ public class SalesforceMapping extends AbstractMediator {
 		String jsonPayloadToString = JsonUtil
 				.jsonPayloadToString(((Axis2MessageContext) context).getAxis2MessageContext());
 		// JSONObject requestBody=XML.toJSONObject(payload);
+		System.out.println(jsonPayloadToString);
 		String source = (String) context.getProperty("source");
 		// System.out.println(jsonPayloadToString);
 		String outputArray = "";
@@ -42,7 +44,7 @@ public class SalesforceMapping extends AbstractMediator {
 	public String getSalesforceMapping(String jsonPayloadToString) {
 		JSONArray jsonArray = new JSONArray(jsonPayloadToString);
 		JSONArray outputJsonArray = new JSONArray();
-		String[] standardFields = { "foafName", "absract" };
+		String[] standardFields = { "foafName", "abstract" };
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 			JSONObject outputObject = new JSONObject();
@@ -51,49 +53,73 @@ public class SalesforceMapping extends AbstractMediator {
 			JSONArray headquarterArray = new JSONArray();
 			JSONArray custompropertiesArray = new JSONArray();
 			outputObject.put("foafName", checkKey("foafName", jsonObject));
-			outputObject.put("absract", checkKey("absract", jsonObject));
-//			outputObject.put("source", "dbpedia");
+			outputObject.put("abstract", checkKey("abstract", jsonObject));
+			outputObject.put("source", "salesforce-csv");
 //			outputObject.put("profile_url", checkKey("URI",jsonObject));
 //			outputObject.put("description", checkKey("description",jsonObject));
 //			//outputObject.put("operating_years", jsonObject.getString("employees_num"));
 //			outputObject.put("foafName", checkKey("foafName",jsonObject));
 //			outputObject.put("company_type", checkKey("company_type",jsonObject));
 //			outputObject.put("founded", checkKey("founded",jsonObject));
-
+			ArrayList<String> emp = new ArrayList<String>();
 			Iterator<String> keys = jsonObject.keys();
 			while (keys.hasNext()) {
 				String key = (String) keys.next();
 				if (key.contains("industry ")) {
 
-					JSONObject employerObject = new JSONObject();
+					JSONObject industryObject = new JSONObject();
 					if (!jsonObject.get(key).equals("")) {
-						employerObject.put("industry", checkKey(key, jsonObject));
+						industryObject.put("industry", checkKey(key, jsonObject));
 
-						employeeArray.put(employerObject);
+						industryArray.put(industryObject);
 					}
-				} else if (key.contains("employer ")) {
+				} else if (key.contains("employer")) {
 					Iterator<String> Empkeys = jsonObject.keys();
 					String[] keywords1 = key.split(" ");
 					while (Empkeys.hasNext()) {
 						String Empkey = (String) Empkeys.next();
 
-						if (key.contains("employer ")) {
-							String[] keywords2 = key.split(" ");
-							JSONObject industryObject = new JSONObject();
+						if (Empkey.contains("employer")) {
+							String[] keywords2 = Empkey.split(" ");
+							JSONObject empObject = new JSONObject();
 
-							if (keywords1[1] == keywords2[1] && (keywords1[2] + 1) == keywords2[2]) {
-
-								if (!jsonObject.get(key).equals("") && !jsonObject.get(Empkey).equals("")) {
-									industryObject.put("first_name", checkKey(key, jsonObject));
-									industryObject.put("last_name", checkKey(Empkey, jsonObject));
-									industryObject.put("emp",
-											(checkKey(key, jsonObject) + " " + checkKey(key, jsonObject)));
-									industryArray.put(industryObject);
+							if (Integer.parseInt(keywords1[1]) == Integer.parseInt(keywords2[1])) {
+								if (Integer.parseInt(keywords1[2])+1 == Integer.parseInt(keywords2[2])){
+										
+									if (!emp.contains(key) && !emp.contains(Empkey)) {
+										if (!jsonObject.get(key).equals("") && !jsonObject.get(Empkey).equals("")) {
+											empObject.put("first_name", checkKey(key, jsonObject));
+											empObject.put("last_name", checkKey(Empkey, jsonObject));
+											empObject.put("emp",
+													(checkKey(key, jsonObject) + " " + checkKey(Empkey, jsonObject)));
+											employeeArray.put(empObject);
+											emp.add(Empkey);
+											emp.add(key);
+										}
+									}
+									
+										}
+								else if (Integer.parseInt(keywords1[2]) == Integer.parseInt(keywords2[2])+1) {
+									if (!emp.contains(key) && !emp.contains(Empkey)) {
+										if (!jsonObject.get(key).equals("") && !jsonObject.get(Empkey).equals("")) {
+											empObject.put("first_name", checkKey(Empkey, jsonObject));
+											empObject.put("last_name", checkKey(key, jsonObject));
+											
+											empObject.put("emp",
+													(checkKey(Empkey, jsonObject)+"  "+checkKey(key, jsonObject)));
+											employeeArray.put(empObject);
+											emp.add(Empkey);
+											emp.add(key);
+										}
+									}
+								}
+									
+									
 								}
 							}
 						}
 					}
-				}
+				
 
 				else if (key.contains("headquarter ")) {
 					JSONObject headquarterObject = new JSONObject();
@@ -118,6 +144,7 @@ public class SalesforceMapping extends AbstractMediator {
 			// return ""; }
 		}
 		return outputJsonArray.toString();
+
 	}
 
 	public static String checkKey(String key, JSONObject jsonObject) {
