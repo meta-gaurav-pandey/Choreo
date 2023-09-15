@@ -20,7 +20,6 @@
     <com.example.metadata_._LinkedinDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._LinkedinDataIntegration_metadata>
     <com.example.metadata_._XmlIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_swagger>
     <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
-    <com.example.metadata_._TestAPI_swagger>capp/EnterpriseServiceBus</com.example.metadata_._TestAPI_swagger>
     <com.example.api_._JsonIntegration>capp/EnterpriseServiceBus</com.example.api_._JsonIntegration>
     <com.example.lib_._CSV-connector>capp/EnterpriseServiceBus</com.example.lib_._CSV-connector>
     <com.example.local-entry_._FILE_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._FILE_CONNECTION_1>
@@ -33,15 +32,12 @@
     <com.example.sequence_._SalesforceSequence>capp/EnterpriseServiceBus</com.example.sequence_._SalesforceSequence>
     <com.example.api_._XmlIntegration>capp/EnterpriseServiceBus</com.example.api_._XmlIntegration>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
-    <com.example.api_._split>capp/EnterpriseServiceBus</com.example.api_._split>
     <com.example.sequence_._DbpediaParent>capp/EnterpriseServiceBus</com.example.sequence_._DbpediaParent>
-    <com.example.api_._TestAPI>capp/EnterpriseServiceBus</com.example.api_._TestAPI>
     <com.example.metadata_._YahooDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._YahooDataIntegration_metadata>
     <com.example.api_._SalesforceApi>capp/EnterpriseServiceBus</com.example.api_._SalesforceApi>
     <com.example.dataservice_._RDBMSdataService>capp/DataServicesServer</com.example.dataservice_._RDBMSdataService>
     <com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>
     <com.example.sequence_._LinkedInSequence>capp/EnterpriseServiceBus</com.example.sequence_._LinkedInSequence>
-    <com.example.metadata_._split_metadata>capp/EnterpriseServiceBus</com.example.metadata_._split_metadata>
     <com.example.sequence_._InsertionParentSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionParentSequence>
     <com.example.metadata_._SalesforceApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_swagger>
     <com.example.metadata_._ZoomInfoDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._ZoomInfoDataIntegration_swagger>
@@ -50,7 +46,6 @@
     <com.example.metadata_._YahooDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._YahooDataIntegration_swagger>
     <com.example.api_._LinkedinDataIntegration>capp/EnterpriseServiceBus</com.example.api_._LinkedinDataIntegration>
     <com.example.metadata_._IngestionCsv_metadata>capp/EnterpriseServiceBus</com.example.metadata_._IngestionCsv_metadata>
-    <com.example.metadata_._split_swagger>capp/EnterpriseServiceBus</com.example.metadata_._split_swagger>
     <com.example.api_._DbpediaDataIntegration>capp/EnterpriseServiceBus</com.example.api_._DbpediaDataIntegration>
     <com.example.api_._YahooDataIntegration>capp/EnterpriseServiceBus</com.example.api_._YahooDataIntegration>
     <com.example.metadata_._DbpediaDataIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._DbpediaDataIntegration_swagger>
@@ -64,7 +59,6 @@
     <com.example.metadata_._ZoomInfoDataIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._ZoomInfoDataIntegration_metadata>
     <com.example.sequence_._InsertionSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionSequence>
     <com.example.sequence_._ZoomInfoParent>capp/EnterpriseServiceBus</com.example.sequence_._ZoomInfoParent>
-    <com.example.metadata_._TestAPI_metadata>capp/EnterpriseServiceBus</com.example.metadata_._TestAPI_metadata>
     <com.example.api_._ZoomInfoDataIntegration>capp/EnterpriseServiceBus</com.example.api_._ZoomInfoDataIntegration>
     <com.example.api_._IngestionCsv>capp/EnterpriseServiceBus</com.example.api_._IngestionCsv>
     <com.example.metadata_._JsonIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._JsonIntegration_swagger>
@@ -105,12 +99,6 @@
       <artifactId>ErrorSequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>TestAPI_swagger</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
     </dependency>
     <dependency>
       <groupId>com.example.api</groupId>
@@ -178,20 +166,8 @@
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>com.example.api</groupId>
-      <artifactId>split</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
       <groupId>com.example.sequence</groupId>
       <artifactId>DbpediaParent</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.api</groupId>
-      <artifactId>TestAPI</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -224,12 +200,6 @@
       <artifactId>LinkedInSequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>split_metadata</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
     </dependency>
     <dependency>
       <groupId>com.example.sequence</groupId>
@@ -276,12 +246,6 @@
     <dependency>
       <groupId>com.example.metadata</groupId>
       <artifactId>IngestionCsv_metadata</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>split_swagger</artifactId>
       <version>1.0.0</version>
       <type>yaml</type>
     </dependency>
@@ -362,12 +326,6 @@
       <artifactId>ZoomInfoParent</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>TestAPI_metadata</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
     </dependency>
     <dependency>
       <groupId>com.example.api</groupId>

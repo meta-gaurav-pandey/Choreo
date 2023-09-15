@@ -31,8 +31,7 @@ public class JavaMediatorClass extends AbstractMediator {
 				json = convertLead(payload);
 				context.setProperty("Array1", json.toString());
 				System.out.println(json.toString());
-				
-				
+
 			} else if (ObjectType.equals("AccountScheduler")) {
 				System.out.println("Scheduler" + payload);
 				json = convertSchedule(payload);
@@ -101,29 +100,30 @@ public class JavaMediatorClass extends AbstractMediator {
 			records = new JSONArray();
 			records.put(jsonObj.getJSONObject("soapenv:Body").getJSONObject("jsonObject").getJSONObject("records"));
 
-		//	 System.out.println("Hey" + records);
+			// System.out.println("Hey" + records);
 			JSONArray result = new JSONArray();
-	//		String[] standardFields={"zeniadev__SICCode__c","zeniadev__Quarterly_Growth__c","zeniadev__Operating_Years__c","Description","zeniadev__No_Of_Employees__c","zeniadev__Annual_Growth__c","Status","Industry","zeniadev__Headquarters__c","zeniadev__Niacs_Code__c","Company","Name"};
+			// String[]
+			// standardFields={"zeniadev__SICCode__c","zeniadev__Quarterly_Growth__c","zeniadev__Operating_Years__c","Description","zeniadev__No_Of_Employees__c","zeniadev__Annual_Growth__c","Status","Industry","zeniadev__Headquarters__c","zeniadev__Niacs_Code__c","Company","Name"};
 			for (int i = 0; i < records.length(); i++) {
-				JSONArray employeeArray=new JSONArray();
+				JSONArray employeeArray = new JSONArray();
 				JSONObject record = records.getJSONObject(i);
-			
-				JSONObject obj = new JSONObject();
-				obj.put("Name", checkKeySales("Name",record));
-				obj.put("Description", checkKeySales("Description",record));
-				obj.put("source", "salesforce");
-				obj.put("zeniadev__SICCode__c",checkKeySales("zeniadev__SICCode__c",record));
 
-				obj.put("zeniadev__Quarterly_Growth__c", checkKeySales("zeniadev__Quarterly_Growth__c",record));
-				obj.put("zeniadev__Operating_Years__c",checkKeySales("zeniadev__Operating_Years__c",record) );
-				obj.put("zeniadev__No_Of_Employees__c",checkKeySales("zeniadev__No_Of_Employees__c",record));
-				obj.put("zeniadev__Annual_Growth__c",checkKeySales("zeniadev__Annual_Growth__c",record) );
-	
-				obj.put("Status",checkKeySales("Status",record));
-				obj.put("Industry",checkKeySales("Industry",record) );
-				obj.put("zeniadev__Headquarters__c",checkKeySales("zeniadev__Headquarters__c",record) );
-				obj.put("zeniadev__Niacs_Code__c",checkKeySales("zeniadev__Niacs_Code__c",record) );
-				obj.put("Company",checkKeySales("Company",record));
+				JSONObject obj = new JSONObject();
+				obj.put("Name", checkKeySales("Name", record));
+				obj.put("Description", checkKeySales("Description", record));
+				obj.put("source", "salesforce");
+			//	obj.put("zeniadev__SICCode__c", checkKeySales("zeniadev__SICCode__c", record));
+
+				obj.put("zeniadev__Quarterly_Growth__c", checkKeyPercent("zeniadev__Quarterly_Growth__c", record));
+				obj.put("zeniadev__Operating_Years__c", checkKeySales("zeniadev__Operating_Years__c", record));
+				obj.put("zeniadev__No_Of_Employees__c", checkKeySales("zeniadev__No_Of_Employees__c", record));
+				obj.put("zeniadev__Annual_Growth__c", checkKeyPercent("zeniadev__Annual_Growth__c", record));
+
+				obj.put("Status", checkKeySales("Status", record));
+				obj.put("Industry", checkKeySales("Industry", record));
+				obj.put("zeniadev__Headquarters__c", checkKeySales("zeniadev__Headquarters__c", record));
+			//	obj.put("zeniadev__Niacs_Code__c", checkKeySales("zeniadev__Niacs_Code__c", record));
+				obj.put("Company", checkKeySales("Company", record));
 //				obj.put("latitude", record.get("Latitude"));
 //				obj.put("longitude", record.get("Longitude"));
 //				obj.put("geocodeAccuracy", record.get("GeocodeAccuracy"));
@@ -149,38 +149,67 @@ public class JavaMediatorClass extends AbstractMediator {
 //				obj.put("Categories", record.get("Categories__c"));
 //				obj.put("Specialties", record.get("Specialties__c"));
 //				obj.put("headquarters", record.get("headquarters__c"));
-				Iterator<String> keys=record.keys();
-				while(keys.hasNext()) {
-					String key=(String)keys.next();
-					if(key.contains("zeniadev__Contacts__r")) {
-					
-						if(!(record.get(key)==null) || !record.get(key).equals("")) {
+				Iterator<String> keys = record.keys();
+				while (keys.hasNext()) {
+					String key = (String) keys.next();
+					if (key.contains("zeniadev__Contacts__r")) {
+
+						if (!(record.get(key) == null) || !record.get(key).equals("")) {
 							System.out.println("condition");
-							int size= record.getJSONObject(key).getInt("totalSize");
-						
-							JSONArray emp=new JSONArray();
-							if(size==1) {
+							int size = record.getJSONObject(key).getInt("totalSize");
+
+							JSONArray emp = new JSONArray();
+							if (size == 1) {
 								emp.put(record.getJSONObject(key).getJSONObject("records"));
+							} else {
+
+								emp = record.getJSONObject(key).getJSONArray("records");
 							}
-							else {
-								
-								emp=record.getJSONObject(key).getJSONArray("records");
-							}
-						System.out.println(emp.toString());
-							for(int r=0;r< emp.length();r++) {
-								JSONObject empRecord=emp.getJSONObject(r);
-								JSONObject empObject=new JSONObject();
-								empObject.put("zeniadev__Designation__c", checkKeySales("zeniadev__Designation__c",empRecord));
-								empObject.put("Name", checkKeySales("Name",empRecord));
-								empObject.put("zeniadev__Lead__c", checkKeySales("zeniadev__Lead__c",empRecord));
+							System.out.println(emp.toString());
+							for (int r = 0; r < emp.length(); r++) {
+								JSONObject empRecord = emp.getJSONObject(r);
+								JSONObject empObject = new JSONObject();
+								empObject.put("zeniadev__Designation__c",
+										checkKeySales("zeniadev__Designation__c", empRecord));
+								empObject.put("Name", checkKeySales("Name", empRecord));
+								empObject.put("zeniadev__Lead__c", checkKeySales("zeniadev__Lead__c", empRecord));
 								employeeArray.put(empObject);
 							}
-						obj.put("Contact", employeeArray);
-						
-					//	employeeArray.put(employerObject);
+							obj.put("Contact", employeeArray);
+
+							// employeeArray.put(employerObject);
 						}
+					} else if (key.contains("zeniadev__Niacs_Code__c")) {
+						JSONArray NaicArray = new JSONArray();
+						if (!checkKeySales(key, record).equals("")) {
+
+							String[] code = checkKeySales(key, record).split(",");
+
+							for (int j = 0; j < code.length; j++) {
+								JSONObject Naic = new JSONObject();
+								Naic.put("zeniadev__Niacs_Code__c", code[j].trim());
+								NaicArray.put(Naic);
+							}
 						}
+						obj.put("naics", NaicArray);
+
 					}
+					else if (key.contains("zeniadev__SICCode__c")) {
+						JSONArray sicArray = new JSONArray();
+						if (!checkKeySales(key, record).equals("")) {
+
+							String[] code = checkKeySales(key, record).split(",");
+
+							for (int j = 0; j < code.length; j++) {
+								JSONObject sic = new JSONObject();
+								sic.put("zeniadev__SICCode__c", code[j].trim());
+								sicArray.put(sic);
+							}
+						}
+						obj.put("sic", sicArray);
+
+					}
+				}
 				result.put(obj);
 
 			}
@@ -190,23 +219,28 @@ public class JavaMediatorClass extends AbstractMediator {
 			return result;
 		}
 
-
-
 	}
-	public static JSONObject getJSONObject(String key,String value) {
-		JSONObject jsonObject=new JSONObject();
-		jsonObject.put("name",key);
-		jsonObject.put("value",value);
+
+	public static JSONObject getJSONObject(String key, String value) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("name", key);
+		jsonObject.put("value", value);
 		return jsonObject;
 	}
-	public static String checkKeySales(String key,JSONObject jsonObject) {
-		if(jsonObject.has(key)) {
+
+	public static String checkKeySales(String key, JSONObject jsonObject) {
+		if (jsonObject.has(key)) {
 			return (String) jsonObject.get(key).toString();
-		}
-		else
-		return "";
+		} else
+			return "";
 	}
-	
+
+	public static String checkKeyPercent(String key, JSONObject jsonObject) {
+		if (jsonObject.has(key)) {
+			return (String) jsonObject.get(key).toString().concat("%");
+		} else
+			return "";
+	}
 
 	public static JSONArray convertSchedule(String xml) throws org.json.JSONException {
 
@@ -246,12 +280,11 @@ public class JavaMediatorClass extends AbstractMediator {
 
 		if (xml.length() > 0) {
 			JSONObject jsonObj = XML.toJSONObject(xml);
-		//	System.out.println(jsonObj);
+			// System.out.println(jsonObj);
 			JSONArray records;
 
 			records = new JSONArray();
 			records.put(jsonObj.getJSONObject("soapenv:Body").getJSONObject("Record"));
-
 
 			JSONArray result = new JSONArray();
 			for (int i = 0; i < records.length(); i++) {
