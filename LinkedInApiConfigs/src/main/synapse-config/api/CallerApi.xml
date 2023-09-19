@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/callLinkedin" name="CallLinkedInApi" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="ErrorSequence" methods="GET" uri-template="/{CompanyName}">
+        <inSequence>
+            <log>
+                <property name="StartLog" value="Api Started"/>
+            </log>
+            <property name="Type" scope="default" type="STRING" value="linkedIn"/>
+            <property expression="get-property('uri.var.CompanyName')" name="CompanyName" scope="default" type="STRING"/>
+            <class name="com.example.LinkedInClass"/>
+            <log>
+                <property name="LinkedinAPi" value="ClassSequence completed"/>
+            </log>
+            <sequence key="InsertionSequence"/>
+            <sequence key="InsertionParentSequence"/>
+            <log>
+                <property name="End Logger" value="Main Sequence ended"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>
