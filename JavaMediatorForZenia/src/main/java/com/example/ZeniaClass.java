@@ -68,7 +68,7 @@ public class ZeniaClass extends AbstractMediator {
 			connection.setRequestMethod("GET");
 
 			// Read and print the response content
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
 			String line;
 			StringBuilder response = new StringBuilder();
 			while ((line = reader.readLine()) != null) {
