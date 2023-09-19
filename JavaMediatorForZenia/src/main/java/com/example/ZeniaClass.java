@@ -1,6 +1,6 @@
 package com.example;
 
-import com.bordercloud.sparql.*;
+
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,6 +9,10 @@ import org.apache.synapse.MessageContext;
 import org.apache.synapse.mediators.AbstractMediator;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.bordercloud.sparql.SparqlClient;
+import com.bordercloud.sparql.SparqlClientException;
+import com.bordercloud.sparql.SparqlResult;
 
 import java.io.BufferedReader;
 import java.io.IOException;
