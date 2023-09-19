@@ -20,4 +20,10 @@
     <artifact name="CallDbpedia_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
         <file>src/main/resources/metadata/CallDbpedia_metadata.yaml</file>
     </artifact>
+    <artifact name="InsertionSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/InsertionSequence.xml</file>
+    </artifact>
+    <artifact name="InsertionParentSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/InsertionParentSequence.xml</file>
+    </artifact>
 </artifacts>

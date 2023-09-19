@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: CallerApi
+  title: CallLinkedInApi
   description: API Definition of CallerApi
   version: 1.0.0
 servers:

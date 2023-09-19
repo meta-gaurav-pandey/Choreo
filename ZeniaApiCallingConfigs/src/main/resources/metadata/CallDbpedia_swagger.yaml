@@ -4,7 +4,7 @@ info:
   description: API Definition of CallDbpedia
   version: 1.0.0
 servers:
-- url: http://localhost:8290/callDbpedia
+- url: http://localhost:8290/Dbpedia
 paths:
   /{CompanyName}:
     get:
