@@ -1,19 +1,17 @@
 openapi: 3.0.1
 info:
-  title: CallLinkedIn
-  description: API Definition of CallLinkedIn
+  title: YahooFinance
+  description: API Definition of YahooFinance
   version: 1.0.0
 servers:
-- url: http://localhost:8290/callLinkedin
+- url: http://localhost:8290/yahoo
 paths:
-  /{CompanyName}:
+  /{symbol}:
     get:
       parameters:
-      - name: CompanyName
+      - name: symbol
         in: path
         required: true
-        style: simple
-        explode: false
         schema:
           type: string
       responses:

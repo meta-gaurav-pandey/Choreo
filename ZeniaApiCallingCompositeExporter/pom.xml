@@ -14,17 +14,38 @@
   <name>ZeniaApiCallingCompositeExporter</name>
   <description>ZeniaApiCallingCompositeExporter</description>
   <properties>
+    <com.example.metadata_._YahooFinance_metadata>capp/EnterpriseServiceBus</com.example.metadata_._YahooFinance_metadata>
     <com.example_._JavaMediatorForZenia>capp/EnterpriseServiceBus</com.example_._JavaMediatorForZenia>
     <com.example.metadata_._CallDbpedia_swagger>capp/EnterpriseServiceBus</com.example.metadata_._CallDbpedia_swagger>
-    <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
-    <com.example.metadata_._CallerApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._CallerApi_swagger>
-    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
-    <com.example.api_._CallerApi>capp/EnterpriseServiceBus</com.example.api_._CallerApi>
-    <com.example.api_._CallDbpedia>capp/EnterpriseServiceBus</com.example.api_._CallDbpedia>
     <com.example.sequence_._InsertionParentSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionParentSequence>
     <com.example.sequence_._InsertionSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionSequence>
+    <com.example.api_._YahooFinance>capp/EnterpriseServiceBus</com.example.api_._YahooFinance>
+    <com.example.metadata_._YahooFinance_swagger>capp/EnterpriseServiceBus</com.example.metadata_._YahooFinance_swagger>
+    <com.example.api_._CallLinkedIn>capp/EnterpriseServiceBus</com.example.api_._CallLinkedIn>
+    <com.example.metadata_._CallLinkedIn_swagger>capp/ApplicationServer</com.example.metadata_._CallLinkedIn_swagger>
+    <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
+    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
+    <com.example.api_._CallDbpedia>capp/EnterpriseServiceBus</com.example.api_._CallDbpedia>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>YahooFinance_metadata</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.api</groupId>
+      <artifactId>YahooFinance</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>YahooFinance_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
     <dependency>
       <groupId>com.example</groupId>
       <artifactId>JavaMediatorForZenia</artifactId>
@@ -44,15 +65,9 @@
     </dependency>
     <dependency>
       <groupId>com.example.metadata</groupId>
-      <artifactId>CallerApi_swagger</artifactId>
+      <artifactId>CallLinkedIn_swagger</artifactId>
       <version>1.0.0</version>
       <type>yaml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.api</groupId>
-      <artifactId>CallerApi</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.api</groupId>
@@ -69,6 +84,12 @@
     <dependency>
       <groupId>com.example.sequence</groupId>
       <artifactId>InsertionSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.api</groupId>
+      <artifactId>CallLinkedIn</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/yahoo" name="YahooFinance" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="ErrorSequence" methods="GET" uri-template="/{symbol}">
+        <inSequence>
+            <log>
+                <property name="LogYahooFinance" value="Api started"/>
+            </log>
+            <property name="Type" scope="default" type="STRING" value="yahoo-finance"/>
+            <property expression="get-property('uri.var.symbol')" name="symbol" scope="default" type="STRING"/>
+            <class name="com.example.ZeniaClass"/>
+            <log>
+                <property expression="json-eval($ctx:Array1)" name="Array1"/>
+                <property expression="json-eval($ctx:Array2)" name="Array2"/>
+            </log>
+            <sequence key="InsertionSequence"/>
+            <sequence key="InsertionParentSequence"/>
+            <log>
+                <property name="End Logger" value="Main Sequence ended"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

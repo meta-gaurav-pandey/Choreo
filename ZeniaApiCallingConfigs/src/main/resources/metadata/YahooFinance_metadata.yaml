@@ -1,10 +1,10 @@
 ---
-key: "CallLinkedIn-1.0.0"
-name : "CallLinkedIn"
-displayName : "CallLinkedIn"
+key: "YahooFinance-1.0.0"
+name : "YahooFinance"
+displayName : "YahooFinance"
 description: "Sample API"
 version: "1.0.0"
-serviceUrl: "https://{MI_HOST}:{MI_PORT}/call"
+serviceUrl: "https://{MI_HOST}:{MI_PORT}/yahoo"
 definitionType: "OAS3"
 securityType: "BASIC"
 mutualSSLEnabled: false

@@ -12,5 +12,7 @@
 	<classpathentry kind="lib" path="C:/Users/Gaurav/.m2/repository/com/bordercloud/SPARQL-JAVA/1.1.1/SPARQL-JAVA-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Gaurav/.m2/repository/org/apache/ws/commons/axiom/axiom-api/1.4.0/axiom-api-1.4.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Gaurav/.m2/repository/org/json/json/20140107/json-20140107.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gaurav/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gaurav/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar"/>
 	<classpathentry kind="output" path="target"/>
 </classpath>

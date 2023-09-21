@@ -5,6 +5,11 @@ package com.example;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.mediators.AbstractMediator;
 import org.json.JSONArray;
@@ -36,7 +41,10 @@ public class ZeniaClass extends AbstractMediator {
 				linkedin(cont);
 			} else if (type.equals("dbpedia")) {
 				dbpedia(cont);
-			} else {
+			}else if (type.equals("yahoo-finance")) {
+				yahoo(cont);
+			} 
+			else {
 				System.out.println("You have entered wrong company name");
 				throw new Exception("Please enter valid company");
 			}
@@ -82,7 +90,7 @@ public class ZeniaClass extends AbstractMediator {
 
 			// System.out.println("Response Body: " + response.toString());
 			JSONObject linkedObject = new JSONObject(response.toString());
-			System.out.println(linkedObject.toString());
+		//	System.out.println(linkedObject.toString());
 			JSONArray Output1 = getLinkedinMappingJson(linkedObject);
 			JSONArray Output2 = getLinkedinParentMappingJson(linkedObject);
 			context.setProperty("Array1", Output1.toString());
@@ -141,10 +149,8 @@ public class ZeniaClass extends AbstractMediator {
 						if (columnArrays.containsKey(variable)) {
 
 							ArrayList<String> duplicate = columnArrays.get(variable);
-							if (duplicate.contains(value)) {
-								System.out.println("value already there");
+							if (!duplicate.contains(value)) {
 
-							} else {
 								duplicate.add(value);
 								columnArrays.put(variable, duplicate);
 							}
@@ -362,6 +368,92 @@ public class ZeniaClass extends AbstractMediator {
 		}
 		return result;
 	}
+	
+	public static void yahoo(MessageContext context) {
+		 try {
+			 String	outputArray;
+				String	outputParentArray;
+			 String symbol = (String) context.getProperty("symbol");
+        	 String line, url;
+             url = "https://api.zeniagraph.ai/graphql";
+             CloseableHttpClient client = null;
+             CloseableHttpResponse response = null;
+
+             client = HttpClientBuilder.create().build();
+             HttpPost httpPost = new HttpPost(url);
+             httpPost.addHeader("Content-Type", "application/json");
+             httpPost.addHeader("Accept", "");
+             
+//             Map<String, Object> query = new HashMap<String, Object>();
+//             Map<String, Object> queryMap = new HashMap<String, Object>();
+//             queryMap.put("input", "AAPL");
+//             queryMap.put("source", "yahoo_finance");
+//             queryMap.put("type", "company");
+//
+//             query.put("data", queryMap);
+            String query = "query getCompaniesByCrawl($data:CompanyListCrawl!)\r\n"
+            		+ "{\r\n"
+            		+ "    getCompaniesByCrawl(data:$data)\r\n"
+            		+ "    {\r\n"
+            		+ "        name\r\n"
+            		+ "        no_of_employees\r\n"
+            		+ "        ticker_symbol\r\n"
+            		+ "        website\r\n"
+            		+ "        industry\r\n"
+            		+ "        quarterly_revenue_growth\r\n"
+            		+ "        current_year_revenue\r\n"
+            		+ "        previous_year_revenue\r\n"
+            		+ "        total_assets\r\n"
+            		+ "        gross_profit\r\n"
+            		+ "        market_cap\r\n"
+            		+ "        last_quarterly_revenue\r\n"
+            		+ "        second_last_quarterly_revenue\r\n"
+            		+ "        description\r\n"
+            		+ "        parent_name\r\n"
+            		+ "    } \r\n"
+            		+ "}";
+
+            Map<String, Object> variables = new HashMap<String, Object>();
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("input", symbol);
+            dataMap.put("source", "yahoo_finance");
+            dataMap.put("type", "company");
+
+            variables.put("data", dataMap);
+
+            // Create an ObjectMapper instance to convert variables to JSON
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            String variablesJson = objectMapper.writeValueAsString(variables);
+
+            JSONObject jsonobj = new JSONObject();
+            jsonobj.put("query", query);
+            jsonobj.put("variables", variables);
+
+            StringEntity entity = new StringEntity(jsonobj.toString());
+ 
+            httpPost.setEntity(entity);
+            response = client.execute(httpPost);
+
+            BufferedReader bufReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            StringBuilder builder = new StringBuilder();
+
+            while ((line = bufReader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.lineSeparator());
+            }
+            // ...
+          //  System.out.println(builder.toString());
+            JSONObject yahooObject = new JSONObject(builder.toString());
+            JSONObject inputObject=yahooObject.getJSONObject("data").getJSONObject("getCompaniesByCrawl");
+            outputArray=getYahooWithoutNodeJson(inputObject);
+			outputParentArray=getYahooWithNodeJson(inputObject);
+			context.setProperty("Array1", outputArray);
+			context.setProperty("Array2", outputParentArray);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 
 	public static JSONArray getLinkedinParentMappingJson(JSONObject jsonObject) {
 		// jsonArray = new JSONArray(jsonPayloadToString);
@@ -436,4 +528,115 @@ public class ZeniaClass extends AbstractMediator {
 		} else
 			return key;
 	}
+	
+	
+	public static String getYahooWithoutNodeJson(JSONObject jsonObject) {
+		JSONArray outputJsonArray=new JSONArray();
+		JSONObject outputJsonObject=new JSONObject();
+		outputJsonObject.put("tickerSymbol", validatekey("ticker_symbol",jsonObject));
+		outputJsonObject.put("fullTimeEmployees", validatekey("no_of_employees",jsonObject));
+		outputJsonObject.put("website", validatekey("website",jsonObject));
+		outputJsonObject.put("industry", validatekey("industry",jsonObject));
+		outputJsonObject.put("quarterly_revenue_growth", validatekey("quarterly_revenue_growth",jsonObject));
+		outputJsonObject.put("current_year_revenue", validatekey("current_year_revenue",jsonObject));
+		outputJsonObject.put("previous_year_revenue", validatekey("previous_year_revenue",jsonObject));
+		outputJsonObject.put("TotalAssets", validatekey("total_assets",jsonObject));
+		outputJsonObject.put("gross_profit", validatekey("gross_profit",jsonObject));
+		outputJsonObject.put("marketCap", validatekey("market_cap",jsonObject));
+		outputJsonObject.put("last_quarterly_revenue", validatekey("last_quarterly_revenue",jsonObject));
+		outputJsonObject.put("second_last_quarterly_revenue", validatekey("second_last_quarterly_revenue",jsonObject));
+		outputJsonObject.put("longBusinessSummary", validatekey("description",jsonObject));
+		outputJsonObject.put("parentName", validatekey("parent_name",jsonObject));
+		outputJsonObject.put("annual_revenue_growth", getPercentage(validatekey("current_year_revenue",jsonObject),validatekey("previous_year_revenue",jsonObject)));
+		outputJsonObject.put("source","yahoo");
+		outputJsonObject.put("symbol", validatekey("ticker_symbol",jsonObject));
+		outputJsonObject.put("longName", validatekey("name",jsonObject));
+
+		
+		outputJsonArray.put(outputJsonObject);
+		System.out.println("Data: " +outputJsonArray.toString());
+
+		return outputJsonArray.toString();
+	}
+	public static String getYahooWithNodeJson(JSONObject jsonObject) {
+		JSONArray outputJsonArray=new JSONArray();
+		JSONObject outputObject=new JSONObject();
+		outputObject.put("source","yahoo-node");
+		outputObject.put("symbol", validatekey("ticker_symbol",jsonObject));
+		outputObject.put("gross_profit", getInMillions(validatekey("gross_profit",jsonObject)));
+		outputObject.put("TotalAssets", getInMillions(validatekey("total_assets",jsonObject)));
+		outputObject.put("current_year_revenue", getInMillions(validatekey("current_year_revenue",jsonObject)));
+		outputObject.put("previous_year_revenue",  getInMillions(validatekey("previous_year_revenue",jsonObject)));
+		outputObject.put("marketCap", getInMillions(validatekey("market_cap",jsonObject)));
+		outputObject.put("last_quarterly_revenue", getInMillions(validatekey("last_quarterly_revenue",jsonObject)));
+		outputObject.put("second_last_quarterly_revenue", getInMillions(validatekey("second_last_quarterly_revenue",jsonObject)));
+		outputObject.put("quarterly_revenue_growth", format(validatekey("quarterly_revenue_growth",jsonObject)));
+		//	outputObject.put("quarterly_revenue_growth", String.format("%.2f", (Double.parseDouble(validatekey("quarterly_revenue_growth",jsonObject)))*100).concat("%"));
+			String annualGrowth=getAnnualGrowthPercentage(validatekey("current_year_revenue",jsonObject),validatekey("previous_year_revenue",jsonObject));
+			outputObject.put("annual_revenue_growth",format(annualGrowth) );
+		outputObject.put("longName", validatekey("name",jsonObject));
+		//if(!validatekey("employer",jsonObject).equals("")) {
+		if(jsonObject.has("employer") && jsonObject.getJSONArray("employer").length()>0) {
+		JSONArray employerArray=jsonObject.getJSONArray("employer");
+		JSONArray outputEmployeeArray=new JSONArray();
+		for(int i=0;i<employerArray.length();i++) {
+		JSONObject outputEmployeeObject=new JSONObject();
+		JSONObject employeeObject=employerArray.getJSONObject(i);
+		outputEmployeeObject.put("name",validatekey("full_name",employeeObject) );
+		outputEmployeeObject.put("title",validatekey("occupation",employeeObject) );
+		outputEmployeeArray.put(outputEmployeeObject);
+		}
+		outputObject.put("employer",outputEmployeeArray);
+		}
+		outputJsonArray.put(outputObject);
+		System.out.println("Contact Data:"+outputJsonArray.toString());
+
+		return outputJsonArray.toString();
+		}
+	public static String getInMillions(String inputValue) {
+		if(!inputValue.equals("")) {
+			double d = Double.parseDouble(inputValue); 
+			d=(d/1000000);
+			System.out.println(String.format("%.0f",d).concat("M"));
+			return String.format("%.2f",d).concat("M");
+			}
+			else {
+				return "";
+			}
+	}
+	public static String getPercentage(String firstValue, String secondValue) {
+		System.out.println("In Percentage");
+		if(firstValue.equals("") || secondValue.equals("")) {
+			return "";
+		}
+		else {
+			Double l1=Double.parseDouble(firstValue);
+			Double l2=Double.parseDouble(secondValue);
+			Double l=(l1-l2)/l2;
+			return String.format("%.3f",l);
+		}
+	}
+	
+	public static String getAnnualGrowthPercentage(String firstValue, String secondValue) {
+		if(firstValue.equals("") || secondValue.equals("")) {
+			return "";
+		}
+		else {
+			firstValue=firstValue.replace(" M", "");
+			secondValue=secondValue.replace(" M", "");
+			String currentYearValue=String.valueOf((Double.parseDouble(firstValue))*1000000);
+			String previousYearValue=String.valueOf((Double.parseDouble(secondValue))*1000000);
+			return getPercentage(currentYearValue,previousYearValue);
+
+		}
+	}
+	public static String format(String inputValue ) {
+		if(!inputValue.equals("")) {
+			return String.format("%.2f", (Double.parseDouble(inputValue))*100).concat("%");
+			}
+			else {
+				return "";
+			}
+	}
+
 }
