@@ -2,11 +2,11 @@
     <artifact name="CallLinkedIn" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/api/CallLinkedIn.xml</file>
     </artifact>
-    <artifact name="CallerApi_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/CallerApi_swagger.yaml</file>
+    <artifact name="CallLinkedIn_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CallLinkedIn_swagger.yaml</file>
     </artifact>
-    <artifact name="CallerApi_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/CallerApi_metadata.yaml</file>
+    <artifact name="CallLinkedIn_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CallLinkedIn_metadata.yaml</file>
     </artifact>
     <artifact name="ErrorSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/ErrorSequence.xml</file>
