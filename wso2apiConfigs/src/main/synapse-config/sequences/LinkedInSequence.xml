@@ -6,17 +6,17 @@
     </msazurestorage.init>
     <msazurestorage.downloadBlob>
         <containerName>wso2container</containerName>
-        <fileName>dbpedia-contact-data.csv</fileName>
+        <fileName>linkedin-parent-name-data.csv</fileName>
     </msazurestorage.downloadBlob>
     <file.checkExist configKey="FILE_CONNECTION_1">
-        <path> /home/wso2carbon/wso2mi-4.1.0/dbpedia-contact-data.csv</path>
+        <path> /home/wso2carbon/wso2mi-4.1.0/linkedin-parent-name-data.csv</path>
         <includeResultTo>Message Body</includeResultTo>
     </file.checkExist>
     <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
     <switch source="get-property('response')">
         <case regex="true">
             <file.read configKey="FILE_CONNECTION_1">
-                <path> /home/wso2carbon/wso2mi-4.1.0/dbpedia-contact-data.csv</path>
+                <path> /home/wso2carbon/wso2mi-4.1.0/linkedin-parent-name-data.csv</path>
                 <readMode>Complete File</readMode>
                 <startLineNum>0</startLineNum>
                 <lineNum>0</lineNum>
@@ -36,43 +36,7 @@
                 <csvEmptyValues>Empty</csvEmptyValues>
             </CSV.csvToJson>
             <class name="com.example.DBPediaMapper"/>
-            <payloadFactory media-type="json">
-                <format>$1</format>
-                <args>
-                    <arg evaluator="json" expression="$ctx:Array2"/>
-                </args>
-            </payloadFactory>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=OrganisationMapping">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
-            <log>
-                <property name="TTL Conversion Status" value="True"/>
-            </log>
-            <call>
-                <endpoint>
-                    <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
-                        <suspendOnFailure>
-                            <initialDuration>-1</initialDuration>
-                            <progressionFactor>-1</progressionFactor>
-                            <maximumDuration>0</maximumDuration>
-                        </suspendOnFailure>
-                        <markForSuspension>
-                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                        </markForSuspension>
-                    </http>
-                </endpoint>
-            </call>
+            <sequence key="InsertionParentSequence"/>
         </case>
         <default>
             <log separator=",">

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="DbpediaParent" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence name="YahooWithNodeSequence" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <msazurestorage.init>
         <accountName>adfstorageeus</accountName>
         <accountKey>zBC6T807FXHQUqYj4g7o0lBvB4z4Wu98pnYamNGoS+s0hfEf7NVmC17kPN18NkxEOM9N4/q6ep7r+AStSuwrpg==</accountKey>
     </msazurestorage.init>
     <msazurestorage.downloadBlob>
         <containerName>wso2container</containerName>
-        <fileName>dbpedia-contact-data.csv</fileName>
+        <fileName>yahoo-finance-with-node.csv</fileName>
     </msazurestorage.downloadBlob>
     <file.checkExist configKey="FILE_CONNECTION_1">
-        <path> /home/wso2carbon/wso2mi-4.1.0/dbpedia-contact-data.csv</path>
+        <path> /home/wso2carbon/wso2mi-4.1.0/yahoo-finance-with-node.csv</path>
         <includeResultTo>Message Body</includeResultTo>
     </file.checkExist>
     <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
     <switch source="get-property('response')">
         <case regex="true">
+            <log>
+                <property name="File Present" value="true"/>
+            </log>
             <file.read configKey="FILE_CONNECTION_1">
-                <path> /home/wso2carbon/wso2mi-4.1.0/dbpedia-contact-data.csv</path>
+                <path> /home/wso2carbon/wso2mi-4.1.0/yahoo-finance-with-node.csv</path>
                 <readMode>Complete File</readMode>
                 <startLineNum>0</startLineNum>
                 <lineNum>0</lineNum>
@@ -25,7 +28,7 @@
                 <enableStreaming>false</enableStreaming>
                 <enableLock>false</enableLock>
             </file.read>
-            <property name="source" scope="default" type="STRING" value="dbpedia-contact"/>
+            <property name="source" scope="default" type="STRING" value="yahoo-node"/>
             <log>
                 <property name="File Connector" value="Read the csv file and converting into json format"/>
             </log>
@@ -35,16 +38,9 @@
                 <skipHeader>true</skipHeader>
                 <csvEmptyValues>Empty</csvEmptyValues>
             </CSV.csvToJson>
-            <class name="com.example.DBPediaMapper"/>
+            <class name="com.example.YahooMapper"/>
             <sequence key="InsertionParentSequence"/>
         </case>
-        <default>
-            <log separator=",">
-                <property name="Default log" value="No file exist"/>
-            </log>
-        </default>
+        <default/>
     </switch>
-    <log>
-        <property name="dbpedia parent" value="sequence completed"/>
-    </log>
 </sequence>
