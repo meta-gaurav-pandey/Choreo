@@ -9,7 +9,7 @@
         <fileName>yahoo-finance-with-node.csv</fileName>
     </msazurestorage.downloadBlob>
     <file.checkExist configKey="FILE_CONNECTION_1">
-        <path> /home/wso2carbon/wso2mi-4.1.0/yahoo-finance-with-node.csv</path>
+        <path>/home/wso2carbon/wso2mi-4.1.0/yahoo-finance-with-node.csv</path>
         <includeResultTo>Message Body</includeResultTo>
     </file.checkExist>
     <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
@@ -19,7 +19,7 @@
                 <property name="File Present" value="true"/>
             </log>
             <file.read configKey="FILE_CONNECTION_1">
-                <path> /home/wso2carbon/wso2mi-4.1.0/yahoo-finance-with-node.csv</path>
+                <path>/home/wso2carbon/wso2mi-4.1.0/yahoo-finance-with-node.csv</path>
                 <readMode>Complete File</readMode>
                 <startLineNum>0</startLineNum>
                 <lineNum>0</lineNum>
