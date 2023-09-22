@@ -23,7 +23,7 @@ public class DBPediaMapper extends AbstractMediator {
 		String outputArray="";
 		if(source.equals("dbpedia")) {
 			outputArray=getDBPediaMappingJson(jsonPayloadToString);
-			context.setProperty("Array", outputArray);
+			context.setProperty("Array1", outputArray);
 
 		}
 		

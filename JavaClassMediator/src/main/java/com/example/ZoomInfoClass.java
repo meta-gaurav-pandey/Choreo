@@ -21,7 +21,7 @@ public class ZoomInfoClass extends AbstractMediator {
 		// TODO Implement your mediation logic here
 		if (source.equals("zoominfo")) {
 			JSONArray result = Zoominfo(context);
-			context.setProperty("Array", result.toString());
+			context.setProperty("Array1", result.toString());
 		} else if (source.equals("Zoominfo-parent")) {
 			JSONArray result = parentZoomInfo(context);
 			context.setProperty("Array2", result.toString());
