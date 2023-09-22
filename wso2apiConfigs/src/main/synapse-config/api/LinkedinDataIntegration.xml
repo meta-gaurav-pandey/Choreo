@@ -30,7 +30,7 @@
                         <enableStreaming>false</enableStreaming>
                         <enableLock>false</enableLock>
                     </file.read>
-                    <property name="source" scope="default" type="STRING" value="dbpedia"/>
+                    <property name="source" scope="default" type="STRING" value="linkedin"/>
                     <log>
                         <property name="File Connector" value="Read the csv file and converting into json format"/>
                     </log>
