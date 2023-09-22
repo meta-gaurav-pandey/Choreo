@@ -3,8 +3,8 @@
     <resource methods="GET">
         <inSequence>
             <msazurestorage.init>
-                <accountName>adfstorageeus</accountName>
-                <accountKey>zBC6T807FXHQUqYj4g7o0lBvB4z4Wu98pnYamNGoS+s0hfEf7NVmC17kPN18NkxEOM9N4/q6ep7r+AStSuwrpg==</accountKey>
+                <accountName>zeniastorage</accountName>
+                <accountKey>bPwp6wLgmSIglDQpIopUn4CUs1MPdfMNawYjw4JAgYO6gXi+kBLXApGOlb+bPQYMUsXruE0dWLOU+AStbA1Rdw==</accountKey>
             </msazurestorage.init>
             <msazurestorage.downloadBlob>
                 <containerName>wso2container</containerName>
