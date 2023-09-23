@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="InsertionParentSequence" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log separator=",">
-        <property name="StartingLog" value="InsertionSequence Started"/>
+        <property name="StartingLog" value="Insertion parent Sequence Started"/>
     </log>
     <payloadFactory media-type="json">
         <format>$1</format>
@@ -41,6 +41,6 @@
         </endpoint>
     </call>
     <log separator=",">
-        <property name="EndingLog" value="InsertionSequence End"/>
+        <property name="EndingLog" value="Insertion parent Sequence End"/>
     </log>
 </sequence>
