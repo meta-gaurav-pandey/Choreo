@@ -35,7 +35,7 @@
                 <skipHeader>true</skipHeader>
                 <csvEmptyValues>Empty</csvEmptyValues>
             </CSV.csvToJson>
-            <class name="com.example.DBPediaMapper"/>
+            <class name="com.example.LinkedInMapper"/>
             <sequence key="InsertionParentSequence"/>
         </case>
         <default>
