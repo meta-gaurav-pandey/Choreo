@@ -48,11 +48,11 @@ public class LinkedInMapper extends AbstractMediator {
 		JSONArray outputJsonArray=new JSONArray();
 		for(int i = 0;i<jsonArray.length();i++) {
 			JSONObject jsonObject=jsonArray.getJSONObject(i);
-			if(!jsonObject.getString("parentName").equals("")) {
+			if(!jsonObject.getString("parent_name").equals("")) {
 					
 				jsonObject.put("source","Linkedin-parent");
 				jsonObject.put("Comp_Name", checkKey("social_url",jsonObject));
-				jsonObject.put("parentName", jsonObject.getString("parentName"));
+				jsonObject.put("parentName", jsonObject.getString("parent_name"));
 				outputJsonArray.put(jsonObject);
 			}
 		}
