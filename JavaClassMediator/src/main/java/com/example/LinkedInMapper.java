@@ -56,6 +56,7 @@ public class LinkedInMapper extends AbstractMediator {
 				outputJsonArray.put(jsonObject);
 			}
 		}
+		System.out.println(outputJsonArray.toString());
 		return outputJsonArray.toString();
 	}
 	public String getLinkedinMappingJson(String jsonPayloadToString) {
