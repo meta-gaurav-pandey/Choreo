@@ -33,7 +33,7 @@ public class DBPediaMapper extends AbstractMediator {
 
 			 }
 		
-		System.out.println(outputArray);
+		//System.out.println(outputArray);
 
 		return true;
 	}
@@ -78,7 +78,7 @@ public class DBPediaMapper extends AbstractMediator {
 	public String getDBPediaMappingJson(String jsonPayloadToString) {
 		JSONArray jsonArray = new JSONArray(jsonPayloadToString);
 		JSONArray outputJsonArray=new JSONArray();
-		String[] standardFields={"name","numberOfEmployees","profile_url","description","foafName","company_type","founded"};
+		String[] standardFields={"name","numberOfEmployees","URI","description","foafName","company_type","founded"};
 		for(int i = 0;i<jsonArray.length();i++) {
 			JSONObject jsonObject=jsonArray.getJSONObject(i);	
 			JSONObject outputObject=new JSONObject();

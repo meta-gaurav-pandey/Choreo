@@ -130,7 +130,7 @@ import org.json.JSONObject;
 			outputObject.put("name", validatekey("name",jsonObject));
 			outputObject.put("source", "dbpedia");
 			outputObject.put("numberOfEmployees", validatekey("no_of_employees",jsonObject));
-			outputObject.put("profile_url", validatekey("profile_url",jsonObject));
+			outputObject.put("URI", validatekey("profile_url",jsonObject));
 			//if(jsonObject.get("founded").jsonObject.getString("profile_url"));
 			outputObject.put("founded", validatekey("founded",jsonObject));
 			outputObject.put("company_type", validatekey("company_type",jsonObject));

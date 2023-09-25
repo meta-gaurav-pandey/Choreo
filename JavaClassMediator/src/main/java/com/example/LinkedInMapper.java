@@ -25,12 +25,12 @@ public class LinkedInMapper extends AbstractMediator {
 		if(source.equals("linkedin")) {
 			outputArray=getLinkedinMappingJson(jsonPayloadToString);
 			context.setProperty("Array1", outputArray);
-			System.out.println(outputArray);
+			System.out.println("Array1 completed");
 		}
 		else if(source.equals("linkedin-parent")){
 			outputArray=getLinkedinParentMappingJson(jsonPayloadToString);
 			context.setProperty("Array2", outputArray);
-			System.out.println(outputArray);
+			System.out.println("Array2 completed");
 		}
 
 		return true;
@@ -56,7 +56,7 @@ public class LinkedInMapper extends AbstractMediator {
 				outputJsonArray.put(jsonObject);
 			}
 		}
-		System.out.println(outputJsonArray.toString());
+		//System.out.println(outputJsonArray.toString());
 		return outputJsonArray.toString();
 	}
 	public String getLinkedinMappingJson(String jsonPayloadToString) {

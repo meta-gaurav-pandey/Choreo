@@ -26,13 +26,13 @@ public class YahooMapper extends AbstractMediator {
 			System.out.println("yahoo-node");
 			outputArray=getYahooNodeMappingJson(jsonPayloadToString);
 			context.setProperty("Array2", outputArray);
-			System.out.println("Yahoo WithNode:"+outputArray);
+			System.out.println("Yahoo WithNode completed");
 		}
 		else if(source.equals("yahoo-without-node")) {
 			System.out.println("yahoo-without-node");
 			outputArray=getYahooWithoutNodeMappingJson(jsonPayloadToString);
 			context.setProperty("Array1", outputArray);
-			System.out.println("Yahoo WithoutNode:"+outputArray);
+			System.out.println("Yahoo WithoutNode completed");
 
 		}
 		
@@ -100,7 +100,7 @@ public class YahooMapper extends AbstractMediator {
 			outputJsonArray.put(outputObject);
 
 		}
-		System.out.println(outputJsonArray.toString());
+		//System.out.println(outputJsonArray.toString());
 		return outputJsonArray.toString();
 		
 	}

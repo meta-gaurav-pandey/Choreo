@@ -89,7 +89,7 @@ public class ZoomInfoClass extends AbstractMediator {
 			outputObject.put("custom_properties", custompropertiesArray);
 			outputJsonArray.put(outputObject);
 		}
-		System.out.println(outputJsonArray.toString());
+		System.out.println("Array1 completed");
 
 		return outputJsonArray;
 
@@ -117,7 +117,7 @@ public class ZoomInfoClass extends AbstractMediator {
 			outputObject.put("source", "zoominfo-parent");
 					outputJsonArray.put(outputObject);
 		}
-		System.out.println(outputJsonArray.toString());
+		System.out.println("Array2 completed");
 
 		return outputJsonArray;
 
