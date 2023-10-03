@@ -22,8 +22,10 @@ import com.bordercloud.sparql.SparqlResult;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -92,9 +94,11 @@ public class ZeniaClass extends AbstractMediator {
 			JSONObject linkedObject = new JSONObject(response.toString());
 		//	System.out.println(linkedObject.toString());
 			JSONArray Output1 = getLinkedinMappingJson(linkedObject);
-			JSONArray Output2 = getLinkedinParentMappingJson(linkedObject);
+			JSONArray Output2 = getLinkedinParentMappingJson(linkedObject, context);
 			context.setProperty("Array1", Output1.toString());
 			context.setProperty("Array2", Output2.toString());
+			
+			
 
 			// Close the connection
 			connection.disconnect();
@@ -231,7 +235,9 @@ public class ZeniaClass extends AbstractMediator {
 				/// String jsonString = resultsArray.toString(2); // Indent for pretty printing
 				JSONArray empOutput = getdbpediaContactMappingJson(company);
 				context.setProperty("Array1", resultsArray.toString(2));
+				
 				context.setProperty("Array2", empOutput.toString(2));
+				context.setProperty("parentData", parentNameData(resultObject, "foafName"));
 				// Print the JSON string
 				// System.out.println(jsonString);
 			}
@@ -445,7 +451,7 @@ public class ZeniaClass extends AbstractMediator {
           //  System.out.println(builder.toString());
             JSONObject yahooObject = new JSONObject(builder.toString());
             JSONObject inputObject=yahooObject.getJSONObject("data").getJSONObject("getCompaniesByCrawl");
-            outputArray=getYahooWithoutNodeJson(inputObject);
+            outputArray=getYahooWithoutNodeJson(inputObject,context);
 			outputParentArray=getYahooWithNodeJson(inputObject);
 			context.setProperty("Array1", outputArray);
 			context.setProperty("Array2", outputParentArray);
@@ -455,7 +461,7 @@ public class ZeniaClass extends AbstractMediator {
         }
 	}
 
-	public static JSONArray getLinkedinParentMappingJson(JSONObject jsonObject) {
+	public static JSONArray getLinkedinParentMappingJson(JSONObject jsonObject,MessageContext context) {
 		// jsonArray = new JSONArray(jsonPayloadToString);
 		JSONArray outputJsonArray = new JSONArray();
 
@@ -465,6 +471,9 @@ public class ZeniaClass extends AbstractMediator {
 			jsonObject.put("Comp_Name", source[1]);
 			jsonObject.put("parentName", validatekey("company_name", jsonObject));
 			outputJsonArray.put(jsonObject);
+			context.setProperty("parentData",parentNameData(jsonObject,"parentName"));
+			
+			
 		}
 
 		return outputJsonArray;
@@ -530,7 +539,7 @@ public class ZeniaClass extends AbstractMediator {
 	}
 	
 	
-	public static String getYahooWithoutNodeJson(JSONObject jsonObject) {
+	public static String getYahooWithoutNodeJson(JSONObject jsonObject,MessageContext context) {
 		JSONArray outputJsonArray=new JSONArray();
 		JSONObject outputJsonObject=new JSONObject();
 		outputJsonObject.put("tickerSymbol", validatekey("ticker_symbol",jsonObject));
@@ -555,6 +564,7 @@ public class ZeniaClass extends AbstractMediator {
 		
 		outputJsonArray.put(outputJsonObject);
 		System.out.println("Data: " +outputJsonArray.toString());
+		context.setProperty("parentData",parentNameData(outputJsonObject,"parentName"));
 
 		return outputJsonArray.toString();
 	}
@@ -637,6 +647,31 @@ public class ZeniaClass extends AbstractMediator {
 			else {
 				return "";
 			}
+	}
+	public static JSONArray parentNameData(JSONObject jsonObject,String key) {
+		   JSONArray parent=new JSONArray();
+		if (!validatekey(key, jsonObject).equals("")) {
+		
+			try {
+			 parent.put("https://company.org/resource/".concat(getEncodedString(validatekey(key,jsonObject))));
+			 return parent;
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+		 parent.put("https://company.org/resource/");
+		 return parent;
+		}
+		return parent;
+
+	}
+	public static String getEncodedString(String urlText) throws UnsupportedEncodingException {
+		if (urlText != null)
+			return URLEncoder.encode(urlText, "UTF-8").replace("+", "%20");
+		else
+			return "";
 	}
 
 }

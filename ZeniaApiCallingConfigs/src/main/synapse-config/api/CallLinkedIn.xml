@@ -13,6 +13,7 @@
             </log>
             <sequence key="InsertionSequence"/>
             <sequence key="InsertionParentSequence"/>
+            <sequence key="RedisSync"/>
             <log>
                 <property name="End Logger" value="Main Sequence ended"/>
             </log>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RedisSync" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log>
+        <property name="Log-redisSync" value="Started"/>
+    </log>
+    <class name="com.example.RedisSyncClass"/>
+    <payloadFactory media-type="json">
+        <format>$1</format>
+        <args>
+            <arg evaluator="json" expression="$ctx:SyncRedisObject"/>
+        </args>
+    </payloadFactory>
+    <log>
+        <property name="Log-redisSync" value="End"/>
+    </log>
+</sequence>
