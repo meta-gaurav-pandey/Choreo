@@ -128,4 +128,7 @@
     <artifact name="YahooWithNodeSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/YahooWithNodeSequence.xml</file>
     </artifact>
+    <artifact name="RedisSync" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/RedisSync.xml</file>
+    </artifact>
 </artifacts>
