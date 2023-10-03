@@ -20,13 +20,8 @@ public class RedisSyncClass extends AbstractMediator {
 	public boolean mediate(MessageContext context) {
 
 	 try {
-		 String	outputArray;
-			String	outputParentArray;
-		 String parentData = (String) context.getProperty("parentData");
-		 JSONArray parentArray=new JSONArray(parentData);
-		 if(parentArray.length()==0) {
-			 parentArray.put("https://company.org/resource/");
-		 }
+		 Object parentArray=null;
+			parentArray =  context.getProperty("parentData");
     	 String line, url;
          url = "https://api.zeniagraph.ai/graphql";
          CloseableHttpClient client = null;
@@ -50,7 +45,7 @@ public class RedisSyncClass extends AbstractMediator {
        
         
 
-        variables.put("comParent_url", parentData);
+        variables.put("comParent_url", parentArray);
 
         // Create an ObjectMapper instance to convert variables to JSON
 //        ObjectMapper objectMapper = new ObjectMapper();
