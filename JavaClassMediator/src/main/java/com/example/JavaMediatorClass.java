@@ -1,5 +1,8 @@
 package com.example;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -28,7 +31,7 @@ public class JavaMediatorClass extends AbstractMediator {
 				context.setProperty("Array", json.toString());
 			} else if (ObjectType.equals("Lead")) {
 				System.out.println("Lead" + payload);
-				json = convertLead(payload);
+				json = convertLead(payload,context);
 				context.setProperty("Array1", json.toString());
 				System.out.println(json.toString());
 
@@ -90,7 +93,7 @@ public class JavaMediatorClass extends AbstractMediator {
 
 	}
 
-	public static JSONArray convertLead(String xml) throws org.json.JSONException {
+	public static JSONArray convertLead(String xml,MessageContext context) throws org.json.JSONException {
 
 		if (xml.length() > 0) {
 			JSONObject jsonObj = XML.toJSONObject(xml);
@@ -211,6 +214,7 @@ public class JavaMediatorClass extends AbstractMediator {
 					}
 				}
 				result.put(obj);
+				context.setProperty("parentName",parentNameData(obj,"Name"));
 
 			}
 			return result;
@@ -332,6 +336,7 @@ public class JavaMediatorClass extends AbstractMediator {
 						record.get("Specialties") instanceof JSONObject ? "" : record.get("Specialties"));
 
 				result.put(obj);
+				
 
 			}
 			return result;
@@ -414,5 +419,46 @@ public class JavaMediatorClass extends AbstractMediator {
 			return result;
 		}
 
+	}
+	public static ArrayList parentNameData(JSONObject jsonObject,String key) {
+		   ArrayList<String> parent=new ArrayList<String>();
+		if (!validatekey(key, jsonObject).equals("")) {
+		
+			try {
+			 parent.add("https://company.org/resource/".concat(getEncodedString(validatekey(key,jsonObject))));
+			 return parent;
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+		 parent.add("https://company.org/resource/");
+		 return parent;
+		}
+		return parent;
+
+	}
+	public static String validatekey(String key, JSONObject jsonObject) {
+
+		String result;
+		if (jsonObject.has(key)) {
+			if (!jsonObject.isNull(key)) {
+				result = jsonObject.getString(key);
+			} else {
+				result = "";
+
+			}
+		} else {
+			result = "";
+
+		}
+		return result;
+	}
+	public static String getEncodedString(String urlText) throws UnsupportedEncodingException {
+		if (urlText != null)
+			return URLEncoder.encode(urlText, "UTF-8").replace("+", "%20");
+		else
+			return "";
 	}
 }
