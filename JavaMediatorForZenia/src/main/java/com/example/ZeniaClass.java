@@ -37,7 +37,9 @@ public class ZeniaClass extends AbstractMediator {
 	public boolean mediate(MessageContext cont) {
 		try {
 			String type = (String) cont.getProperty("Type");
-
+			
+//checking the type of source then calling method according to the source
+			
 			System.out.println("In the class");
 			if (type.equals("linkedIn")) {
 				linkedin(cont);
@@ -59,6 +61,8 @@ public class ZeniaClass extends AbstractMediator {
 	}
 
 	// TODO Implement your mediation logic here
+	// Method for linkedin data source
+	
 	public static void linkedin(MessageContext context) {
 		try {
 			// URL of the API endpoint
@@ -108,6 +112,8 @@ public class ZeniaClass extends AbstractMediator {
 
 	}
 
+	//Method for dbpedia  source data
+	
 	public static void dbpedia(MessageContext context) {
 		try {
 			String company = (String) context.getProperty("CompanyName");
@@ -247,6 +253,9 @@ public class ZeniaClass extends AbstractMediator {
 		}
 	}
 
+	
+	//Method for Linkedin parent mapping
+	
 	public static JSONArray getLinkedinMappingJson(JSONObject jsonObject) {
 		JSONArray outputJsonArray = new JSONArray();
 		JSONArray custompropertiesArray = new JSONArray();
@@ -375,6 +384,9 @@ public class ZeniaClass extends AbstractMediator {
 		return result;
 	}
 	
+	
+	//Method for Yahoo data source 
+	
 	public static void yahoo(MessageContext context) {
 		 try {
 			 String	outputArray;
@@ -479,6 +491,10 @@ public class ZeniaClass extends AbstractMediator {
 		return outputJsonArray;
 	}
 
+	
+	//Method for dbpedia contact mapping
+	
+	
 	public static JSONArray getdbpediaContactMappingJson(String company) {
 		JSONArray resultsArray = new JSONArray();
 		try {
@@ -539,6 +555,8 @@ public class ZeniaClass extends AbstractMediator {
 	}
 	
 	
+	//Method for Yahoo without node mapping
+	
 	public static String getYahooWithoutNodeJson(JSONObject jsonObject,MessageContext context) {
 		JSONArray outputJsonArray=new JSONArray();
 		JSONObject outputJsonObject=new JSONObject();
@@ -568,6 +586,9 @@ public class ZeniaClass extends AbstractMediator {
 
 		return outputJsonArray.toString();
 	}
+	
+	//Method for Yahoo with node data
+	
 	public static String getYahooWithNodeJson(JSONObject jsonObject) {
 		JSONArray outputJsonArray=new JSONArray();
 		JSONObject outputObject=new JSONObject();
@@ -603,6 +624,12 @@ public class ZeniaClass extends AbstractMediator {
 
 		return outputJsonArray.toString();
 		}
+	
+	
+	//Some of the utility methods 
+	
+	
+	
 	public static String getInMillions(String inputValue) {
 		if(!inputValue.equals("")) {
 			double d = Double.parseDouble(inputValue); 

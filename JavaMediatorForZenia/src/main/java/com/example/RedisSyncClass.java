@@ -23,16 +23,23 @@ public class RedisSyncClass extends AbstractMediator {
 		 Object parentArray=null;
 			parentArray =  context.getProperty("parentData");
     	 String line, url;
+    	 
+    	 //Url to call
+    	 
          url = "https://api.zeniagraph.ai/graphql";
          CloseableHttpClient client = null;
          CloseableHttpResponse response = null;
 
          client = HttpClientBuilder.create().build();
          HttpPost httpPost = new HttpPost(url);
+         
+         //Setting headers for api call
+         
          httpPost.addHeader("Content-Type", "application/json");
          httpPost.addHeader("Accept", "");
          
-
+        //Setting up the query
+         
         String query = "mutation syncCompanyData($comParent_url: [String]){\r\n"
         		+ "    syncCompanyData(comParent_url: $comParent_url){\r\n"
         		+ "        record\r\n"
@@ -47,10 +54,7 @@ public class RedisSyncClass extends AbstractMediator {
 
         variables.put("comParent_url", parentArray);
 
-        // Create an ObjectMapper instance to convert variables to JSON
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String variablesJson = objectMapper.writeValueAsString(variables);
-
+  
         JSONObject jsonobj = new JSONObject();
         jsonobj.put("query", query);
         jsonobj.put("variables", variables);
@@ -62,7 +66,9 @@ public class RedisSyncClass extends AbstractMediator {
 
         BufferedReader bufReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         StringBuilder builder = new StringBuilder();
-
+        
+//   Making the json object from the string buffer
+        
         while ((line = bufReader.readLine()) != null) {
             builder.append(line);
             builder.append(System.lineSeparator());
@@ -71,6 +77,7 @@ public class RedisSyncClass extends AbstractMediator {
       //  System.out.println(builder.toString());
         JSONObject SyncRedisObject = new JSONObject(builder.toString());
        
+        //Setting property SyncRedisObject
        
 		context.setProperty("SyncRedisObject", SyncRedisObject);
 		
