@@ -684,13 +684,11 @@ public class ZeniaClass extends AbstractMediator {
 			 return parent;
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
-		else {
-		 parent.put("https://company.org/resource/");
-		 return parent;
-		}
+		
 		return parent;
 
 	}

@@ -51,7 +51,7 @@ public class RedisSyncClass extends AbstractMediator {
        // Map<String, Object> dataMap = new HashMap<String, Object>();
        
         
-
+        variables.put("isCrawl", true);
         variables.put("comParent_url", parentArray);
 
   
