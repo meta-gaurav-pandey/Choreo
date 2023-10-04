@@ -130,6 +130,7 @@ public class SplittingClass extends AbstractMediator {
 		outputObject.put("URI", validatekey("profile_url", jsonObject));
 		// if(jsonObject.get("founded").jsonObject.getString("profile_url"));
 		outputObject.put("founded", validatekey("founded", jsonObject));
+		outputObject.put("description", validatekey("description", jsonObject));
 		outputObject.put("company_type", validatekey("company_type", jsonObject));
 		outputObject.put("custom_properties", jsonObject.getJSONArray("custom_properties"));
 		outputObject.put("foafName", jsonObject.getString("parent_name"));
@@ -285,10 +286,7 @@ public class SplittingClass extends AbstractMediator {
 				e.printStackTrace();
 			}
 		}
-		else {
-		 parent.put("https://company.org/resource/");
-		 return parent;
-		}
+		
 		return parent;
 
 	}

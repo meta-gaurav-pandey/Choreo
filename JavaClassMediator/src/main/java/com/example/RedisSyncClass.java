@@ -46,8 +46,9 @@ public class RedisSyncClass extends AbstractMediator{
        // Map<String, Object> dataMap = new HashMap<String, Object>();
        
         
-
+        variables.put("isCrawl", true);
         variables.put("comParent_url", parentArray);
+       
 
         // Create an ObjectMapper instance to convert variables to JSON
 //        ObjectMapper objectMapper = new ObjectMapper();
