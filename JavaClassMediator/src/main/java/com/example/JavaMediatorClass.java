@@ -432,10 +432,7 @@ public class JavaMediatorClass extends AbstractMediator {
 				e.printStackTrace();
 			}
 		}
-		else {
-		 parent.add("https://company.org/resource/");
-		 return parent;
-		}
+		
 		return parent;
 
 	}
