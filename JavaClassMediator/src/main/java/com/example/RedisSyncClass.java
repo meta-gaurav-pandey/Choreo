@@ -57,7 +57,7 @@ public class RedisSyncClass extends AbstractMediator{
         JSONObject jsonobj = new JSONObject();
         jsonobj.put("query", query);
         jsonobj.put("variables", variables);
-
+         System.out.println("Request for redis sync  :"+jsonobj);
         StringEntity entity = new StringEntity(jsonobj.toString());
 
         httpPost.setEntity(entity);
@@ -72,10 +72,10 @@ public class RedisSyncClass extends AbstractMediator{
         }
         // ...
       //  System.out.println(builder.toString());
-        JSONObject SyncRedisObject = new JSONObject(builder.toString());
+      //  JSONObject SyncRedisObject = new JSONObject(builder.toString());
        
        
-		context.setProperty("SyncRedisObject", SyncRedisObject);
+		context.setProperty("SyncRedisObject", builder.toString());
 		
 
     } catch (IOException e) {
