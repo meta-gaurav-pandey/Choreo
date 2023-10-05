@@ -35,8 +35,8 @@ public class RedisSyncClass extends AbstractMediator{
          httpPost.addHeader("Accept", "");
          
 
-        String query = "mutation syncCompanyData($comParent_url: [String]){\r\n"
-        		+ "    syncCompanyData(comParent_url: $comParent_url){\r\n"
+        String query = "mutation syncCompanyData($comParent_url: [String],$isCrawl : Boolean!){\r\n"
+        		+ "    syncCompanyData(comParent_url: $comParent_url,isCrawl:$isCrawl){\r\n"
         		+ "        record\r\n"
         		+ "        error\r\n"
         		+ "    }\r\n"
