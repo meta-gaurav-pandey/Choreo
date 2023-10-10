@@ -22,8 +22,7 @@ endpoints:
   schemaFilePath: wso2apiConfigs/src/main/resources/metadata/MainApi_swagger.yaml
 
   
-
-- name: DbpediaDataIntegration
+- name: CsvDataIngestion
   # +required Numeric port value that gets exposed via this endpoint
   port: 8290
   # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
@@ -34,46 +33,12 @@ endpoints:
   networkVisibility: Public
   # +optional Context (base path) of the API that is exposed via this endpoint.
   # This is mandatory if the endpoint type is set to REST or GraphQL.
-  context: /dbpedia
+  context: /csvFile
   # +optional Path to the schema definition file. Defaults to wild card route if not provided
   # This is only applicable to REST endpoint types.
   # The path should be relative to the docker context.
-  schemaFilePath: wso2apiConfigs/src/main/resources/metadata/DbpediaDataIntegration_swagger.yaml
+  schemaFilePath: wso2apiConfigs/src/main/resources/metadata/CsvDataIngestion_swagger.yaml
 
-- name: LinkedinDataIntegration
-  # +required Numeric port value that gets exposed via this endpoint
-  port: 8290
-  # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
-  # Allowed values: REST, GraphQL, GRPC
-  type: REST
-  # +optional Network level visibility of this endpoint. Defaults to Project
-  # Accepted values: Project|Organization|Public.
-  networkVisibility: Public
-  # +optional Context (base path) of the API that is exposed via this endpoint.
-  # This is mandatory if the endpoint type is set to REST or GraphQL.
-  context: /linkedInData
-  # +optional Path to the schema definition file. Defaults to wild card route if not provided
-  # This is only applicable to REST endpoint types.
-  # The path should be relative to the docker context.
-  schemaFilePath: wso2apiConfigs/src/main/resources/metadata/LinkedinDataIntegration_swagger.yaml
-
-
-- name: YahooDataIntegration
-  # +required Numeric port value that gets exposed via this endpoint
-  port: 8290
-  # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
-  # Allowed values: REST, GraphQL, GRPC
-  type: REST
-  # +optional Network level visibility of this endpoint. Defaults to Project
-  # Accepted values: Project|Organization|Public.
-  networkVisibility: Public
-  # +optional Context (base path) of the API that is exposed via this endpoint.
-  # This is mandatory if the endpoint type is set to REST or GraphQL.
-  context: /yahooData
-  # +optional Path to the schema definition file. Defaults to wild card route if not provided
-  # This is only applicable to REST endpoint types.
-  # The path should be relative to the docker context.
-  schemaFilePath: wso2apiConfigs/src/main/resources/metadata/YahooDataIntegration_swagger.yaml
 
 
 - name: IngestionCsv
@@ -133,7 +98,7 @@ endpoints:
 
 
 
-- name: ZoomInfoDataIntegration
+- name: JsonIntegration
   # +required Numeric port value that gets exposed via this endpoint
   port: 8290
   # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
@@ -144,8 +109,8 @@ endpoints:
   networkVisibility: Public
   # +optional Context (base path) of the API that is exposed via this endpoint.
   # This is mandatory if the endpoint type is set to REST or GraphQL.
-  context: /csvIntegration
+  context: /jsonIntegration
   # +optional Path to the schema definition file. Defaults to wild card route if not provided
   # This is only applicable to REST endpoint types.
   # The path should be relative to the docker context.
-  schemaFilePath: wso2apiConfigs/src/main/resources/metadata/ZoomInfoDataIntegration_swagger.yaml   
+  schemaFilePath: wso2apiConfigs/src/main/resources/metadata/JsonIntegration_swagger.yaml   

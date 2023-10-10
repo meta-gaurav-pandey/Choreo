@@ -1,78 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/jsonIntegration" name="JsonIntegration" xmlns="http://ws.apache.org/ns/synapse">
-    <resource faultSequence="ErrorSequence" methods="GET">
+    <resource faultSequence="ErrorSequence" methods="POST">
         <inSequence>
-            <log>
-                <property name="Start Logger" value="File connector Main Logger Started"/>
-            </log>
-            <msazurestorage.init>
-                <accountName>databricksaqi</accountName>
-                <accountKey>SboycvfUPW4wJaTDY8SnA6/ylwO1uptrBSystnsrdeiprCjPc7FoIVoVlawyk+0Mmte6S/gadI8M+ASta0ovYg==</accountKey>
-            </msazurestorage.init>
-            <msazurestorage.downloadBlob>
-                <containerName>wso2container</containerName>
-                <fileName>LinkedInData.csv</fileName>
-            </msazurestorage.downloadBlob>
-            <file.checkExist configKey="FILE_CONNECTION_1">
-                <path>/home/wso2carbon/wso2mi-4.1.0 /input.json</path>
-                <includeResultTo>Message Body</includeResultTo>
-            </file.checkExist>
-            <property expression="json-eval($.checkExistResult.fileExists)" name="response" scope="default" type="STRING"/>
-            <switch source="get-property('response')">
-                <case regex="true">
-                    <file.read configKey="FILE_CONNECTION_1">
-                        <path>/home/wso2carbon/wso2mi-4.1.0/input.json</path>
-                        <readMode>Complete File</readMode>
-                        <startLineNum>0</startLineNum>
-                        <lineNum>0</lineNum>
-                        <contentType>application/json</contentType>
-                        <includeResultTo>Message Property</includeResultTo>
-                        <resultPropertyName>Array</resultPropertyName>
-                        <enableStreaming>false</enableStreaming>
-                        <enableLock>false</enableLock>
-                    </file.read>
-                    <log level="full"/>
-                    <call>
-                        <endpoint>
-                            <http method="post" uri-template="http://52.91.255.31:8080/ttl/generate/ttl?entityType=OrganisationMapping">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
-                    <log>
-                        <property name="TTL Conversion Status" value="True"/>
+            <log level="full"/>
+            <property expression="$trp:Content-Type" name="content" scope="default" type="STRING"/>
+            <switch source="get-property('content')">
+                <case regex="application/json">
+                    <log level="full">
+                        <property name="log1" value="json api started"/>
                     </log>
-                    <call>
-                        <endpoint>
-                            <http method="post" uri-template="http://52.91.255.31:8080/insertion/insertDataIntoGraph">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
+                    <class name="com.example.SplittingClass"/>
+                    <log>
+                        <property expression="json-eval($ctx:Array1)" name="Array1"/>
+                    </log>
+                    <sequence key="InsertionSequence"/>
+                    <sequence key="InsertionParentSequence"/>
+                    <sequence key="RedisSync"/>
                 </case>
                 <default>
-                    <log separator=",">
-                        <property name="Default log" value="No file exist"/>
+                    <log>
+                        <property name="JsonInjestionLog" value="No Json Data found in the payload"/>
                     </log>
+                    <payloadFactory media-type="text">
+                        <format>No Json Data found in the payload</format>
+                        <args/>
+                    </payloadFactory>
                 </default>
             </switch>
-            <log>
-                <property name="End Logger" value="Main Sequence ended"/>
-            </log>
+            <log/>
             <respond/>
         </inSequence>
         <outSequence/>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/csvFile" name="CsvDataIngestion" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="ErrorSequence" methods="GET">
+        <inSequence>
+            <log>
+                <property name="LogOfCsvIngetion" value="Started Api"/>
+            </log>
+            <property expression="get-property('query.param.data_source')" name="source" scope="default" type="STRING"/>
+            <filter regex="^(linkedin|dbpedia|yahoo-without-node|zoominfo)$" source="$ctx:source">
+                <then>
+                    <log>
+                        <property expression="get-property('query.param.data_source')" name="LogOfCsvIngetion"/>
+                    </log>
+                    <property name="DownloadPath" scope="default" type="STRING" value="/home/wso2carbon/wso2mi-4.1.0"/>
+                    <switch source="get-property('query.param.data_source')">
+                        <case regex="linkedin">
+                            <sequence key="ChildDataSequenec"/>
+                            <property name="source" scope="default" type="STRING" value="linkedin-parent"/>
+                            <sequence key="ParentDataSequence"/>
+                        </case>
+                        <case regex="dbpedia">
+                            <sequence key="ChildDataSequenec"/>
+                            <property name="source" scope="default" type="STRING" value="dbpedia-contact"/>
+                            <sequence key="ParentDataSequence"/>
+                        </case>
+                        <case regex="zoominfo">
+                            <sequence key="ChildDataSequenec"/>
+                            <property name="source" scope="default" type="STRING" value="Zoominfo-parent"/>
+                            <sequence key="ParentDataSequence"/>
+                        </case>
+                        <default>
+                            <sequence key="ChildDataSequenec"/>
+                            <property name="source" scope="default" type="STRING" value="yahoo-node"/>
+                            <sequence key="ParentDataSequence"/>
+                        </default>
+                    </switch>
+                </then>
+                <else>
+                    <payloadFactory media-type="text">
+                        <format>you have not provided any source of your data please provide any of these ('linkedin','dbpedia','yahoo-without-node','zoominfo')</format>
+                        <args/>
+                    </payloadFactory>
+                    <respond/>
+                </else>
+            </filter>
+            <payloadFactory media-type="json">
+                <format>
+                {
+"childFilePayload":"$1",
+"parentFilePayload":"$2"
+}
+</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('payload1')"/>
+                    <arg evaluator="xml" expression="get-property('payload2')"/>
+                </args>
+            </payloadFactory>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

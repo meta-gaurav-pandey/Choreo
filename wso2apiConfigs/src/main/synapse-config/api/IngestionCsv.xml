@@ -6,65 +6,79 @@
             <property expression="$trp:Content-Type" name="content" scope="default" type="STRING"/>
             <switch source="get-property('content')">
                 <case regex="text/csv">
-                    <property name="source" scope="default" type="STRING" value="dbpedia-contact"/>
-                    <CSV.csvToJson>
-                        <headerPresent>Present</headerPresent>
-                        <valueSeparator>,</valueSeparator>
-                        <skipHeader>true</skipHeader>
-                        <csvEmptyValues>Empty</csvEmptyValues>
-                    </CSV.csvToJson>
-                    <class name="com.example.DBPediaMapper"/>
-                    <payloadFactory media-type="json">
-                        <format>$1</format>
-                        <args>
-                            <arg evaluator="json" expression="$ctx:Array2"/>
-                        </args>
-                    </payloadFactory>
-                    <call>
-                        <endpoint>
-                            <http method="post" uri-template="http://localhost:8080/generate/ttl?entityType=OrganisationMapping">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
-                    <log level="full">
-                        <property name="TTL Conversion Status" value="True"/>
-                    </log>
-                    <call>
-                        <endpoint>
-                            <http method="post" uri-template="http://localhost:8081/insertDataIntoGraph">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
+                    <property expression="get-property('query.param.data_source')" name="source" scope="default" type="STRING"/>
+                    <filter regex="^(linkedin|dbpedia|yahoo-without-node|zoominfo|linkedin-parent|dbpedia-contact|Zoominfo-parent|yahoo-node)$" source="$ctx:source">
+                        <then>
+                            <log>
+                                <property expression="get-property('query.param.data_source')" name="LogOfCsvIngetion"/>
+                            </log>
+                            <log>
+                                <property name="File Connector" value="Read the csv file and converting into json format"/>
+                            </log>
+                            <CSV.csvToJson>
+                                <headerPresent>Present</headerPresent>
+                                <valueSeparator>,</valueSeparator>
+                                <skipHeader>true</skipHeader>
+                                <csvEmptyValues>Empty</csvEmptyValues>
+                            </CSV.csvToJson>
+                            <switch source="$ctx:source">
+                                <case regex="linkedin">
+                                    <class name="com.example.LinkedInMapper"/>
+                                    <sequence key="InsertionSequence"/>
+                                </case>
+                                <case regex="linkedin-parent">
+                                    <class name="com.example.LinkedInMapper"/>
+                                    <sequence key="InsertionParentSequence"/>
+                                </case>
+                                <case regex="dbpedia">
+                                    <class name="com.example.DBPediaMapper"/>
+                                    <sequence key="InsertionSequence"/>
+                                </case>
+                                <case regex="dbpedia-contact">
+                                    <class name="com.example.DBPediaMapper"/>
+                                    <sequence key="InsertionParentSequence"/>
+                                </case>
+                                <case regex="yahoo-without-node">
+                                    <class name="com.example.YahooMapper"/>
+                                    <sequence key="InsertionSequence"/>
+                                </case>
+                                <case regex="yahoo-node">
+                                    <class name="com.example.YahooMapper"/>
+                                    <sequence key="InsertionParentSequence"/>
+                                </case>
+                                <case regex="zoominfo">
+                                    <class name="com.example.ZoomInfoClass"/>
+                                    <sequence key="InsertionSequence"/>
+                                </case>
+                                <case regex="Zoominfo-parent">
+                                    <class name="com.example.ZoomInfoClass"/>
+                                    <sequence key="InsertionParentSequence"/>
+                                </case>
+                                <default>
+                                    <payloadFactory media-type="text">
+                                        <format>No Such Source found</format>
+                                        <args/>
+                                    </payloadFactory>
+                                </default>
+                            </switch>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="text">
+                                <format>you have not provided any source of your data please provide any of these ('linkedin','dbpedia','yahoo-without-node','zoominfo','linkedin-parent','dbpedia-contact','Zoominfo-parent','yahoo-node')</format>
+                                <args/>
+                            </payloadFactory>
+                        </else>
+                    </filter>
                 </case>
-                <case regex="application/json">
-                    <log level="full">
-                        <property name="log1" value="json api started"/>
-                    </log>
-                    <class name="com.example.SplittingClass"/>
+                <default>
                     <log>
-                        <property expression="json-eval($ctx:Array1)" name="Array1"/>
+                        <property name="logOfCsvIngestion" value="No file Found"/>
                     </log>
-                    <sequence key="InsertionSequence"/>
-                    <sequence key="InsertionParentSequence"/>
-                    <sequence key="RedisSync"/>
-                </case>
-                <default/>
+                    <payloadFactory media-type="text">
+                        <format>No file Found</format>
+                        <args/>
+                    </payloadFactory>
+                </default>
             </switch>
             <log>
                 <property name="End Log" value="IngestionCsv api completed"/>

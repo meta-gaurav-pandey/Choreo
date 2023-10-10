@@ -25,7 +25,7 @@ public class SalesforceMapping extends AbstractMediator {
 		if (source.equals("salesforce")) {
 			outputArray = getSalesforceMapping(jsonPayloadToString);
 			System.out.println(outputArray.toString());
-			context.setProperty("Array", outputArray);
+			context.setProperty("Array1", outputArray);
 
 		}
 

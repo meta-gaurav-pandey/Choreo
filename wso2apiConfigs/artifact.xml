@@ -20,24 +20,6 @@
     <artifact name="ClassSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/ClassSequence.xml</file>
     </artifact>
-    <artifact name="ZoomInfoDataIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/api/ZoomInfoDataIntegration.xml</file>
-    </artifact>
-    <artifact name="ZoomInfoDataIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/ZoomInfoDataIntegration_swagger.yaml</file>
-    </artifact>
-    <artifact name="ZoomInfoDataIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/ZoomInfoDataIntegration_metadata.yaml</file>
-    </artifact>
-    <artifact name="LinkedinDataIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/api/LinkedinDataIntegration.xml</file>
-    </artifact>
-    <artifact name="LinkedinDataIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/LinkedinDataIntegration_swagger.yaml</file>
-    </artifact>
-    <artifact name="LinkedinDataIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/LinkedinDataIntegration_metadata.yaml</file>
-    </artifact>
     <artifact name="XmlIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/api/XmlIntegration.xml</file>
     </artifact>
@@ -95,40 +77,25 @@
     <artifact name="IngestionCsv_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
         <file>src/main/resources/metadata/IngestionCsv_metadata.yaml</file>
     </artifact>
-    <artifact name="DbpediaDataIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/api/DbpediaDataIntegration.xml</file>
-    </artifact>
-    <artifact name="DbpediaDataIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/DbpediaDataIntegration_swagger.yaml</file>
-    </artifact>
-    <artifact name="DbpediaDataIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/DbpediaDataIntegration_metadata.yaml</file>
-    </artifact>
-    <artifact name="ZoomInfoParent" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/ZoomInfoParent.xml</file>
-    </artifact>
-    <artifact name="DbpediaParent" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/DbpediaParent.xml</file>
-    </artifact>
-    <artifact name="LinkedInSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/LinkedInSequence.xml</file>
-    </artifact>
-    <artifact name="YahooDataIntegration" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/api/YahooDataIntegration.xml</file>
-    </artifact>
-    <artifact name="YahooDataIntegration_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/YahooDataIntegration_swagger.yaml</file>
-    </artifact>
-    <artifact name="YahooDataIntegration_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
-        <file>src/main/resources/metadata/YahooDataIntegration_metadata.yaml</file>
-    </artifact>
     <artifact name="InsertionParentSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/InsertionParentSequence.xml</file>
     </artifact>
-    <artifact name="YahooWithNodeSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/YahooWithNodeSequence.xml</file>
-    </artifact>
     <artifact name="RedisSync" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/RedisSync.xml</file>
+    </artifact>
+    <artifact name="CsvDataIngestion" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/CsvDataIngestion.xml</file>
+    </artifact>
+    <artifact name="CsvDataIngestion_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CsvDataIngestion_swagger.yaml</file>
+    </artifact>
+    <artifact name="CsvDataIngestion_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/CsvDataIngestion_metadata.yaml</file>
+    </artifact>
+    <artifact name="ChildDataSequenec" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ChildDataSequenec.xml</file>
+    </artifact>
+    <artifact name="ParentDataSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ParentDataSequence.xml</file>
     </artifact>
 </artifacts>
