@@ -14,8 +14,24 @@
                         <property expression="json-eval($ctx:Array1)" name="Array1"/>
                     </log>
                     <sequence key="InsertionSequence"/>
+                    <property expression="$body" name="InsertionSequence" scope="default" type="STRING"/>
                     <sequence key="InsertionParentSequence"/>
+                    <property expression="$body" name="InsertionParentSequence" scope="default" type="STRING"/>
                     <sequence key="RedisSync"/>
+                    <property expression="$body" name="RedisSync" scope="default" type="STRING"/>
+                    <payloadFactory media-type="json">
+                        <format>{&#xd;
+"InsertionSequencePayload":"$1",&#xd;
+"InsertionParentSequence":"$2",&#xd;
+"RedisSync":"$3"&#xd;
+&#xd;
+}</format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('InsertionSequence')"/>
+                            <arg evaluator="xml" expression="get-property('InsertionParentSequence')"/>
+                            <arg evaluator="xml" expression="get-property('RedisSync')"/>
+                        </args>
+                    </payloadFactory>
                 </case>
                 <default>
                     <log>
