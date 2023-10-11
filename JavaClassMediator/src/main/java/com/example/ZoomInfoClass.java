@@ -1,5 +1,7 @@
 package com.example;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -16,6 +18,9 @@ public class ZoomInfoClass extends AbstractMediator {
 
 	public boolean mediate(MessageContext context) {
 		String source = (String) context.getProperty("source");
+		String isFull = (String) context.getProperty("isFull_Load");
+		String jsonPayloadToString = JsonUtil
+				.jsonPayloadToString(((Axis2MessageContext) context).getAxis2MessageContext());
 		System.out.println("In zoominfo class");
 		System.out.println(source);
 		// TODO Implement your mediation logic here
@@ -25,6 +30,9 @@ public class ZoomInfoClass extends AbstractMediator {
 		} else if (source.equals("Zoominfo-parent")) {
 			JSONArray result = parentZoomInfo(context);
 			context.setProperty("Array2", result.toString());
+			if(isFull.equals("No")) {
+			context.setProperty("parentData", parentNameData("parentName",jsonPayloadToString));
+			}
 		}
 		return true;
 
@@ -101,9 +109,7 @@ public class ZoomInfoClass extends AbstractMediator {
 		// JSONObject requestBody=XML.toJSONObject(payload);
 
 		JSONArray jsonArray = new JSONArray(jsonPayloadToString);
-		// String[] standardFields={"Company Name","parentName"};
 
-		// List standardFieldsList = Arrays.asList(standardFields);
 		JSONArray outputJsonArray = new JSONArray();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -111,7 +117,7 @@ public class ZoomInfoClass extends AbstractMediator {
 			// JSONArray sicArray=new JSONArray();
 			// JSONArray naicsArray=new JSONArray();
 //			JSONArray custompropertiesArray=new JSONArray();
-			System.out.println(jsonObject.toString());
+	//		System.out.println(jsonObject.toString());
 			outputObject.put("Company Name", checkKey("Company Name", jsonObject));
 			outputObject.put("parentName", checkKey("parentName", jsonObject));
 			outputObject.put("source", "zoominfo-parent");
@@ -134,6 +140,55 @@ public class ZoomInfoClass extends AbstractMediator {
 		if (jsonObject.has(key)) {
 			return jsonObject.getString(key);
 		} else
+			return "";
+	}
+	
+	// Creating the Array for redis sync 
+	
+	public JSONArray parentNameData(String key,String InputjsonObject) {
+		JSONArray jsonArray = new JSONArray(InputjsonObject);
+		JSONArray outputJsonArray = new JSONArray();
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			try {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				if (!validatekey(key, jsonObject).equals("")) {
+
+					outputJsonArray.put("https://company.org/resource/"
+							.concat(getEncodedString(validatekey(key, jsonObject))));
+
+				}
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// System.out.println(outputJsonArray.toString());
+		return outputJsonArray;
+
+	}
+
+	public static String validatekey(String key, JSONObject jsonObject) {
+
+		String result;
+		if (jsonObject.has(key)) {
+			if (!jsonObject.isNull(key)) {
+				result = jsonObject.getString(key);
+			} else {
+				result = "";
+
+			}
+		} else {
+			result = "";
+
+		}
+		return result;
+	}
+
+	public static String getEncodedString(String urlText) throws UnsupportedEncodingException {
+		if (urlText != null)
+			return URLEncoder.encode(urlText, "UTF-8").replace("+", "%20");
+		else
 			return "";
 	}
 }

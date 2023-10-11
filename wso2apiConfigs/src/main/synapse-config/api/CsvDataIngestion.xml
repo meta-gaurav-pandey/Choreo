@@ -8,32 +8,84 @@
             <property expression="get-property('query.param.data_source')" name="source" scope="default" type="STRING"/>
             <filter regex="^(linkedin|dbpedia|yahoo-without-node|zoominfo)$" source="$ctx:source">
                 <then>
-                    <log>
-                        <property expression="get-property('query.param.data_source')" name="LogOfCsvIngetion"/>
-                    </log>
-                    <property name="DownloadPath" scope="default" type="STRING" value="/home/wso2carbon/wso2mi-4.1.0"/>
-                    <switch source="get-property('query.param.data_source')">
-                        <case regex="linkedin">
-                            <sequence key="ChildDataSequenec"/>
-                            <property name="source" scope="default" type="STRING" value="linkedin-parent"/>
-                            <sequence key="ParentDataSequence"/>
-                        </case>
-                        <case regex="dbpedia">
-                            <sequence key="ChildDataSequenec"/>
-                            <property name="source" scope="default" type="STRING" value="dbpedia-contact"/>
-                            <sequence key="ParentDataSequence"/>
-                        </case>
-                        <case regex="zoominfo">
-                            <sequence key="ChildDataSequenec"/>
-                            <property name="source" scope="default" type="STRING" value="Zoominfo-parent"/>
-                            <sequence key="ParentDataSequence"/>
-                        </case>
-                        <default>
-                            <sequence key="ChildDataSequenec"/>
-                            <property name="source" scope="default" type="STRING" value="yahoo-node"/>
-                            <sequence key="ParentDataSequence"/>
-                        </default>
-                    </switch>
+                    <filter regex="^(lYes|No)$" source="get-property('query.param.isFull_Load')">
+                        <then>
+                            <log>
+                                <property expression="get-property('query.param.data_source')" name="LogOfCsvIngetion"/>
+                            </log>
+                            <property expression="get-property('query.param.isFull_Load')" name="isFull_Load" scope="default" type="STRING"/>
+                            <property name="DownloadPath" scope="default" type="STRING" value="/home/wso2carbon/wso2mi-4.1.0"/>
+                            <switch source="get-property('query.param.data_source')">
+                                <case regex="linkedin">
+                                    <sequence key="ChildDataSequenec"/>
+                                    <property name="source" scope="default" type="STRING" value="linkedin-parent"/>
+                                    <sequence key="ParentDataSequence"/>
+                                </case>
+                                <case regex="dbpedia">
+                                    <sequence key="ChildDataSequenec"/>
+                                    <property name="source" scope="default" type="STRING" value="dbpedia-contact"/>
+                                    <sequence key="ParentDataSequence"/>
+                                </case>
+                                <case regex="zoominfo">
+                                    <sequence key="ChildDataSequenec"/>
+                                    <property name="source" scope="default" type="STRING" value="Zoominfo-parent"/>
+                                    <sequence key="ParentDataSequence"/>
+                                </case>
+                                <default>
+                                    <sequence key="ChildDataSequenec"/>
+                                    <property name="source" scope="default" type="STRING" value="yahoo-node"/>
+                                    <sequence key="ParentDataSequence"/>
+                                </default>
+                            </switch>
+                            <switch source="get-property('query.param.isFull_Load')">
+                                <case regex="No">
+                                    <log separator="&lt;-------------->">
+                                        <property name="CsvDataIntegration" value="The given file is not for full load"/>
+                                        <property name="CsvDataIntegration" value="Calling redis Sync Api"/>
+                                    </log>
+                                    <sequence key="RedisSync"/>
+                                    <property expression="$ctx:SyncRedisObject" name="payload3" scope="default" type="STRING"/>
+                                    <payloadFactory media-type="json">
+                                        <format> {&#xd;
+"childFilePayload":"$1",&#xd;
+"parentFilePayload":"$2",&#xd;
+"SyncRedisPayload":"$3"&#xd;
+}</format>
+                                        <args>
+                                            <arg evaluator="xml" expression="get-property('payload1')"/>
+                                            <arg evaluator="xml" expression="get-property('payload2')"/>
+                                            <arg evaluator="xml" expression="get-property('payload3')"/>
+                                        </args>
+                                    </payloadFactory>
+                                </case>
+                                <default>
+                                    <log>
+                                        <property name="CsvDataIntegration" value="The given file is for full load"/>
+                                    </log>
+                                    <payloadFactory media-type="json">
+                                        <format>
+                {
+"childFilePayload":"$1",
+"parentFilePayload":"$2"
+}
+</format>
+                                        <args>
+                                            <arg evaluator="xml" expression="get-property('payload1')"/>
+                                            <arg evaluator="xml" expression="get-property('payload2')"/>
+                                        </args>
+                                    </payloadFactory>
+                                </default>
+                            </switch>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="text">
+                                <format>Please Provide Query Param IsFull_Load value as Yes or No&#xd;
+</format>
+                                <args/>
+                            </payloadFactory>
+                            <respond/>
+                        </else>
+                    </filter>
                 </then>
                 <else>
                     <payloadFactory media-type="text">
@@ -43,18 +95,6 @@
                     <respond/>
                 </else>
             </filter>
-            <payloadFactory media-type="json">
-                <format>
-                {
-"childFilePayload":"$1",
-"parentFilePayload":"$2"
-}
-</format>
-                <args>
-                    <arg evaluator="xml" expression="get-property('payload1')"/>
-                    <arg evaluator="xml" expression="get-property('payload2')"/>
-                </args>
-            </payloadFactory>
             <respond/>
         </inSequence>
         <outSequence/>

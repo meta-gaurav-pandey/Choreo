@@ -4,12 +4,6 @@
         <property name="Log-redisSync" value="Started"/>
     </log>
     <class name="com.example.RedisSyncClass"/>
-    <payloadFactory media-type="json">
-        <format>$1</format>
-        <args>
-            <arg evaluator="json" expression="$ctx:SyncRedisObject"/>
-        </args>
-    </payloadFactory>
     <log>
         <property name="Log-redisSync" value="End"/>
     </log>

@@ -42,11 +42,11 @@ public class JavaMediatorClass extends AbstractMediator {
 			} else if (ObjectType.equals("DataEvent")) {
 				System.out.println("DataEvent" + payload);
 				json = convertEventData(payload);
-				context.setProperty("Array", json.toString());
+				context.setProperty("Array1", json.toString());
 			} else if (ObjectType.equals("ApiData")) {
 				System.out.println("ApiData" + payload);
 				json = convertApiData(payload);
-				context.setProperty("Array", json.toString());
+				context.setProperty("Array1", json.toString());
 			} else {
 				throw new Exception("The typeObject is null");
 			}

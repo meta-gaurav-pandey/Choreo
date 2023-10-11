@@ -1,5 +1,7 @@
 package com.example;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -18,6 +20,7 @@ public class YahooMapper extends AbstractMediator {
 		String jsonPayloadToString = JsonUtil
 				.jsonPayloadToString(((Axis2MessageContext) context)
 				.getAxis2MessageContext());
+		String isFull = (String) context.getProperty("isFull_Load");
 		//JSONObject requestBody=XML.toJSONObject(payload);
 		String source = (String) context.getProperty("source");
 		System.out.println("source");
@@ -27,6 +30,10 @@ public class YahooMapper extends AbstractMediator {
 			outputArray=getYahooNodeMappingJson(jsonPayloadToString);
 			context.setProperty("Array2", outputArray);
 			System.out.println("Yahoo WithNode completed");
+			if(isFull.equals("No")) {
+			context.setProperty("parentData", parentNameData("parentName",jsonPayloadToString));
+			}
+			
 		}
 		else if(source.equals("yahoo-without-node")) {
 			System.out.println("yahoo-without-node");
@@ -149,4 +156,39 @@ public String validatekey(String key,JSONObject jsonObject) {
 			}
 			return result;
 		}
+
+
+// Creating the Array for redis sync 
+
+public JSONArray parentNameData(String key,String InputjsonObject) {
+	JSONArray jsonArray = new JSONArray(InputjsonObject);
+	JSONArray outputJsonArray = new JSONArray();
+
+	for (int i = 0; i < jsonArray.length(); i++) {
+		try {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			if (!validatekey(key, jsonObject).equals("")) {
+
+				outputJsonArray.put("https://company.org/resource/"
+						.concat(getEncodedString(validatekey(key, jsonObject))));
+
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	// System.out.println(outputJsonArray.toString());
+	return outputJsonArray;
+
+}
+
+
+
+public static String getEncodedString(String urlText) throws UnsupportedEncodingException {
+	if (urlText != null)
+		return URLEncoder.encode(urlText, "UTF-8").replace("+", "%20");
+	else
+		return "";
+}
 }

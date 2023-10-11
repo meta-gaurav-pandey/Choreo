@@ -1,5 +1,7 @@
 package com.example;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -17,13 +19,20 @@ public class DBPediaMapper extends AbstractMediator {
 		String jsonPayloadToString = JsonUtil
 				.jsonPayloadToString(((Axis2MessageContext) context)
 				.getAxis2MessageContext());
+		String isFull = (String) context.getProperty("isFull_Load");
 		//JSONObject requestBody=XML.toJSONObject(payload);
 		String source = (String) context.getProperty("source");
 		//System.out.println(jsonPayloadToString);
+		System.out.println("isFull_load :"+isFull);
 		String outputArray="";
 		if(source.equals("dbpedia")) {
 			outputArray=getDBPediaMappingJson(jsonPayloadToString);
 			context.setProperty("Array1", outputArray);
+			if(isFull.equals("No")) {
+			context.setProperty("parentData", parentNameData("foafName",jsonPayloadToString));
+			//System.out.println("parentData  "+ parentNameData("foafName",jsonPayloadToString));
+			}
+			
 
 		}
 		
@@ -146,5 +155,53 @@ public class DBPediaMapper extends AbstractMediator {
 		}
 		else
 		return "";
+	}
+	// Creating the Array for redis sync 
+	
+	public JSONArray parentNameData(String key,String InputjsonObject) {
+		JSONArray jsonArray = new JSONArray(InputjsonObject);
+		JSONArray outputJsonArray = new JSONArray();
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			try {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				if (!validatekey(key, jsonObject).equals("")) {
+
+					outputJsonArray.put("https://company.org/resource/"
+							.concat(getEncodedString(validatekey(key, jsonObject))));
+
+				}
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// System.out.println(outputJsonArray.toString());
+		return outputJsonArray;
+
+	}
+
+	public static String validatekey(String key, JSONObject jsonObject) {
+
+		String result;
+		if (jsonObject.has(key)) {
+			if (!jsonObject.isNull(key)) {
+				result = jsonObject.getString(key);
+			} else {
+				result = "";
+
+			}
+		} else {
+			result = "";
+
+		}
+		return result;
+	}
+
+	public static String getEncodedString(String urlText) throws UnsupportedEncodingException {
+		if (urlText != null)
+			return URLEncoder.encode(urlText, "UTF-8").replace("+", "%20");
+		else
+			return "";
 	}
 }

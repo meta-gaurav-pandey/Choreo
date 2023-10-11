@@ -22,10 +22,17 @@ public class RedisSyncClass extends AbstractMediator{
 	 try {
 		 Object parentArray=null;
 			parentArray =  context.getProperty("parentData");
+			if(parentArray!=null) {
+				
+			JSONArray parent=(JSONArray) parentArray;
+		     if(parent.length()>0) {
+		
+			
 		 //JSONArray parentArray=new JSONArray(parentData);
 		 
     	 String line, url;
          url = "https://api.zeniagraph.ai/graphql";
+    	//  url = "https://localhost:8089/graphql";
          CloseableHttpClient client = null;
          CloseableHttpResponse response = null;
 
@@ -76,10 +83,22 @@ public class RedisSyncClass extends AbstractMediator{
        
        
 		context.setProperty("SyncRedisObject", builder.toString());
-		
-
+			}
+			else {
+				String result="Either no data present for parent or the file is Missing";
+			//	JSONObject SyncRedisObject = new JSONObject(result.toString());
+				context.setProperty("SyncRedisObject",result.toString());
+			}
+		     
+			}
+			else {
+				String result="Either no data present for parent or the file is Missing";
+			//	JSONObject SyncRedisObject = new JSONObject(result.toString());
+				context.setProperty("SyncRedisObject",result.toString());
+			}
     } catch (IOException e) {
         e.printStackTrace();
+        context.setProperty("SyncRedisObject",e.getMessage());
     }
 	return true;
 	 }
