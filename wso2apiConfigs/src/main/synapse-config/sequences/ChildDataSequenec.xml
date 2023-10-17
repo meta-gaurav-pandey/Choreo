@@ -48,7 +48,7 @@
                         <case regex="dbpedia">
                             <class name="com.example.DBPediaMapper"/>
                         </case>
-                        <case regex="yahoo">
+                        <case regex="yahoo-without-node">
                             <class name="com.example.YahooMapper"/>
                         </case>
                         <default>

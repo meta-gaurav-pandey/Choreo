@@ -8,7 +8,7 @@
             <property expression="get-property('query.param.data_source')" name="source" scope="default" type="STRING"/>
             <filter regex="^(linkedin|dbpedia|yahoo-without-node|zoominfo)$" source="$ctx:source">
                 <then>
-                    <filter regex="^(lYes|No)$" source="get-property('query.param.isFull_Load')">
+                    <filter regex="^(Yes|No)$" source="get-property('query.param.isFull_Load')">
                         <then>
                             <log>
                                 <property expression="get-property('query.param.data_source')" name="LogOfCsvIngetion"/>
