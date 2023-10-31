@@ -87,7 +87,7 @@ public class SplittingClass extends AbstractMediator {
 		outputObject.put("type", validatekey("company_type", jsonObject));
 		outputObject.put("specialities", getSpecialtiesArray(validatekey("specialities", jsonObject)));
 		if (jsonObject.has("custom_properties"))
-			outputObject.put("custom_properties", jsonObject.getJSONArray("custom_properties"));
+			outputObject.put("custom_properties", getCustomProperties(jsonObject.getJSONArray("custom_properties")));
 		if (jsonObject.has("employer"))
 			outputObject.put("employer", jsonObject.getJSONArray("employer"));
 
@@ -132,7 +132,7 @@ public class SplittingClass extends AbstractMediator {
 		outputObject.put("founded", validatekey("founded", jsonObject));
 		outputObject.put("description", validatekey("description", jsonObject));
 		outputObject.put("company_type", validatekey("company_type", jsonObject));
-		outputObject.put("custom_properties", jsonObject.getJSONArray("custom_properties"));
+		outputObject.put("custom_properties", getCustomProperties(jsonObject.getJSONArray("custom_properties")));
 		outputObject.put("foafName", jsonObject.getString("parent_name"));
 		JSONArray inputEmployeeArray = new JSONArray();
 		inputEmployeeArray = jsonObject.getJSONArray("employer");
@@ -265,7 +265,7 @@ public class SplittingClass extends AbstractMediator {
 		outputJsonObject.put("quarterly_growth", validatekey("quarterly_growth", jsonObject));
 		outputJsonObject.put("parent_name", validatekey("parent_name", jsonObject));
 		if (jsonObject.has("custom_properties") && jsonObject.getJSONArray("custom_properties").length() > 0) {
-			outputJsonObject.put("custom_properties", jsonObject.getJSONArray("custom_properties"));
+			outputJsonObject.put("custom_properties", getCustomProperties(jsonObject.getJSONArray("custom_properties")));
 		}
 
 		outputJsonObject.put("source", "others");
@@ -353,5 +353,20 @@ public class SplittingClass extends AbstractMediator {
 		return result;
 	}
 	
+	public JSONArray getCustomProperties(JSONArray jsonArray) {
+		JSONArray CustomArray=new JSONArray();
+		if(jsonArray.length()>0) {
+			
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject resultObj=new JSONObject();
+				JSONObject customObj = jsonArray.getJSONObject(i);
+				resultObj.put("name", validatekey("name", customObj));
+				resultObj.put("value", validatekey("value", customObj));
+				CustomArray.put(resultObj);
+			}
+		}
+		
+		return CustomArray;
+	}
 	
 }
