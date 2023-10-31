@@ -341,7 +341,7 @@ public class SplittingClass extends AbstractMediator {
 		String result;
 		if (jsonObject.has(key)) {
 			if (!jsonObject.isNull(key)) {
-				result = jsonObject.getString(key);
+				result = (String) jsonObject.get(key).toString();
 			} else {
 				result = "";
 
