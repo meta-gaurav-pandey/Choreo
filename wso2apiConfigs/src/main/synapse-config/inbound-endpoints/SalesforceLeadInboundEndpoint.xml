@@ -13,7 +13,7 @@
         <parameter name="connection.salesforce.salesforceObject">/topic/Leads</parameter>
         <parameter name="connection.salesforce.loginEndpoint">https://login.salesforce.com</parameter>
         <parameter name="connection.salesforce.userName">abdul.wahab@zeniagraph.com</parameter>
-        <parameter name="connection.salesforce.password">Quid@123rHFeThoYrzp181aNibelZuGZq</parameter>
+        <parameter name="connection.salesforce.password">Meta@123lvBCtaDCVYA05gKCSJGuwpFsX</parameter>
         <parameter name="connection.salesforce.waitTime">5000</parameter>
         <parameter name="connection.salesforce.connectionTimeout">20000</parameter>
         <parameter name="connection.salesforce.soapApiVersion">22.0</parameter>

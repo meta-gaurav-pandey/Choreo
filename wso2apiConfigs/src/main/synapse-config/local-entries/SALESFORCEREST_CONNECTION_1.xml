@@ -4,12 +4,12 @@
         <hostName>https://login.salesforce.com</hostName>
         <connectionType>init</connectionType>
         <timeout>3000</timeout>
-        <password>Quid@123rHFeThoYrzp181aNibelZuGZq</password>
+        <password>Meta@123lvBCtaDCVYA05gKCSJGuwpFsX</password>
         <apiVersion>v57.0</apiVersion>
         <apiUrl>https://metacubesoftware-1f-dev-ed.develop.my.salesforce.com</apiUrl>
         <clientSecret>62E5CEF92945778999B0BAC007A489110A7DEDC93A793E9B90FF1A9F3D8B4F66</clientSecret>
         <clientId>3MVG9wt4IL4O5wvLA9GK2AK2BfNDe68gUQEF50ZTyjKzTLFphdf.OhTfZlZ2rfAS4HmdxWrN3QHSouSTAOSxC</clientId>
-        <accessToken>00D5i00000DWMXN!AQUAQOzQo5VI0.M15yRSEKBAeb44XR2pW1.eSvT3.5chC6aahCCX3Oh3R.AtMd_.j9DXKXqBRUeAVdO9NG3nWnUfaBuxmS9_</accessToken>
+        <accessToken>00D5i00000DWMXN!AQUAQF0y7FQ38Bn7JC6eWvv6coB3z69hhau6hxUMDeLJbwrvbAf0ZXj5UmYUyhMuTdAn8P4n7AdK_.2PIGJDCfYrBw_HY9W3</accessToken>
         <name>SALESFORCEREST_CONNECTION_1</name>
         <username>abdul.wahab@zeniagraph.com</username>
     </salesforcerest.init>
