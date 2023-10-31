@@ -85,6 +85,7 @@ public class SplittingClass extends AbstractMediator {
 		outputObject.put("social_url", validatekey("social_url", jsonObject));
 		outputObject.put("founded", validatekey("founded", jsonObject));
 		outputObject.put("type", validatekey("company_type", jsonObject));
+		outputObject.put("position", validatekey("occupation", jsonObject));
 		outputObject.put("specialities", getSpecialtiesArray(validatekey("specialities", jsonObject)));
 		if (jsonObject.has("custom_properties"))
 			outputObject.put("custom_properties", getCustomProperties(jsonObject.getJSONArray("custom_properties")));
