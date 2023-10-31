@@ -85,12 +85,11 @@ public class SplittingClass extends AbstractMediator {
 		outputObject.put("social_url", validatekey("social_url", jsonObject));
 		outputObject.put("founded", validatekey("founded", jsonObject));
 		outputObject.put("type", validatekey("company_type", jsonObject));
-		outputObject.put("position", validatekey("occupation", jsonObject));
 		outputObject.put("specialities", getSpecialtiesArray(validatekey("specialities", jsonObject)));
 		if (jsonObject.has("custom_properties"))
 			outputObject.put("custom_properties", getCustomProperties(jsonObject.getJSONArray("custom_properties")));
 		if (jsonObject.has("employer"))
-			outputObject.put("employer", jsonObject.getJSONArray("employer"));
+			outputObject.put("employer", getEmployer(jsonObject.getJSONArray("employer")));
 
 		outputJsonArray.put(outputObject);
 
@@ -368,6 +367,23 @@ public class SplittingClass extends AbstractMediator {
 		}
 		
 		return CustomArray;
+	}
+	public JSONArray getEmployer(JSONArray jsonArray) {
+		JSONArray EmpArray=new JSONArray();
+		if(jsonArray.length()>0) {
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject resultObj=new JSONObject();
+				JSONObject EmpObj = jsonArray.getJSONObject(i);
+				resultObj.put("full_name", validatekey("full_name", EmpObj));
+				resultObj.put("description", validatekey("description", EmpObj));
+				resultObj.put("social_url", validatekey("social_url", EmpObj));
+				resultObj.put("position", validatekey("occupation", EmpObj));
+				
+				EmpArray.put(resultObj);
+			}
+		}
+		
+		return EmpArray;
 	}
 	
 }
