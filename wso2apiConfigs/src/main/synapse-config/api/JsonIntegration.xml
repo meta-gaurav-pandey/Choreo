@@ -36,6 +36,12 @@
                             <arg evaluator="xml" expression="get-property('RedisSync')"/>
                         </args>
                     </payloadFactory>
+                    <log>
+                        <property expression="get-property('InsertionSequence')" name="InsertionSequence"/>
+                        <property expression="get-property('InsertionParentSequence')" name="InsertionParentSequence"/>
+                        <property expression="get-property('InsertParentData')" name="InsertParentData"/>
+                        <property expression="get-property('RedisSync')" name="RedisSync"/>
+                    </log>
                 </case>
                 <default>
                     <log>
