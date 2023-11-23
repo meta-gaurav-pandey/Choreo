@@ -41,20 +41,28 @@
                                 <case regex="No">
                                     <log separator="&lt;-------------->">
                                         <property name="CsvDataIntegration" value="The given file is not for full load"/>
+                                        <property name="CsvDataIntegration" value="Calling InsertDataOnParent Api"/>
+                                    </log>
+                                    <sequence key="InsertDataOnParent"/>
+                                    <property expression="$ctx:insertParentDataObject" name="payload3" scope="default" type="STRING"/>
+                                    <log separator="&lt;-------------->">
+                                        <property name="CsvDataIntegration" value="The given file is not for full load"/>
                                         <property name="CsvDataIntegration" value="Calling redis Sync Api"/>
                                     </log>
                                     <sequence key="RedisSync"/>
-                                    <property expression="$ctx:SyncRedisObject" name="payload3" scope="default" type="STRING"/>
+                                    <property expression="$ctx:SyncRedisObject" name="payload4" scope="default" type="STRING"/>
                                     <payloadFactory media-type="json">
                                         <format> {&#xd;
 "childFilePayload":"$1",&#xd;
 "parentFilePayload":"$2",&#xd;
-"SyncRedisPayload":"$3"&#xd;
+"InsertDataOnParentPayload":"$3"&#xd;
+"SyncRedisPayload":"$4"&#xd;
 }</format>
                                         <args>
                                             <arg evaluator="xml" expression="get-property('payload1')"/>
                                             <arg evaluator="xml" expression="get-property('payload2')"/>
                                             <arg evaluator="xml" expression="get-property('payload3')"/>
+                                            <arg evaluator="xml" expression="get-property('payload4')"/>
                                         </args>
                                     </payloadFactory>
                                 </case>

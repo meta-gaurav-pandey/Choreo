@@ -15,32 +15,24 @@
   <description>wso2apiCompositeExporter</description>
   <properties>
     <com.example.lib_._msazurestorage-connector>capp/EnterpriseServiceBus</com.example.lib_._msazurestorage-connector>
-    <com.example.sequence_._RedisSync>capp/EnterpriseServiceBus</com.example.sequence_._RedisSync>
-    <com.example.sequence_._DataBaseSchedulerSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSchedulerSequence>
-    <com.example.metadata_._XmlIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_swagger>
-    <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
-    <com.example.api_._JsonIntegration>capp/EnterpriseServiceBus</com.example.api_._JsonIntegration>
-    <com.example.lib_._CSV-connector>capp/EnterpriseServiceBus</com.example.lib_._CSV-connector>
-    <com.example.local-entry_._FILE_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._FILE_CONNECTION_1>
-    <com.example.local-entry_._SALESFORCEREST_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._SALESFORCEREST_CONNECTION_1>
-    <com.example.task_._DataBaseScheduler>capp/EnterpriseServiceBus</com.example.task_._DataBaseScheduler>
-    <com.example_._JavaClassMediator>capp/EnterpriseServiceBus</com.example_._JavaClassMediator>
-    <com.example.lib_._file-connector>capp/EnterpriseServiceBus</com.example.lib_._file-connector>
-    <com.example.sequence_._DataBaseSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSequence>
-    <com.example.sequence_._SalesforceSequence>capp/EnterpriseServiceBus</com.example.sequence_._SalesforceSequence>
-    <com.example.api_._XmlIntegration>capp/EnterpriseServiceBus</com.example.api_._XmlIntegration>
-    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
     <com.example.api_._SalesforceApi>capp/EnterpriseServiceBus</com.example.api_._SalesforceApi>
     <com.example.dataservice_._RDBMSdataService>capp/DataServicesServer</com.example.dataservice_._RDBMSdataService>
+    <com.example.sequence_._RedisSync>capp/EnterpriseServiceBus</com.example.sequence_._RedisSync>
+    <com.example.sequence_._DataBaseSchedulerSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSchedulerSequence>
     <com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._SalesforceLeadInboundEndpoint>
     <com.example.sequence_._ParentDataSequence>capp/EnterpriseServiceBus</com.example.sequence_._ParentDataSequence>
     <com.example.sequence_._InsertionParentSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionParentSequence>
     <com.example.metadata_._SalesforceApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_swagger>
+    <com.example.metadata_._XmlIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_swagger>
     <com.example.lib_._salesforcerest-connector>capp/EnterpriseServiceBus</com.example.lib_._salesforcerest-connector>
     <com.example.inbound-endpoint_._DatabaseInboundEndpoint>capp/EnterpriseServiceBus</com.example.inbound-endpoint_._DatabaseInboundEndpoint>
+    <com.example.sequence_._ErrorSequence>capp/EnterpriseServiceBus</com.example.sequence_._ErrorSequence>
     <com.example.api_._CsvDataIngestion>capp/EnterpriseServiceBus</com.example.api_._CsvDataIngestion>
     <com.example.metadata_._IngestionCsv_metadata>capp/EnterpriseServiceBus</com.example.metadata_._IngestionCsv_metadata>
+    <com.example.api_._JsonIntegration>capp/EnterpriseServiceBus</com.example.api_._JsonIntegration>
+    <com.example.lib_._CSV-connector>capp/EnterpriseServiceBus</com.example.lib_._CSV-connector>
     <com.example.metadata_._SalesforceApi_metadata>capp/EnterpriseServiceBus</com.example.metadata_._SalesforceApi_metadata>
+    <com.example.local-entry_._FILE_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._FILE_CONNECTION_1>
     <com.example.sequence_._ClassSequence>capp/EnterpriseServiceBus</com.example.sequence_._ClassSequence>
     <com.example.metadata_._MainApi_swagger>capp/EnterpriseServiceBus</com.example.metadata_._MainApi_swagger>
     <com.example.api_._MainApi>capp/EnterpriseServiceBus</com.example.api_._MainApi>
@@ -49,9 +41,18 @@
     <com.example.metadata_._XmlIntegration_metadata>capp/EnterpriseServiceBus</com.example.metadata_._XmlIntegration_metadata>
     <com.example.sequence_._InsertionSequence>capp/EnterpriseServiceBus</com.example.sequence_._InsertionSequence>
     <com.example.sequence_._ChildDataSequenec>capp/EnterpriseServiceBus</com.example.sequence_._ChildDataSequenec>
+    <com.example.local-entry_._SALESFORCEREST_CONNECTION_1>capp/EnterpriseServiceBus</com.example.local-entry_._SALESFORCEREST_CONNECTION_1>
+    <com.example.task_._DataBaseScheduler>capp/EnterpriseServiceBus</com.example.task_._DataBaseScheduler>
+    <com.example_._JavaClassMediator>capp/EnterpriseServiceBus</com.example_._JavaClassMediator>
+    <com.example.lib_._file-connector>capp/EnterpriseServiceBus</com.example.lib_._file-connector>
     <com.example.metadata_._CsvDataIngestion_metadata>capp/EnterpriseServiceBus</com.example.metadata_._CsvDataIngestion_metadata>
     <com.example.metadata_._CsvDataIngestion_swagger>capp/EnterpriseServiceBus</com.example.metadata_._CsvDataIngestion_swagger>
+    <com.example.sequence_._DataBaseSequence>capp/EnterpriseServiceBus</com.example.sequence_._DataBaseSequence>
+    <com.example.sequence_._SalesforceSequence>capp/EnterpriseServiceBus</com.example.sequence_._SalesforceSequence>
+    <com.example.api_._XmlIntegration>capp/EnterpriseServiceBus</com.example.api_._XmlIntegration>
+    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
     <com.example.api_._IngestionCsv>capp/EnterpriseServiceBus</com.example.api_._IngestionCsv>
+    <com.example.sequence_._InsertDataOnParent>capp/EnterpriseServiceBus</com.example.sequence_._InsertDataOnParent>
     <com.example.metadata_._JsonIntegration_swagger>capp/EnterpriseServiceBus</com.example.metadata_._JsonIntegration_swagger>
   </properties>
   <dependencies>
@@ -60,89 +61,6 @@
       <artifactId>msazurestorage-connector</artifactId>
       <version>1.0.5</version>
       <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.sequence</groupId>
-      <artifactId>RedisSync</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.sequence</groupId>
-      <artifactId>DataBaseSchedulerSequence</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.metadata</groupId>
-      <artifactId>XmlIntegration_swagger</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.sequence</groupId>
-      <artifactId>ErrorSequence</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.api</groupId>
-      <artifactId>JsonIntegration</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.lib</groupId>
-      <artifactId>CSV-connector</artifactId>
-      <version>1.0.4</version>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.local-entry</groupId>
-      <artifactId>FILE_CONNECTION_1</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.local-entry</groupId>
-      <artifactId>SALESFORCEREST_CONNECTION_1</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.task</groupId>
-      <artifactId>DataBaseScheduler</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example</groupId>
-      <artifactId>JavaClassMediator</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.example.lib</groupId>
-      <artifactId>file-connector</artifactId>
-      <version>4.0.14</version>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.sequence</groupId>
-      <artifactId>DataBaseSequence</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.sequence</groupId>
-      <artifactId>SalesforceSequence</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.api</groupId>
-      <artifactId>XmlIntegration</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.api</groupId>
@@ -155,6 +73,18 @@
       <artifactId>RDBMSdataService</artifactId>
       <version>1.0.0</version>
       <type>dbs</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>RedisSync</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>DataBaseSchedulerSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.inbound-endpoint</groupId>
@@ -181,6 +111,12 @@
       <type>yaml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.metadata</groupId>
+      <artifactId>XmlIntegration_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.lib</groupId>
       <artifactId>salesforcerest-connector</artifactId>
       <version>1.1.3</version>
@@ -189,6 +125,12 @@
     <dependency>
       <groupId>com.example.inbound-endpoint</groupId>
       <artifactId>DatabaseInboundEndpoint</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>ErrorSequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -205,10 +147,28 @@
       <type>yaml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.api</groupId>
+      <artifactId>JsonIntegration</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.lib</groupId>
+      <artifactId>CSV-connector</artifactId>
+      <version>1.0.4</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.metadata</groupId>
       <artifactId>SalesforceApi_metadata</artifactId>
       <version>1.0.0</version>
       <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.local-entry</groupId>
+      <artifactId>FILE_CONNECTION_1</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.sequence</groupId>
@@ -259,6 +219,29 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.local-entry</groupId>
+      <artifactId>SALESFORCEREST_CONNECTION_1</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.task</groupId>
+      <artifactId>DataBaseScheduler</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>JavaClassMediator</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.example.lib</groupId>
+      <artifactId>file-connector</artifactId>
+      <version>4.0.14</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.metadata</groupId>
       <artifactId>CsvDataIngestion_metadata</artifactId>
       <version>1.0.0</version>
@@ -271,8 +254,32 @@
       <type>yaml</type>
     </dependency>
     <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>DataBaseSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>SalesforceSequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.api</groupId>
+      <artifactId>XmlIntegration</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>com.example.api</groupId>
       <artifactId>IngestionCsv</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>InsertDataOnParent</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>

@@ -17,18 +17,22 @@
                     <property expression="$body" name="InsertionSequence" scope="default" type="STRING"/>
                     <sequence key="InsertionParentSequence"/>
                     <property expression="$body" name="InsertionParentSequence" scope="default" type="STRING"/>
+                    <sequence key="InsertDataOnParent"/>
+                    <property expression="$ctx:insertParentDataObject" name="InsertParentData" scope="default" type="STRING"/>
                     <sequence key="RedisSync"/>
                     <property expression="$ctx:SyncRedisObject" name="RedisSync" scope="default" type="STRING"/>
                     <payloadFactory media-type="json">
                         <format>{&#xd;
 "InsertionSequencePayload":"$1",&#xd;
 "InsertionParentSequence":"$2",&#xd;
-"RedisSync":"$3"&#xd;
+"InsertParentData":"$3"&#xd;
+"RedisSync":"$4"&#xd;
 &#xd;
 }</format>
                         <args>
                             <arg evaluator="xml" expression="get-property('InsertionSequence')"/>
                             <arg evaluator="xml" expression="get-property('InsertionParentSequence')"/>
+                            <arg evaluator="xml" expression="get-property('InsertParentData')"/>
                             <arg evaluator="xml" expression="get-property('RedisSync')"/>
                         </args>
                     </payloadFactory>

@@ -116,6 +116,9 @@ public class SplittingClass extends AbstractMediator {
 		outputParentObject.put("Comp_Name", source[1]);
 		outputParentObject.put("parentName", validatekey("parent_name", jsonObject));
 		outputParentObject.put("source", "Linkedin-parent");
+//		if(validatekey("custom_lead", jsonObject)!=""){
+//			outputParentObject.put("custom_lead",validatekey("custom_lead", jsonObject) );
+//		}
 		outputParentArray.put(outputParentObject);
 		System.out.println("Parent Data" + outputParentArray.toString());
 		return outputParentArray.toString();

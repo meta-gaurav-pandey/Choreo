@@ -98,4 +98,7 @@
     <artifact name="ParentDataSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/ParentDataSequence.xml</file>
     </artifact>
+    <artifact name="InsertDataOnParent" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/InsertDataOnParent.xml</file>
+    </artifact>
 </artifacts>

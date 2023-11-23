@@ -9,58 +9,121 @@
                     <property expression="get-property('query.param.data_source')" name="source" scope="default" type="STRING"/>
                     <filter regex="^(linkedin|dbpedia|yahoo-without-node|zoominfo|linkedin-parent|dbpedia-contact|Zoominfo-parent|yahoo-node)$" source="$ctx:source">
                         <then>
-                            <log>
-                                <property expression="get-property('query.param.data_source')" name="LogOfCsvIngetion"/>
-                            </log>
-                            <log>
-                                <property name="File Connector" value="Read the csv file and converting into json format"/>
-                            </log>
-                            <CSV.csvToJson>
-                                <headerPresent>Present</headerPresent>
-                                <valueSeparator>,</valueSeparator>
-                                <skipHeader>true</skipHeader>
-                                <csvEmptyValues>Empty</csvEmptyValues>
-                            </CSV.csvToJson>
-                            <switch source="$ctx:source">
-                                <case regex="linkedin">
-                                    <class name="com.example.LinkedInMapper"/>
-                                    <sequence key="InsertionSequence"/>
-                                </case>
-                                <case regex="linkedin-parent">
-                                    <class name="com.example.LinkedInMapper"/>
-                                    <sequence key="InsertionParentSequence"/>
-                                </case>
-                                <case regex="dbpedia">
-                                    <class name="com.example.DBPediaMapper"/>
-                                    <sequence key="InsertionSequence"/>
-                                </case>
-                                <case regex="dbpedia-contact">
-                                    <class name="com.example.DBPediaMapper"/>
-                                    <sequence key="InsertionParentSequence"/>
-                                </case>
-                                <case regex="yahoo-without-node">
-                                    <class name="com.example.YahooMapper"/>
-                                    <sequence key="InsertionSequence"/>
-                                </case>
-                                <case regex="yahoo-node">
-                                    <class name="com.example.YahooMapper"/>
-                                    <sequence key="InsertionParentSequence"/>
-                                </case>
-                                <case regex="zoominfo">
-                                    <class name="com.example.ZoomInfoClass"/>
-                                    <sequence key="InsertionSequence"/>
-                                </case>
-                                <case regex="Zoominfo-parent">
-                                    <class name="com.example.ZoomInfoClass"/>
-                                    <sequence key="InsertionParentSequence"/>
-                                </case>
-                                <default>
+                            <filter regex="^(Yes|No)$" source="get-property('query.param.isFull_Load')">
+                                <then>
+                                    <log>
+                                        <property expression="get-property('query.param.data_source')" name="LogOfCsvIngetion"/>
+                                    </log>
+                                    <log>
+                                        <property name="File Connector" value="Read the csv file and converting into json format"/>
+                                    </log>
+                                    <CSV.csvToJson>
+                                        <headerPresent>Present</headerPresent>
+                                        <valueSeparator>,</valueSeparator>
+                                        <skipHeader>true</skipHeader>
+                                        <csvEmptyValues>Empty</csvEmptyValues>
+                                    </CSV.csvToJson>
+                                    <switch source="$ctx:source">
+                                        <case regex="linkedin">
+                                            <class name="com.example.LinkedInMapper"/>
+                                            <sequence key="InsertionSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <case regex="linkedin-parent">
+                                            <class name="com.example.LinkedInMapper"/>
+                                            <sequence key="InsertionParentSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <case regex="dbpedia">
+                                            <class name="com.example.DBPediaMapper"/>
+                                            <sequence key="InsertionSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <case regex="dbpedia-contact">
+                                            <class name="com.example.DBPediaMapper"/>
+                                            <sequence key="InsertionParentSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <case regex="yahoo-without-node">
+                                            <class name="com.example.YahooMapper"/>
+                                            <sequence key="InsertionSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <case regex="yahoo-node">
+                                            <class name="com.example.YahooMapper"/>
+                                            <sequence key="InsertionParentSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <case regex="zoominfo">
+                                            <class name="com.example.ZoomInfoClass"/>
+                                            <sequence key="InsertionSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <case regex="Zoominfo-parent">
+                                            <class name="com.example.ZoomInfoClass"/>
+                                            <sequence key="InsertionParentSequence"/>
+                                            <property expression="$body" name="payload" scope="default" type="STRING"/>
+                                        </case>
+                                        <default>
+                                            <payloadFactory media-type="text">
+                                                <format>No Such Source found</format>
+                                                <args/>
+                                            </payloadFactory>
+                                        </default>
+                                    </switch>
+                                    <switch source="get-property('query.param.isFull_Load')">
+                                        <case regex="No">
+                                            <log separator="&lt;-------------->">
+                                                <property name="CsvDataIntegration" value="The given file is not for full load"/>
+                                                <property name="CsvDataIntegration" value="Calling InsertDataOnParent Api"/>
+                                            </log>
+                                            <sequence key="InsertDataOnParent"/>
+                                            <property expression="$ctx:insertParentDataObject" name="payload3" scope="default" type="STRING"/>
+                                            <log separator="&lt;-------------->">
+                                                <property name="CsvDataIntegration" value="The given file is not for full load"/>
+                                                <property name="CsvDataIntegration" value="Calling redis Sync Api"/>
+                                            </log>
+                                            <sequence key="RedisSync"/>
+                                            <property expression="$ctx:SyncRedisObject" name="payload4" scope="default" type="STRING"/>
+                                            <payloadFactory media-type="json">
+                                                <format> {&#xd;
+"FilePayload":"$1",&#xd;
+"InsertDataOnParentPayload":"$3"&#xd;
+"SyncRedisPayload":"$4"&#xd;
+}</format>
+                                                <args>
+                                                    <arg evaluator="xml" expression="get-property('payload')"/>
+                                                    <arg evaluator="xml" expression="get-property('payload3')"/>
+                                                    <arg evaluator="xml" expression="get-property('payload4')"/>
+                                                </args>
+                                            </payloadFactory>
+                                        </case>
+                                        <default>
+                                            <log>
+                                                <property name="CsvDataIntegration" value="The given file is for full load"/>
+                                            </log>
+                                            <payloadFactory media-type="json">
+                                                <format>
+                {
+"FilePayload":"$1",
+}
+</format>
+                                                <args>
+                                                    <arg evaluator="xml" expression="get-property('payload')"/>
+                                                </args>
+                                            </payloadFactory>
+                                        </default>
+                                    </switch>
+                                </then>
+                                <else>
                                     <payloadFactory media-type="text">
-                                        <format>No Such Source found</format>
+                                        <format>Please Provide Query Param IsFull_Load value as Yes or No&#xd;
+</format>
                                         <args/>
                                     </payloadFactory>
-                                </default>
-                            </switch>
+                                    <respond/>
+                                </else>
+                            </filter>
                         </then>
                         <else>
                             <payloadFactory media-type="text">

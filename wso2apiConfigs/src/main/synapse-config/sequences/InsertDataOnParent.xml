@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="InsertDataOnParent" onError="ErrorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log>
+        <property name="Log-InsertParentData" value="Started"/>
+    </log>
+    <class name="com.example.InsertParentData"/>
+    <log>
+        <property name="Log-InsertParentData" value="End"/>
+    </log>
+</sequence>
