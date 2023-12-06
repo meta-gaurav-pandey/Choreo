@@ -12,62 +12,71 @@ import org.json.JSONObject;
 
 public class SplittingClass extends AbstractMediator {
 	public boolean mediate(MessageContext context) {
-		String inputJson = JsonUtil.jsonPayloadToString(((Axis2MessageContext) context).getAxis2MessageContext());
-		boolean flag = false;
-		String outputArray;
-		String outputParentArray;
-		JSONArray jsonArray = new JSONArray(inputJson);
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			if (jsonObject.has("source")) {
-				if (jsonObject.get("source").equals("dbpedia")) {
-					outputArray = getDbpediaMapping(jsonObject);
-					outputParentArray = getDbpediaContactMapping(jsonObject);
-					context.setProperty("Array1", outputArray);
-					context.setProperty("Array2", outputParentArray);
-					context.setProperty("parentData", parentNameData(jsonObject));
-					System.out.println("in dbpedia source");
-					flag = true;
-					break;
-				} else if (jsonObject.get("source").equals("linkedin")) {
-					outputArray = getLinkedinMappingJson(jsonObject);
-					outputParentArray = getLinkedinParentMapping(jsonObject);
-					context.setProperty("Array1", outputArray);
-					context.setProperty("Array2", outputParentArray);
-					context.setProperty("parentData", parentNameData(jsonObject));
-					System.out.println("in linkedin source");
-					flag = true;
-					break;
-				} else if (jsonObject.get("source").equals("yahoo_finance")) {
-					outputArray = getYahooWithoutNodeJson(jsonObject);
-					outputParentArray = getYahooWithNodeJson(jsonObject);
-					context.setProperty("Array1", outputArray);
-					context.setProperty("Array2", outputParentArray);
-					context.setProperty("parentData", parentNameData(jsonObject));
-					System.out.println("in yahoo_finance source");
-					flag = true;
-					break;
-				} else if (jsonObject.get("source").equals("others")) {
-					outputArray = getOthersJson(jsonObject);
-					JSONArray Array2 = new JSONArray();
-					context.setProperty("Array1", outputArray);
-					context.setProperty("Array2", Array2);
-					context.setProperty("parentData", parentNameData(jsonObject));
-					System.out.println("in others source");
-					flag = true;
-					break;
+		try {
+			String inputJson = JsonUtil.jsonPayloadToString(((Axis2MessageContext) context).getAxis2MessageContext());
+			boolean flag = false;
+			String outputArray;
+			String outputParentArray;
+			JSONArray jsonArray = new JSONArray(inputJson);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				if (jsonObject.has("source")) {
+					if (jsonObject.get("source").equals("dbpedia")) {
+						outputArray = getDbpediaMapping(jsonObject);
+						outputParentArray = getDbpediaContactMapping(jsonObject);
+						context.setProperty("Array1", outputArray);
+						context.setProperty("Array2", outputParentArray);
+						context.setProperty("parentData", parentNameData(jsonObject));
+						System.out.println("in dbpedia source");
+						flag = true;
+						break;
+					} else if (jsonObject.get("source").equals("linkedin")) {
+						outputArray = getLinkedinMappingJson(jsonObject);
+						outputParentArray = getLinkedinParentMapping(jsonObject);
+						context.setProperty("Array1", outputArray);
+						context.setProperty("Array2", outputParentArray);
+						context.setProperty("parentData", parentNameData(jsonObject));
+						System.out.println("in linkedin source");
+						flag = true;
+						break;
+					} else if (jsonObject.get("source").equals("yahoo_finance")) {
+						outputArray = getYahooWithoutNodeJson(jsonObject);
+						outputParentArray = getYahooWithNodeJson(jsonObject);
+						context.setProperty("Array1", outputArray);
+						context.setProperty("Array2", outputParentArray);
+						context.setProperty("parentData", parentNameData(jsonObject));
+						System.out.println("in yahoo_finance source");
+						flag = true;
+						break;
+					} else if (jsonObject.get("source").equals("others")) {
+						outputArray = getOthersJson(jsonObject);
+						JSONArray Array2 = new JSONArray();
+						context.setProperty("Array1", outputArray);
+						context.setProperty("Array2", Array2);
+						context.setProperty("parentData", parentNameData(jsonObject));
+						System.out.println("in others source");
+						flag = true;
+						break;
+					}
+
+				} else {
+					continue;
 				}
 
-			} else {
-				continue;
+			}
+			if (!flag) {
+				System.out.println("No source present in data");
 			}
 
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			JSONArray Array1 = new JSONArray();
+			JSONArray Array2 = new JSONArray();
+			context.setProperty("Array1", Array1.toString());
+			context.setProperty("Array2", Array2.toString());
+			return true;
 		}
-		if (!flag) {
-			System.out.println("No source present in data");
-		}
-
-		return true;
 
 	}
 
@@ -89,7 +98,7 @@ public class SplittingClass extends AbstractMediator {
 		if (jsonObject.has("custom_properties"))
 			outputObject.put("custom_properties", getCustomProperties(jsonObject.getJSONArray("custom_properties")));
 		if (jsonObject.has("employer"))
-			outputObject.put("employer", getEmployer(jsonObject.getJSONArray("employer")));
+			outputObject.put("employer", getEmployer(jsonObject));
 
 		outputJsonArray.put(outputObject);
 
@@ -268,7 +277,8 @@ public class SplittingClass extends AbstractMediator {
 		outputJsonObject.put("quarterly_growth", validatekey("quarterly_growth", jsonObject));
 		outputJsonObject.put("parent_name", validatekey("parent_name", jsonObject));
 		if (jsonObject.has("custom_properties") && jsonObject.getJSONArray("custom_properties").length() > 0) {
-			outputJsonObject.put("custom_properties", getCustomProperties(jsonObject.getJSONArray("custom_properties")));
+			outputJsonObject.put("custom_properties",
+					getCustomProperties(jsonObject.getJSONArray("custom_properties")));
 		}
 
 		outputJsonObject.put("source", "others");
@@ -278,27 +288,30 @@ public class SplittingClass extends AbstractMediator {
 	}
 
 	public JSONArray parentNameData(JSONObject jsonObject) {
-		   JSONArray parent=new JSONArray();
+		JSONArray parent = new JSONArray();
 		if (!validatekey("parent_name", jsonObject).equals("")) {
-		
+
 			try {
-			 parent.put("https://company.org/resource/".concat(getEncodedString(validatekey("parent_name",jsonObject))));
-			 return parent;
+				parent.put("https://company.org/resource/"
+						.concat(getEncodedString(validatekey("parent_name", jsonObject))));
+				return parent;
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
+
 		return parent;
 
 	}
+
 	public static String getEncodedString(String urlText) throws UnsupportedEncodingException {
 		if (urlText != null)
 			return URLEncoder.encode(urlText, "UTF-8").replace("+", "%20");
 		else
 			return "";
 	}
+
 	public String getInMillions(String inputValue) {
 		double d = Double.parseDouble(inputValue);
 		d = (d / 1000000);
@@ -355,38 +368,105 @@ public class SplittingClass extends AbstractMediator {
 		}
 		return result;
 	}
-	
+
 	public JSONArray getCustomProperties(JSONArray jsonArray) {
-		JSONArray CustomArray=new JSONArray();
-		if(jsonArray.length()>0) {
-			
+		JSONArray CustomArray = new JSONArray();
+		if (jsonArray.length() > 0) {
+
 			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject resultObj=new JSONObject();
+				JSONObject resultObj = new JSONObject();
 				JSONObject customObj = jsonArray.getJSONObject(i);
 				resultObj.put("name", validatekey("name", customObj));
 				resultObj.put("value", validatekey("value", customObj));
 				CustomArray.put(resultObj);
 			}
 		}
-		
+
 		return CustomArray;
 	}
-	public JSONArray getEmployer(JSONArray jsonArray) {
-		JSONArray EmpArray=new JSONArray();
-		if(jsonArray.length()>0) {
+
+	public JSONArray getEmployer(JSONObject jsonObject) {
+		JSONArray jsonArray = jsonObject.getJSONArray("employer");
+		JSONArray EmpArray = new JSONArray();
+		if (jsonArray.length() > 0) {
 			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject resultObj=new JSONObject();
+				String LinkedName = "";
+				if (!validatekey("social_url", jsonObject).equals("")) {
+					if (validatekey("social_url", jsonObject).contains("https://www.linkedin.com/company/")) {
+						String[] splitres = validatekey("social_url", jsonObject)
+								.split("https://www.linkedin.com/company/");
+						LinkedName = splitres[1];
+					} else if (validatekey("social_url", jsonObject).contains("www.linkedin.com/company/")) {
+						String[] splitres = validatekey("social_url", jsonObject).split("www.linkedin.com/company/");
+						LinkedName = splitres[1];
+						
+					}
+					
+				}
+
+				JSONObject resultObj = new JSONObject();
 				JSONObject EmpObj = jsonArray.getJSONObject(i);
 				resultObj.put("full_name", validatekey("full_name", EmpObj));
+				resultObj.put("first_name", validatekey("first_name", EmpObj));
+				resultObj.put("last_name", validatekey("last_name", EmpObj));
+				resultObj.put("company_name", validatekey("name", jsonObject));
+				resultObj.put("experience_url",
+						validatekey("social_url", EmpObj) + "_" + validatekey("social_url", jsonObject) + "_"
+								+ validatekey("occupation", jsonObject) + "_ExperienceDetails");
+				resultObj.put("experience_url_label",
+						validatekey("full_name", EmpObj) + "_" + validatekey("name", jsonObject) + "_"
+								+ validatekey("occupation", jsonObject) + "_ExperienceDetails");
 				resultObj.put("description", validatekey("description", EmpObj));
-				resultObj.put("social_url", validatekey("social_url", EmpObj));
-				resultObj.put("position", validatekey("occupation", EmpObj));
-				
-				EmpArray.put(resultObj);
+				resultObj.put("linkedin_url", validatekey("social_url", EmpObj));
+				resultObj.put("company_linkedin_url", LinkedName);
+				resultObj.put("title", validatekey("occupation", EmpObj));
+				resultObj.put("start_month", validatekey("start_month", EmpObj));
+				resultObj.put("start_year", validatekey("start_year", EmpObj));
+				resultObj.put("end_month", validatekey("end_month", EmpObj));
+				resultObj.put("end_year", validatekey("end_year", EmpObj));
+				resultObj.put("duration", validatekey("duration", EmpObj));
+				resultObj.put("date_range", validatekey("date_range", EmpObj));
+				resultObj.put("job_role_description", validatekey("job_role_description", EmpObj));
+				resultObj.put("skills", validatekey("skills", EmpObj));
+				resultObj.put("languages", validatekey("languages", EmpObj));
+				resultObj.put("location", validatekey("location", EmpObj));
+				if (!resultObj.get("company_linkedin_url").equals("") && !resultObj.get("linkedin_url").equals("")
+						&& !resultObj.get("full_name").equals("")) {
+					EmpArray.put(resultObj);
+				}
+
 			}
 		}
-		
+
 		return EmpArray;
 	}
-	
+
+	public static String cleanedStr(String input) {
+		// Convert the string to lowercase
+		String lowercase = input.toLowerCase();
+
+		// Use a regular expression to remove special characters
+		String cleaned = lowercase.replaceAll("[^a-zA-Z0-9]", "");
+
+		return cleaned;
+	}
+
+	public JSONArray getSkillsLinkedInEMployer(String Data) {
+		JSONArray SkillArray = new JSONArray();
+		if (!Data.equals("")) {
+
+			if (Data.length() > 0) {
+				String[] skills = Data.split(",");
+				for (int i = 0; i < skills.length; i++) {
+					JSONObject resultObj = new JSONObject();
+
+					resultObj.put("skill", skills[i]);
+					SkillArray.put(resultObj);
+				}
+			}
+		}
+
+		return SkillArray;
+	}
+
 }
