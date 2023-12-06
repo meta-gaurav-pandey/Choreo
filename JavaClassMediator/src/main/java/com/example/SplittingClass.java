@@ -426,7 +426,7 @@ public class SplittingClass extends AbstractMediator {
 				resultObj.put("end_year", validatekey("end_year", EmpObj));
 				resultObj.put("duration", validatekey("duration", EmpObj));
 				resultObj.put("date_range", validatekey("date_range", EmpObj));
-				resultObj.put("job_role_description", validatekey("job_role_description", EmpObj));
+				resultObj.put("employee_role_description", validatekey("employee_role_description", EmpObj));
 				resultObj.put("skills", validatekey("skills", EmpObj));
 				resultObj.put("languages", validatekey("languages", EmpObj));
 				resultObj.put("location", validatekey("location", EmpObj));
